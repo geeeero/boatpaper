@@ -1,4 +1,4 @@
-\title{***no idea for title yet***}
+\title{Models for prior-data conflict and strong prior-data agreement}
 \author{GW, FC ($+$ MB?)}
 
 
@@ -15,19 +15,18 @@ i.e., the case when prior and data coincide especially well) by increased poster
 \end{abstract}
 
 
+
 \section{Introduction}
 
 
 
 First, we will briefly characterise the novel parametrisation of canoncial conjugate priors this approach relies on.
 To keep things simple, we restrict ourselves here for the case of the Beta-Binomial model (see Section~\ref{sec:beta-binom}),
-but the approach is generalisable to arbitrary canonical conjugate priors.%
-\footnote{For a more detailed derivation of this parametrisation,
-we have to refer to a future publication of Mi\c{k}elis Bickis.}
+but the approach is generalisable to arbitrary canonical conjugate priors.
 Then we will suggest a shape in this parametrisation that accomplishes
 both \pdc\ sensitivity and `bonus precision' in case of strong prior-data agreement.
 We present a parametric description for such a shape
-and show that it will indeed lead to the desired properties.
+and show that it indeed leads to the desired properties.
 
 
 
@@ -35,11 +34,15 @@ and show that it will indeed lead to the desired properties.
 
 \textbf{***general idea of Bayesian inference, Beta-Binomial model, then imprecise Bayesian inference in the Beta-Binomial model}
 
+***link to Jim Berger robust Bayes: we present it as IP, but works well in a robust Bayes context, emphasize that it fits***
+
+The Bayesian approach to statistical inference requires (possibly subjective) knowledge on the parameter $\vartheta$ to be expressed by a probability distribution on
+the parameter space $\Theta$, with the probability mass or density function $p(\vartheta)$ called \emph{prior distribution}.
+
+
 \subsection{Bayesian inference with conjugate priors}
 \label{sec:regularconjugates}
 
-The Bayesian approach requires (possibly subjective) knowledge on the parameter $\vartheta$ to be expressed by a probability distribution on
-$\Theta$, with the probability mass or density function $p(\vartheta)$ called \emph{prior distribution}.
 
 Interpreting the elements $f_\vartheta(x)$ of the sampling model as conditional distributions of the sample given the parameter,
 denoted by $f(x\mid\vartheta)$ and called \emph{likelihood},
