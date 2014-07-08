@@ -1,6 +1,11 @@
 *~
 *.aux
+*.bbl
+*.blg
 *.log
 *.out
+*.pp1
+*.tag
 *.toc
 *.pdf
+ba/*

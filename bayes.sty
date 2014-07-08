@@ -1,0 +1,474 @@
+%%
+%% This is file `bayes.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% bayes.dtx  (with options: `bayes')
+%% ===========================================================================
+%% Bayesian Analysis packages for use with LaTeX 2e
+%% 
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%%
+\ProvidesPackage{bayes}
+              [2003/03/21 v1.24
+ LaTeX package for Bayesian Analysis code]
+\def\st@Warning#1{\PackageWarning{bayes}{#1}}
+\def\st@WarningNoLine#1{\PackageWarningNoLine{bayes}{#1}}
+\def\st@Info#1{\PackageInfo{bayes}{#1}}
+\newif\ifst@opt@cmtteight
+\DeclareOption{cmtt8}{\st@opt@cmtteighttrue}
+\DeclareOption{nocmtt8}{\st@opt@cmtteightfalse}
+\ExecuteOptions{cmtt8}
+\ProcessOptions\relax
+\RequirePackage{alltt}[1997/06/16]
+\RequirePackage{calc}[1998/07/07]
+\newcommand{\stcmd}[1]{\texttt{#1}}
+\newcommand\ty{\ttfamily}
+\newbox\st@box
+\newdimen\st@box@wd
+\newdimen\st@box@ht
+\newdimen\st@box@dp
+\def\ittt#1{\setbox\st@box=\hbox{#1}\st@box@wd=\wd\st@box%
+  \rlap{\ttfamily\itshape #1}%
+  \hskip\st@box@wd%
+}
+\def\sltt#1{\setbox\st@box=\hbox{#1}\st@box@wd=\wd\st@box%
+  \rlap{\ttfamily\slshape #1}%
+  \hskip\st@box@wd%
+}
+\ifx\forcebftt\@undefined
+  \def\bftt{\ttfamily\bfseries}% the \bfseries is ineffective here
+\else
+  \st@Warning{Using cmbtt8, bold typewriter font}
+  \font\bftt=cmbtt8
+\fi
+\def\nn#1{\mbox{\normalfont\fontsize{9.6}{10}\selectfont #1}}
+\def\smrm{\normalfont\fontsize{8}{10}\selectfont}
+\def\clref#1{[{\smrm CL}]~{\bfseries #1}}
+\def\gref#1{[{\smrm G}]~{\bfseries #1}}
+\def\grefi#1{\gref{{\itshape #1}}}
+\def\pref#1{[{\smrm P}]~{\bfseries #1}}
+\def\rref#1{[{\smrm R}]~{\bfseries #1}}
+\def\stref#1{[{\smrm ST}]~{\bfseries #1}}
+\def\svyref#1{[{\smrm SVY}]~{\bfseries #1}}
+\def\tsref#1{[{\smrm TS}]~{\bfseries #1}}
+\def\uref#1{[{\smrm U}]~{\bfseries #1}}
+\let\fref\uref    % for backward compatiblity with staman.sty
+\def\xtref#1{[{\smrm XT}]~{\bfseries #1}}
+\def\LB{$\bigl[$}
+\def\RB{$\bigr]$}
+\def\num{{\it \#\/}}
+\def\varlist{{\it varlist\/}}
+\def\newvarlist{{\it newvarlist\/}}
+\def\varname{{\it varname\/}}
+\def\newvarname{{\it newvarname\/}}
+\def\ststring{{\it string\/}}
+\def\byvarlist{by \varlist:}
+\def\ifexp{{\tt if\ {\it exp\/}}}
+\def\inrange{{\tt in\ {\it range\/}}}
+\def\eqexp{{\tt ={\it exp\/}}}
+\def\optional#1{{\tt \LB{#1}\RB}}
+\def\optby{\optional{\byvarlist}}
+\def\opteqexp{\optional{\eqexp}}
+\def\optif{\optional{\ifexp}}
+\def\optin{\optional{\inrange}}
+\def\optvarlist{\optional{\varlist}}
+\def\optvarname{\optional{\varname}}
+\def\optnewvarlist{\optional{\newvarlist}}
+\def\optnewvarname{\optional{\newvarname}}
+\def\optweight{\optional{\it weight\/}}
+\newcommand\dunderbar[1]{%
+  \hbox{\lower.45ex\hbox{\underline{\raise.45ex\hbox{#1}}}}%
+}
+%%\newcount\nd
+%%\def\descender#1#2#3{\nd=0\rlap{#1}\hbox{\lower.45ex\hbox{\underbar%
+%%{\loop\ifnum\nd<#3\ \advance\nd by1\repeat}}#2}}
+\def\descenter#1#2#3{\dunderbar{#1}#2}
+\let\DESCENTER=\descender
+\newlength\stsyndent
+\setlength{\stsyndent}{\parindent}
+\def\stsynpara{\hangindent=\stsyndent\hangafter=1\noindent}
+\def\stsynsep#1{\rlap{#1}\hskip\stsyndent}
+\newenvironment{stsyntax}{%
+  \vskip0.25\baselineskip%
+  \normalfont\ttfamily%
+  \fontsize{10}{16}\selectfont%
+  \stsynpara%
+  \raggedright%
+  \hskip0pt%
+}{%
+  \normalfont\selectfont%
+  \vskip0.25\baselineskip%
+  \par%
+}
+\def\stverbfs{8}        % font size
+\def\stverbbs{9}        % baseline skip
+\newenvironment{stverbatim}{%
+  \fontsize{\stverbfs}{\stverbbs}\selectfont%
+  \list{}{%
+    \parsep        0pt%
+    \parskip       0pt%
+    \listparindent 0pt%
+    \itemindent    0pt%
+    \rightmargin   \leftmargin%
+    \parindent     0pt%
+    \topsep        0pt%
+  }%
+  \item\relax%
+}{%
+  \endlist%
+}
+\def\allttfs{8} % font size
+\def\allttbs{9} % baseline skip, \smallskip should be 3pt
+\newenvironment{stlog}{%
+  \def\smallskip{\vskip-6pt}%
+  \def\nullskip{\vskip -\baselineskip}%
+  \list{}{%
+    \parsep        0pt%
+    \parskip       0pt%
+    \listparindent 0pt%
+    \itemindent    0pt%
+    \rightmargin   0pt%
+    \parindent     0pt%
+    \topsep        0pt%
+  }%
+  \fontsize{\allttfs}{\allttbs}\selectfont%
+  \fontsize{\stverbfs}{\stverbbs}\selectfont%
+  \item\relax%
+  \catcode`\>=12%
+  \let\\=\stbackslash%
+  \begin{alltt}\noindent\catcode`\^^A=14%
+}{%
+  \end{alltt}%
+  \endlist%
+}
+\def\outputomitted{\ \ {\hbox{{\rm ({\sl{output omitted}$\,$})}}}}
+\let\oom=\outputomitted
+\def\onnextpage{%
+  \vfil%
+  \centerline{{\rm({\sl Continued on next page\/})}}%
+  \clearpage%
+}
+\let\cnp=\onnextpage
+\def\sttextrulefill#1{%
+  \hbox{\raise2pt\hbox to\hsize{\hbox to12pt{\hfil}\hrulefill%
+  \lower2pt\hbox{\rm{\ #1\ }}%
+  \hbox{\vrule height0.4pt width.5in depth0pt}%
+  \hbox to12pt{\hfil}%
+}}}
+\def\stlinetop#1{\sttextrulefill{top: #1}}
+\def\stlineend#1{\sttextrulefill{end: #1}}
+\def\stlinefragment#1{\sttextrulefill{fragment: #1}}
+\newlength{\streswidth}
+\setlength{\streswidth}{0.5\textwidth-0.75in-\parindent}
+\newlength{\st@parindent}
+\setlength{\st@parindent}{\parindent}
+\newenvironment{stresults}{%
+  \par\noindent%
+  \fontsize{\allttfs}{\allttbs}\selectfont%
+  \hskip \parindent%
+  \begin{tabular}%
+    {@{}p{0.75in}@{}p{\streswidth}@{}p{0.75in}@{}p{\streswidth}@{}}
+}{%
+  \end{tabular}%
+}
+\def\stresultsgroup#1{%
+  \noalign{\smallskip}%
+  {\hskip-\st@parindent\normalfont #1}%
+}
+\newlength\stexamplehskip
+\setlength{\stexamplehskip}{-.40in+\parindent}
+\newenvironment{stexample}[1][Example]{%
+  \bigskip%
+  \par\noindent%
+  \hskip\stexamplehskip%
+  {\hbox{\epsfig{file=tr}}{\textsf{\textbf{~#1}}}}%
+  \par\smallskip%
+}{
+  \penalty10000\vskip-5pt\penalty10000%
+  \par\penalty10000\vbox{\hfill\lower1.25ex\hbox{{\epsfig{file=tl}}}}
+}
+\font\ssymfnt=pzdr at 9.5pt             % Adobe Zapf-Dingbats
+\newlength\sttechhskip
+\setlength{\sttechhskip}{-.40in+\parindent}
+\newenvironment{sttech}[1][Technical Note]{%
+  \bigskip%
+  \par\noindent%
+  \hskip\sttechhskip%
+  {\hbox{\ssymfnt\char'161}{\textsf{\textbf{~#1}}}}%
+  \par\smallskip%
+}{
+  \penalty10000\vskip-5pt\penalty10000%
+  \par\penalty10000\vbox{\hfill\lower1.25ex\hbox{\ssymfnt\char'161}}
+}
+\let\sthat\widehat
+\let\stbar\overline
+\newcommand\stvec[1]{\mathbf #1}
+\let\stmat\stvec
+\ifst@opt@cmtteight
+  \st@Warning{%
+    Using cmtt8 font for stlog environment.
+    If this font is not available, use the nocmtt8 option of bayes.sty.
+  }
+  \font\st@stlogtt=cmtt8
+\else
+  \st@Warning{%
+    Using adjusted standard typewriter font for stlog environment.
+    Bayesian Analysis table lines might not match up.
+  }
+  \def\st@stlogtt{\tt}
+\fi
+\newbox\st@box
+\setbox\st@box\hbox{\st@stlogtt x}
+\newdimen\st@xwd \st@xwd=\wd\st@box
+\newdimen\st@xht \st@xht=\ht\st@box
+\newdimen\st@jsp
+\newlength{\st@linesize}
+\setlength{\st@linesize}{0.6pt}
+\def\stlinesize{\the\st@linesize }
+\newlength{\st@xwidth}
+\ifst@opt@cmtteight
+  \setlength{\st@xwidth}{\st@xwd}
+\else
+  \setlength{\st@xwidth}{0.8\st@xwd}
+\fi
+\def\stxwidth{\the\st@xwidth }
+\newlength{\st@mbdepth}
+\ifst@opt@cmtteight
+  \setlength{\st@mbdepth}{0.5\st@xht+0.5\st@linesize}
+\else
+  \setlength{\st@mbdepth}{0.4\st@xht+0.5\st@linesize}
+\fi
+\def\stmbdepth{\the\st@mbdepth }
+\newlength{\st@mtdepth}
+\setlength{\st@mtdepth}{\st@mbdepth+\st@linesize}
+\def\stmtdepth{\the\st@mtdepth }
+\def\stmaxheight{6.0pt }
+\newlength{\st@maxdepth}
+\setlength{\st@maxdepth}{\allttbs.0pt-\stmaxheight}
+\def\stmaxdepth{\the\st@maxdepth}
+\newlength{\st@emptywidth}
+\setlength{\st@emptywidth}{\st@xwidth-\st@linesize}
+\setlength{\st@emptywidth}{0.5\st@emptywidth}
+\def\stemptywidth{\the\st@emptywidth }
+\tracingmacros=1
+\tracingcommands=1
+\def\BLANK{{%
+  \hskip0.0pt%
+  \kern\stxwidth%
+}}
+\def\CDOT{{%
+  \hskip0.0pt%
+  \kern\stemptywidth%
+  \vrule width\stlinesize height\stmtdepth depth-\stmbdepth%
+  \kern\stemptywidth%
+}}
+\def\DASH{{%
+  \hskip0.0pt%
+  \rlap{\vrule width\stxwidth height\stmtdepth depth-\stmbdepth}% --
+  \BLANK%
+}}
+\newcount\N
+\def\HLI#1{{\N=#1\loop\ifnum\N>0{\DASH}\advance\N by-1\repeat}}
+\def\LEFTDASH{{%
+  \hskip0.0pt%
+  \vrule width\stemptywidth height\stmtdepth depth-\stmbdepth% -
+  \kern\stemptywidth%
+  \hskip0.0pt%
+  \kern\stlinesize%
+}}
+\def\RIGHTDASH{{%
+  \hskip0.0pt%
+  \kern\stemptywidth%
+  \hskip0.0pt%
+  \kern\stlinesize%
+  \vrule width\stemptywidth height\stmtdepth depth-\stmbdepth% -
+}}
+\def\VBAR{{%
+  \hskip0.0pt%
+  \kern\stemptywidth%
+  \vrule width\stlinesize height\stmaxheight depth\stmaxdepth% |
+  \kern\stemptywidth%
+}}
+\def\UPVBAR{{%
+  \hskip0.0pt%
+  \kern\stemptywidth%
+  \vrule width\stlinesize height\stmaxheight depth-\stmtdepth% |
+  \kern\stemptywidth%
+}}
+\def\DOWNVBAR{{%
+  \hskip0.0pt%
+  \kern\stemptywidth%
+  \vrule width\stlinesize height\stmbdepth depth\stmaxdepth% |
+  \kern\stemptywidth%
+}}
+\tracingcommands=0
+\tracingmacros=0
+\def\PLUS{{%
+  \hskip0.0pt%
+  \rlap{\DASH}%
+  \VBAR%
+}}
+\def\TOPT{{%
+  \hskip0.0pt%
+  \rlap{\DASH}%
+  \DOWNVBAR%
+}}
+\def\BOTT{{%
+  \hskip0.0pt%
+  \rlap{\DASH}%
+  \UPVBAR%
+}}
+\def\LFTT{{%
+  \hskip0.0pt%
+  \rlap{\VBAR}%
+  \RIGHTDASH%
+}}
+\def\RGTT{{%
+  \hskip0.0pt%
+  \rlap{\VBAR}%
+  \LEFTDASH%
+}}
+\def\TLC{{%
+  \hskip0.0pt%
+  \rlap{\RIGHTDASH}%
+  \rlap{\DOWNVBAR}%
+  \CDOT%
+}}
+\def\TRC{{%
+  \hskip0.0pt%
+  \rlap{\DOWNVBAR}%
+  \rlap{\LEFTDASH}%
+  \CDOT%
+}}
+\def\BLC{{%
+  \hskip0.0pt%
+  \rlap{\UPVBAR}%
+  \rlap{\RIGHTDASH}%
+  \CDOT%
+}}
+\def\BRC{{%
+  \hskip0.0pt%
+  \rlap{\LEFTDASH}%
+  \rlap{\UPVBAR}%
+  \CDOT%
+}}
+\st@Info{\string\def\string\DASH\string{\DASH\string}}
+\st@Info{\string\def\string\BLANK\string{\BLANK\string}}
+\st@Info{\string\def\string\CDOT\string{\CDOT\string}}
+\st@Info{\string\def\string\LEFTDASH\string{\LEFTDASH\string}}
+\st@Info{\string\def\string\RIGHTDASH\string{\RIGHTDASH\string}}
+\st@Info{\string\def\string\VBAR\string{\VBAR\string}}
+\st@Info{\string\def\string\UPVBAR\string{\UPVBAR\string}}
+\st@Info{\string\def\string\DOWNVBAR\string{\DOWNVBAR\string}}
+\def\st@displaylength#1{
+  \st@Info{\csname #1\endcsname=#1}
+}
+\def\st@displayboxwd#1{
+  \setbox\st@box\hbox{\st@stlogtt\csname #1\endcsname}
+  \st@jsp=\wd\st@box
+  \st@Info{\the\st@jsp=#1 width}
+}
+\def\st@displayboxht#1{
+  \setbox\st@box\hbox{\st@stlogtt\csname #1\endcsname}
+  \st@jsp=\ht\st@box
+  \st@Info{\the\st@jsp=#1 height}
+}
+\setbox\st@box\hbox{\st@stlogtt \kern\stemptywidth\ }
+\newdimen\st@spacewd \st@spacewd=\wd\st@box
+\setbox\st@box\hbox{\st@stlogtt \kern\stemptywidth x}
+\newdimen\st@spaceht \st@spaceht=\wd\st@box
+\st@Info{}
+\st@displaylength{stlinesize}
+\st@displaylength{stxwidth}
+\st@displaylength{stmbdepth}
+\st@displaylength{stmtdepth}
+\st@displaylength{stmaxheight}
+\st@displaylength{stmaxdepth}
+\st@displaylength{stemptywidth}
+\st@Info{}
+\st@Info{following should all equal \stxwidth}
+\st@Info{}
+\st@displayboxwd{DASH}
+\st@displayboxwd{VBAR}
+\st@displayboxwd{PLUS}
+\st@displayboxwd{TOPT}
+\st@displayboxwd{BOTT}
+\st@displayboxwd{LFTT}
+\st@displayboxwd{RGTT}
+\st@displayboxwd{TLC}
+\st@displayboxwd{TRC}
+\st@displayboxwd{BLC}
+\st@displayboxwd{BRC}
+\st@Info{}
+\st@Info{following should all be less than \stmaxheight}
+\st@Info{}
+\st@displayboxht{DASH}
+\st@displayboxht{VBAR}
+\st@displayboxht{PLUS}
+\st@displayboxht{TOPT}
+\st@displayboxht{BOTT}
+\st@displayboxht{LFTT}
+\st@displayboxht{RGTT}
+\st@displayboxht{TLC}
+\st@displayboxht{TRC}
+\st@displayboxht{BLC}
+\st@displayboxht{BRC}
+\st@Info{}
+\def\hangpara{\hangindent=\parindent\hangafter=1\noindent}
+\def\morehang{\hangindent=\parindent\hangafter=1}
+\def\hair{\hbox{\hskip1pt}}
+\def\finehair{\hbox{\hskip0.5pt}}
+\def\emdash{\finehair---\finehair}
+\def\endash{\finehair--\finehair}
+\def\stbackslash{\texttt{\char'134}}
+\def\stforslash{\texttt{/}}
+\def\stcaret{{\char"5E}}                                % for the ^ sign
+\def\caret{\texttt{\stcaret}}
+\def\sttilde{\hbox{\lower.35em\hbox{\char'176}}}        % for the ~ sign
+\def\tytilde{\texttt{\sttilde}}
+\def\lbr{\texttt{\char'173}}                            % for the { sign
+\def\rbr{\texttt{\char'175}}                            % for the } sign
+\def\backtabkey{$\vert$\kern-2pt$\leftarrow$}           % for the backtab
+\def\tabkey{\hbox{$\rightarrow$\kern-2pt$\vert$}}       % for the tabkey
+\newcommand{\BAYES}{\mbox{\normalfont Bayes}}
+\let\bayes=\BAYES
+\let\Bayes=\BAYES
+\def\pvalue{\mbox{$p$-value}}
+\def\pvalues{\mbox{$p$-values}}
+\def\ttest{\mbox{$t$ test}}
+\def\ttests{\mbox{$t$ tests}}
+\def\tstat{\mbox{$t$ statistic}}
+\def\zstat{\mbox{$Z$ statistic}}
+\def\tstats{\mbox{$t$ statistics}}
+\def\tdist{\mbox{$t$ distribution}}
+\def\zstats{\mbox{$Z$ statistics}}
+\def\z{\mbox{$Z$}}
+\def\ftest{\mbox{$F$ test}}
+\def\fstat{\mbox{$F$ statistic}}
+\def\fstats{\mbox{$F$ statistics}}
+\def\fdist{\mbox{$F$ distribution}}
+\def\fvalue{\mbox{$F$ value}}
+\def\fdeflat{\mbox{$F$ deflator}}
+\def\fdeflats{\mbox{$F$ deflators}}
+\def\tdeflat{\mbox{$t$ deflator}}
+\def\rsq{\mbox{$R$-squared}}
+\def\rsqs{\mbox{$R$-squareds}}
+\endinput
+%%
+%% End of file `bayes.sty'.

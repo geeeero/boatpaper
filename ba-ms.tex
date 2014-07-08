@@ -1,0 +1,291 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Title and abstract
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\inserttype[ba0001]{article}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\author{F. I. FirstFamilyName and S. I. SecondFamilyName }{
+ \fnms{FirstAuthor I.}
+ \snm{FirstFamilyName}
+ \footnotemark[1]\ead{email1@example.com}
+and
+  \fnms{SecondAuthor I.}
+  \snm{SecondFamilyName}
+  \footnotemark[2]\ead{email2@example.com}
+and
+  \fnms{ThirdAuthor I.}
+  \snm{ThirdFamilyName}
+  \footnotemark[3]\ead{email3@example.com}
+}
+
+
+\title[Short article title]{Long title for title page of article insert}
+
+\maketitle
+
+\footnotetext[1]{
+ Affiliation First Author
+ \href{mailto:email1@example.com}{email1@example.com}
+}
+\footnotetext[2]{
+ Affiliation Second Author
+ \href{mailto:email2@example.com}{email2@example.com}
+}
+\footnotetext[3]{
+ Affiliation Third Author
+ \href{mailto:email3@example.com}{email3@example.com}
+}
+\renewcommand{\thefootnote}{\arabic{footnote}}
+
+\begin{abstract}
+We will propose a novel idea for generating parameter prior sets in a conjugate setting
+that, in addition to prior-data conflict sensitivity, allow to mirror \emph{strong prior-data agreement},
+i.e., the case when prior and data coincide especially well) by increased posterior precision.
+
+\keywords{\kwd{strong prior-data agreement}, \kwd{prior-data conflict},  \kwd{imprecise probability}, \kwd{conjugate priors}}
+\end{abstract}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\pdc{prior-data conflict}
+
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\posreals}{\reals_{>0}}
+\newcommand{\posrealszero}{\reals_{\ge 0}}
+\newcommand{\naturals}{\mathbb{N}}
+
+\newcommand{\dd}{\,\mathrm{d}}
+
+\newcommand{\mbf}[1]{\mathbf{#1}}
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+
+\newcommand{\btheta}{\bs{\theta}}
+\newcommand{\bpsi}{\bs{\psi}}
+\newcommand{\bbeta}{\bs{\beta}}
+\newcommand{\balpha}{\bs{\alpha}}
+
+\newcommand{\uz}{^{(0)}} % upper zero
+\newcommand{\un}{^{(n)}} % upper n
+\newcommand{\ui}{^{(i)}} % upper i
+
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\ol}[1]{\overline{#1}}
+
+\def\yz{y\uz}
+\def\yn{y\un}
+\def\yi{y\ui}
+
+\def\yzl{\ul{y}\uz}
+\def\yzu{\ol{y}\uz}
+
+\def\ynl{\ul{y}\un}
+\def\ynu{\ol{y}\un}
+
+\def\yil{\ul{y}\ui}
+\def\yiu{\ol{y}\ui}
+
+\def\nz{n\uz}
+\def\nn{n\un}
+\def\ni{n\ui}
+
+\def\nzl{\ul{n}\uz}
+\def\nzu{\ol{n}\uz}
+
+\def\nnl{\ul{n}\un}
+\def\nnu{\ol{n}\un}
+
+\def\nil{\ul{n}\ui}
+\def\niu{\ol{n}\ui}
+
+\def\taux{\tau(x)}
+\def\ttau{\tilde{\tau}}
+\def\ttaux{\ttau(x)}
+
+\def\pz{\psi\uz}
+\def\pn{\psi\un}
+
+\def\Y{\mathcal{Y}}
+\def\YZ{\Y\uz}
+\def\YN{\Y\un}
+\def\YI{\Y\ui}
+\def\N{\mathcal{N}}
+\def\NZ{\N\uz}
+\def\NN{\N\un}
+\def\PZ{\text{I}\!\Pi\uz}
+%\def\PZero{\PZ}
+\def\PN{\text{I}\!\Pi\un}
+\def\MZ{\mathcal{M}\uz}
+\def\MN{\mathcal{M}\un}
+
+\def\Eta{\mathrm{H}}
+\def\EZ{\mathrm{H}\uz}
+\def\EN{\mathrm{H}\un}
+
+\def\ezl{\ul{\eta}_0}
+\def\ezu{\ol{\eta}_0}
+
+\def\ezz{\eta_0\uz}
+\def\ezn{\eta_0\un}
+\def\eoz{\eta_1\uz}
+\def\eon{\eta_1\un}
+
+\def\ezzl{\ul{\eta}_0\uz}
+\def\ezzu{\ol{\eta}_0\uz}
+\def\eznl{\ul{\eta}_0\un}
+\def\ezzn{\ol{\eta}_0\un}
+
+\def\eozl{\ul{\eta}_1\uz}
+\def\eozu{\ol{\eta}_1\uz}
+\def\eonl{\ul{\eta}_1\un}
+\def\eonu{\ol{\eta}_1\un}
+
+\def\eol{\ul{\eta}_1}
+\def\eou{\ol{\eta}_1}
+
+\def\czl{\ul{c}\uz}
+\def\czu{\ol{c}\uz}
+
+\newcommand{\cdf}{\operatorname{F}}
+\newcommand{\p}{\operatorname{P}}
+\newcommand{\q}{\operatorname{Q}}
+\newcommand{\E}{\operatorname{E}}
+\newcommand{\V}{\operatorname{Var}}
+\newcommand{\med}{\operatorname{med}} % Median
+\newcommand{\modus}{\operatorname{mode}} % Mode
+\newcommand{\logit}{\operatorname{logit}} % logit
+
+%\DeclareMathOperator*{\argmin}{arg\,min}
+%\DeclareMathOperator*{\argmax}{arg\,max}
+
+\def\El{\ul{\E}}
+\def\Eu{\ol{\E}}
+
+\def\Pl{\ul{\p}}
+\def\Pu{\ol{\p}}
+
+\newcommand{\ber}{\operatorname{Ber}}   % Bernoulli Distribution
+\newcommand{\bin}{\operatorname{Binom}} % Binomial Distribution
+\newcommand{\be}{\operatorname{Beta}}   % Beta Distribution
+\newcommand{\B}{\operatorname{B}}   % Beta Function
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Manuscript body
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+First, we will briefly characterise the novel parametrisation of canoncial conjugate priors this approach relies on.
+To keep things simple, we restrict ourselves here for the case of the Beta-Binomial model (see Section~\ref{sec:beta-binom}),
+but the approach is generalisable to arbitrary canonical conjugate priors.
+Then we will suggest a shape in this parametrisation that accomplishes
+both \pdc\ sensitivity and `bonus precision' in case of strong prior-data agreement.
+We present a parametric description for such a shape
+and show that it indeed leads to the desired properties.
+
+\section{(Imprecise) Bayesian inference for binomial data}
+
+\textbf{***general idea of Bayesian inference, Beta-Binomial model, then imprecise Bayesian inference in the Beta-Binomial model}
+
+***link to Jim Berger robust Bayes: we present it as IP, but works well in a robust Bayes context, emphasize that it fits***
+
+The Bayesian approach to statistical inference requires (possibly subjective) knowledge on the parameter $\vartheta$ to be expressed by a probability distribution on
+the parameter space $\Theta$, with the probability mass or density function $p(\vartheta)$ called \emph{prior distribution}.
+
+
+\subsection{Bayesian inference with conjugate priors}
+\label{sec:regularconjugates}
+
+
+Interpreting the elements $f_\vartheta(x)$ of the sampling model as conditional distributions of the sample given the parameter,
+denoted by $f(x\mid\vartheta)$ and called \emph{likelihood},
+turns the problem of statistical inference into a problem of probabilistic deduction,
+where the \emph{posterior distribution}, i.e.\ the distribution of the parameter given the sample data,
+can be calculated by Bayes' Rule.
+Thus, in the light of the sample $x= (x_1, \ldots, x_n)$, the prior distribution is updated by Bayes' Rule
+to obtain the posterior distribution with density or mass function
+\begin{align}
+\label{eq:bayesrule}
+p(\vartheta\mid x) \propto f(x\mid\vartheta) \cdot p(\vartheta)\,.
+\end{align}
+The posterior distribution is understood as comprising all the information from the sample and the prior knowledge.
+It therefore underlies all further inferences on the parameter $\vartheta$,
+like point estimators, interval estimators,
+or the \emph{posterior predictive distribution},
+giving the distribution of further observations based on the posterior.
+
+Traditional Bayesian inference is frequently based on so-called \emph{conjugate priors} related to a specific likelihood.
+Such priors have the convenient property that the posterior resulting from~\eqref{eq:bayesrule}
+belongs to the same class of parametric distributions as the prior, and thus only the parameters have to be updated,
+which makes calculation of the posterior and thus the whole Bayesian inference easily tractable.%
+
+A sample distribution
+is said to belong to the \emph{(regular) canonical exponential family} if its density or mass function satisfies the decomposition
+\begin{align}
+\label{eq:expofam-sampledens}
+f(x \mid \vartheta) &\propto \exp\big\{\langle \psi, \tau(x) \rangle - n \mbf{b}(\psi)\big\}\,,
+\end{align}
+where $\psi \in \Psi \subset \reals^q$ is a transformation of the (possibly vectorial) parameter $\vartheta \in \Theta$,
+and $\mbf{b}(\psi)$ a scalar function of $\psi$ (or, in turn, of $\vartheta$).
+$\tau(x)$ is a function of the i.i.d.\ sample $x$ of size $n$ that fulfills $\tau(x) = \sum_{i=1}^n \tau^*(x_i)$,
+with $\tau^*(x_i) \in \mathcal{T} \subset \reals^q$,
+while $\langle\cdot, \cdot\rangle$ denotes the scalar product.
+
+From these ingredients, a conjugate prior on $\psi$ can be constructed as%
+\footnote{In our notation, ${}\uz$ denotes prior parameters; ${}\un$ posterior parameters.}
+\begin{align}
+\label{eq:canonicalprior}
+p(\psi \mid \nz, \yz) \dd\psi
+ &\propto \exp\Big\{ \nz \Big[ \langle \yz, \psi \rangle - \mbf{b}(\psi) \Big] \Big\} \dd\psi\,,
+\end{align}
+where $\nz$ and $\yz$ are now the parameters by which a certain prior can be specified.
+We will refer to priors of the form~\eqref{eq:canonicalprior} as \emph{canonically constructed priors}.
+The domain of $\yz$ is $\Y$, the interior of the convex hull of $\mathcal{T}$;
+the scalar $\nz$ must take strictly positive values for the prior to be \emph{proper} (i.e., integrable to $1$).
+
+An interpretation for these parameters will be given shortly.
+First, let us calculate the posterior density for $\psi$.
+The prior parameters $\yz$ and $\nz$ are updated to their posterior values $\yn$ and $\nn$ in the following way:
+\begin{align}\label{eq:canonicalupdate}
+\yn &= \frac{\nz}{\nz + n} \cdot \yz + \frac{n}{\nz + n} \cdot \frac{\tau(x)}{n}\,, &
+\nn &= \nz + n\,,
+\end{align}
+such that the posterior can be written as
+\begin{align}\label{eq:canonicalposterior}
+p(\psi \mid x, \nz, \yz)
+ =: p(\psi \mid \nn, \yn)
+ &\propto \exp\Big\{ \nn \Big[ \langle \yn, \psi \rangle - \mbf{b}(\psi) \Big] \Big\} \dd\psi\,.
+\end{align}
+In this setting, $\yz$ and $\yn$ can be seen as the parameter describing the main characteristics of the prior and the posterior,
+and thus we will call them \emph{main prior} and \emph{main posterior parameter}, respectively.
+$\yz$ can also be understood as a prior guess for the random quantity $\ttau(x) := \tau(x)/n$ summarizing the sample,
+as $\E[\ttau(x) \mid \psi] = \nabla\mbf{b}(\psi)$,
+where in turn $\E[\nabla\mbf{b}(\psi) \mid \nz, \yz] = \yz$ \cite[e.g.,][Prop.~5.7, p.~275]{2000:bernardosmith}.
+
+Characteristically, $\yn$ is a weighted average of this prior guess $\yz$ and the sample `mean' $\ttau(x)$,
+with weights $\nz$ and $n$, respectively.
+Therefore, $\nz$ can be seen as ``prior strength'' or ``pseudocounts'',
+reflecting the weight one gives to the prior as compared to the sample size $n$.
+To make this more explicit, $\nz$ can be interpreted as the size of an imaginary sample
+that corresponds to the trust on the prior information in the same way
+as the sample size of a real sample
+corresponds to the trust in conclusions based on such a real sample
+\cite[p.~258]{Walter2009a-long}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Bibliography and acknowledgements
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{ba}
+\bibliography{boatpaper}
+
+
+\begin{acknowledgement}
+  The author(s) wish to thank....
+\end{acknowledgement}
+
