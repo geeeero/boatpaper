@@ -38,11 +38,13 @@ and
 \renewcommand{\thefootnote}{\arabic{footnote}}
 
 \begin{abstract}
+Bayesian inference *** influence of prior if data are scarce *** prior-data conflict sensitivity ***
+
 We will propose a novel idea for generating parameter prior sets in a conjugate setting
 that, in addition to prior-data conflict sensitivity, allow to mirror \emph{strong prior-data agreement},
 i.e., the case when prior and data coincide especially well) by increased posterior precision.
 
-\keywords{\kwd{strong prior-data agreement}, \kwd{prior-data conflict},  \kwd{imprecise probability}, \kwd{conjugate priors}}
+\keywords{\kwd{strong prior-data agreement}, \kwd{prior-data conflict}, \kwd{imprecise probability}, \kwd{conjugate priors}}
 \end{abstract}
 
 
@@ -184,7 +186,7 @@ To keep things simple, we restrict ourselves here for the case of the Beta-Binom
 but the approach is generalisable to arbitrary canonical conjugate priors.
 Then we will suggest a shape in this parametrisation that accomplishes
 both \pdc\ sensitivity and `bonus precision' in case of strong prior-data agreement.
-We present a parametric description for such a shape
+We propose a parametric description for such a shape
 and show that it indeed leads to the desired properties.
 
 \section{(Imprecise) Bayesian inference for binomial data}
@@ -245,7 +247,7 @@ p(\psi \mid \nz, \yz) \dd\psi
 where $\nz$ and $\yz$ are now the parameters by which a certain prior can be specified.
 We will refer to priors of the form~\eqref{eq:canonicalprior} as \emph{canonically constructed priors}.
 The domain of $\yz$ is $\Y$, the interior of the convex hull of $\mathcal{T}$;
-the scalar $\nz$ must take strictly positive values for the prior to be \emph{proper} (i.e., integrable to $1$).
+the scalar $\nz$ must take strictly positive values for the prior to be proper (i.e., integrable to $1$).
 
 An interpretation for these parameters will be given shortly.
 First, let us calculate the posterior density for $\psi$.
@@ -280,6 +282,7 @@ corresponds to the trust in conclusions based on such a real sample
 \subsection{The Beta-Binomial Model}
 \label{sec:beta-binom}
 
+The binomial sample model is given by
 \begin{align}
 \label{eq:binomdens}
 f(x\mid\theta) &= {n \choose s}\theta^s (1-\theta)^{n-s}\,,
@@ -320,7 +323,7 @@ where the posterior parameters $\nn$ and $\yn$ are given by \eqref{eq:canonicalu
 
 \subsection{Imprecise Probability}
 
-\textbf{***imprecision to account for model uncertainty, Generalized Bayes' Rule, ***}
+\textbf{***imprecision to account for model uncertainty, Generalized Bayes' Rule, credal sets, link to robust Bayes***}
 
 
 \subsection{Imprecise Bayesian inference using parametrically constructed sets of conjugate priors}
@@ -354,7 +357,7 @@ the lower and upper probability
 
 Special imprecise probability models are now obtained by specific choices of $\PZ$.
 
-The choices for $\PZ$ discussed in the literature are:
+The choices for $\PZ$ discussed in the imprecise probability literature are:
 \begin{enumerate}%[(a)]
 \item $\nz$ is fixed, while $\yz$ varies in a set $\YZ$.\\
 \label{enum:modeltypes-a}%
@@ -398,10 +401,15 @@ or, vice versa, the range of $\nz$ may depend on the value of $\yz$, as in \cite
 \end{enumerate}
 
 All models of this class lead to models with favourable inference properties,
-type~(\ref{enum:rectangular}) allows for \pdc\ sensitivity.
+
+\textbf{*** brief list of inference properties, refer to diss? ***}
+
+Models of type~(\ref{enum:varyn}), (\ref{enum:rectangular}) and (\ref{enum:generalset}) can lead to \pdc\ sensitivity,
+because they allow a range of $\nz$ values in $\PZ$,
+such that prior information (encoded in $\yz$) and data (via $\ttau(x)$) can have a range of weights.
 
 The model we propose belongs to type~(\ref{enum:generalset}),
-and results in models that give more precise inferences when prior and data are in agreement.
+and results in models that also give more precise inferences when prior and data are in agreement.
 
 
 
@@ -738,7 +746,7 @@ would be larger than the ones depicted here, illustrating the extra gain in prec
 \subsubsection{Finding the Touchpoints for the Basic Set}
 \label{sec:touchpoints}
 
-In contrast to models discussed in Section~\ref{sec:generalmodel},
+In contrast to models in the parametrization discussed in Section~\ref{sec:ip-conjugateframework},
 where $\yzl$ and $\yzu$ were at either ends of a set $\PZ$,
 here, for a set \eqref{eq:basicset}, the touchpoints $\yzl$ and $\yzu$ 
 are not necessarily at $\ezzl$ or $\ezzu$.%
