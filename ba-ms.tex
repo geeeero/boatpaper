@@ -40,7 +40,7 @@ and
 \begin{abstract}
 Bayesian inference *** influence of prior if data are scarce *** prior-data conflict sensitivity ***
 
-We will propose a novel idea for generating parameter prior sets in a conjugate setting
+We will propose a new method for generating parameter prior sets in a conjugate setting
 that, in addition to prior-data conflict sensitivity, allow to mirror \emph{strong prior-data agreement},
 i.e., the case when prior and data coincide especially well) by increased posterior precision.
 
@@ -188,6 +188,9 @@ Then we will suggest a shape in this parametrisation that accomplishes
 both \pdc\ sensitivity and `bonus precision' in case of strong prior-data agreement.
 We propose a parametric description for such a shape
 and show that it indeed leads to the desired properties.
+
+***emphazise that this is basically an idea for defining sets of priors***
+
 
 \section{(Imprecise) Bayesian inference for binomial data}
 
@@ -375,20 +378,7 @@ but is mentioned by \cite{1991:walley} in {\S 7.8.3} and in {\S 1.1.4}, footnote
 %$\nz \in \NZ \times \yz \in \YZ$.\\
 This type of model is first discussed in \cite[\S 5.4.3]{1991:walley} for the Beta-Bernoulli model,
 and was later generalised by \cite{Walter2009a-long}
-to sample distributions of the canonical exponential form \eqref{eq:expofam-sampledens}.%
-\footnote{\label{foot:luckmodels}%
-%from \cite[\S 4.4]{itip-statinf}:\\
-More precisely, \cite{Walter2009a-long} proposed
-a direct extension of this model framework
-by the definition of so-called \emph{LUCK-models},
-which were already used in \cite{Walter2007a}
-to generalise Bayesian linear regression. %(see a short summary in Section~\ref{sec:isipta07}).
-These \emph{LUCK-models} utilize the fact that the central properties of the model framework
-(see Section~\ref{sec:gbicp-properties-criteria} below)
-rely on the specific form of the update step \eqref{eq:canonicalupdate} only.
-Thus, these properties can be generalised to settings
-that are not based on i.i.d.\ observations from canonical exponential family distributions,
-but nevertheless follow the same update step.} %This is elaborated in Section~\ref{sec:jstp} \cite{Walter2009a} 
+to sample distributions of the canonical exponential form \eqref{eq:expofam-sampledens}.
 It should be noted here that while the prior parameter set is a Cartesian product of $\NZ = [\nzl, \nzu]$ and $\YZ$,
 the posterior parameter set is not.
 This is due to Eq.~\eqref{eq:canonicalupdate},
@@ -415,29 +405,28 @@ and results in models that also give more precise inferences when prior and data
 
 \subsection{Rationale for switch of parameter space}
 
-Although the updating of the canonical parameters according to \eqref{eq:canonicalupdate},
-i.e., the weighted average update step for $\yz$, and the increment step for $\nz$,
-seems very intuitive (and is central to the behaviour of the model,
-see the list of inference properties in Section~\ref{sec:gbicp-properties-criteria}),
-the shape change of $\PZ$ to $\PN$ through this update step,
-and its effects on posterior inferences, is difficult to grasp.
-This is due to the fact that,
-while the update of a single coordinate $(\nz,\yz)$ is a simple shift,
-this shift is different for each of the coordinates in a set;
-in fact, the shift of the $\yz$ component changes with both $\nz$ and $\yz$.%
-\footnote{As given by \eqref{eq:canonicalupdate},
-for the $\nz$ coordinate holds $\nz \mapsto \nz+n$,
-while for the $\yz$ coordinate holds $\yz \mapsto \frac{\nz\yz + \tau(x)}{\nz+n} = \yz + \frac{\tau(x)-n\yz}{\nz+n}$.}
-These different shifts for the coordinates within a set
-lead to the change of shape from $\PZ$ to $\PN$.
+In the parametrisation in terms of $\nz$ and $\yz$, described in Section~\ref{sec:regularconjugates},
+a conjugate prior is updated to its respective posterior by a shift in the parameter space,
+given by \eqref{eq:canonicalupdate}:
+\begin{align*}
+\nz &\mapsto \nz + n\,, &
+\yz &\mapsto \frac{\nz}{\nz + n} \cdot \yz + \frac{n}{\nz + n} \cdot \frac{\tau(x)}{n} = \yz + \frac{\tau(x)-n\yz}{\nz+n}\,.
+\end{align*}
+We see thus that, while the shift for the $n$ coordinate is the same for all elements $(\nz,\yz)$
+in a prior parameter set $\PZ$,
+the shift in the $y$ coordinate depends on $\nz$, and the location of $\yz$ itself.
+Due to this, the shape of $\PZ$ will change during the update step.
+This shape change from $\PZ$ to $\PN$ is problematic for understanding of the update step in generalized Bayesian inference,
+as its effects on posterior inferences are difficult to grasp.
 
-As this shape change is so problematic for understanding of the update step,
+Therefore, to isolate the influence of a set shape,
 a different parametrisation of the canonical priors
 in which each coordinate has the same shift in updating
-would be advantageous,
-such that updating of parameter sets
+would be advantageous.
+Then updating of parameter sets
 could be expressed as a shift of the entire set within the parameter space.
 
+***change par depending on Mik's response***\\
 %yes, there is, see preliminary results by Mik Bickis (``personal communication'' if no citable work?).
 In fact, such a parametrisation has been developed by Mi\c{k}elis Bickis \cite[personal communication]{2011:bickis:geomip},
 and he is currently preparing a manuscript elaborating the details of his findings.
@@ -470,18 +459,6 @@ by using the Generalised Bayes' Rule for updating.
 \section{A Novel Parametrisation of Canonical Conjugate Priors}
 \label{sec:miksworld}
 
-In the parametrisation in terms of $\nz$ and $\yz$, described in Section~\ref{sec:regularconjugates},
-a conjugate prior is updated to its respective posterior by a shift in the parameter space,
-given by \eqref{eq:canonicalupdate}:
-\begin{align*}
-\nz &\mapsto \nz + n\,, &
-\yz &\mapsto \frac{\nz}{\nz + n} \cdot \yz + \frac{n}{\nz + n} \cdot \frac{\tau(x)}{n} = \yz + \frac{\tau(x)-n\yz}{\nz+n}\,.
-\end{align*}
-We see thus that, while the shift for the $n$ coordinate is the same for all elements $(\nz,\yz)$
-in a prior parameter set $\PZ$,
-the shift in the $y$ coordinate depends on $\nz$, and the location of $\yz$ itself.
-Due to this, the shape of $\PZ$ will change during the update step.
-
 This shape change to some extent obscures the posterior inference properties
 of a certain shape of the prior parameter set $\PZ$.
 Therefore, a different parametrisation of the canonical priors
@@ -490,6 +467,7 @@ Then, updating of parameter sets
 could be expressed as a shift of the entire set within the parameter space.
 %Although interpretation of the shapes may be slightly more difficult due to the,
 
+***change par depending on Mik's response***\\
 A parametrisation developed by Mi\c{k}elis Bickis \cite[personal communication]{2011:bickis:geomip} achieves just that.
 He is currently preparing a manuscript elaborating the details of his findings,
 and we will present here a preview on the results for the Beta-Binomial case.
@@ -1009,10 +987,26 @@ whereas $\ynl$ will increase with a lower slope $\frac{1}{\ezu + n + 2}$.
 
 \section{Example / Application?}
 
+illustrate with simple inferences:\\
+$\ynl, \ynu$, further event of interest, and 95\% credibility interval
+
+compare with Berger/Walley model with $s=1$, $s=2$, and rectangular set.
+
+discuss briefly how to choose boatshape parameters.
+
 
 \section{Conclusion and outlook}
 
-****
+***it's worth to study more shapes to cater for other objectives in inference behaviour
+
+***more detailed study in elicitation of the boatshape set parameters necessary,
+which should be done by pre-posterior analysis
+
+***with the boatshape, we have a more flexible model for prior information
+while remaining within the generalized Bayesian paradigm,
+opening up a wide field for research
+
+***aspects of design of experiments: Teddy paper (convincing another Bayesian)
 
 
 
