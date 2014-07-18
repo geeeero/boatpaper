@@ -285,6 +285,9 @@ corresponds to the trust in conclusions based on such a real sample
 \subsection{The Beta-Binomial Model}
 \label{sec:beta-binom}
 
+To keep things simple, we now consider the special case of the above framework
+where the sample distribution is a binomial, and the canoncially constructed prior is a Beta distribution.
+
 The binomial sample model is given by
 \begin{align}
 \label{eq:binomdens}
@@ -318,7 +321,7 @@ is a Beta distribution with parameters $\nz\yz$ and $\nz(1-\yz)$, in short, %$\t
 \end{align*}
 
 The combination of a Binomial sampling model with this conjugate Beta prior is called \emph{Beta-Binomial model}.
-Here, $\yz = \E[\theta\mid\nz, \yz]$ can be interpreted as prior guess of $\theta$,
+Here, the main prior parameter $\yz = \E[\theta\mid\nz, \yz]$ can be interpreted as prior guess of $\theta$,
 while $\nz$ governs the concentration of probability mass around $\yz$,
 with large values of $\nz$ giving high concentration of probability mass.
 Due to conjugacy, the posterior on $\theta$ is a $\be(\nn\yn, \nn(1-\yn))$,
@@ -344,9 +347,10 @@ with parameters varying in the set of updated parameters $\PN = \{(\nn,\yn) \ver
 In this case, the set of priors corresponding to $\PZ$ considered above gives the set of extreme points for the actual convex set $\MZ$.
 Updating this convex prior credal set with the Generalized Bayes' Rule results in a set $\MN$ of posterior distributions that is again convex,
 and $\MN$ conveniently can be obtained by taking the convex hull of the set of posteriors
-defined by the set of updated parameters $\PN$.}
+defined by the set of updated parameters $\PN$ \cite[p.~56f]{diss-gw}.}
 
-In the precise Beta-Bernoulli model as discussed in Section~\ref{sec:beta-binom},
+The credal set $\MN$ is then the basis for all posterior inferences. For example,
+in the precise Beta-Bernoulli model as discussed in Section~\ref{sec:beta-binom},
 the posterior predictive probability %$[\lpr,\upr]$
 for the event that a future single draw is a success is equal to $\yn$, and so we get,
 for an imprecise model with $\MZ = \{p(\theta\mid\nz, \yz) \vert (\nz, \yz) \in \PZ\}$,
@@ -360,7 +364,7 @@ the lower and upper probability
 
 Special imprecise probability models are now obtained by specific choices of $\PZ$.
 
-The choices for $\PZ$ discussed in the imprecise probability literature are:
+We will classify the choices for $\PZ$ discussed in the imprecise probability literature into four groups:
 \begin{enumerate}%[(a)]
 \item $\nz$ is fixed, while $\yz$ varies in a set $\YZ$.\\
 \label{enum:modeltypes-a}%
@@ -382,7 +386,8 @@ to sample distributions of the canonical exponential form \eqref{eq:expofam-samp
 It should be noted here that while the prior parameter set is a Cartesian product of $\NZ = [\nzl, \nzu]$ and $\YZ$,
 the posterior parameter set is not.
 This is due to Eq.~\eqref{eq:canonicalupdate},
-which results in different ranges for $\yn$ depending on the value of $\nz$ used in the update step.%
+which results in different ranges for $\yn$ depending on the value of $\nz$ used in the update step,
+and we will comment on this important point in Section~\ref{sec:rationale-for-miks-world}.
 \item Both $\nz$ and $\yz$ vary in other sets $\PZ \subset (\reals_{>0} \times \Y)$.\\
 \label{enum:generalset}%
 In this type, also in the prior parameter set the range of $\yz$ may depend on $\nz$,
@@ -391,6 +396,7 @@ or, vice versa, the range of $\nz$ may depend on the value of $\yz$, as in \cite
 \end{enumerate}
 
 All models of this class lead to models with favourable inference properties,
+but there are important differences that we will now briefly discuss.
 
 \textbf{*** brief list of inference properties, refer to diss? ***}
 
@@ -404,6 +410,7 @@ and results in models that also give more precise inferences when prior and data
 
 
 \subsection{Rationale for switch of parameter space}
+\label{sec:rationale-for-miks-world}
 
 In the parametrisation in terms of $\nz$ and $\yz$, described in Section~\ref{sec:regularconjugates},
 a conjugate prior is updated to its respective posterior by a shift in the parameter space,
