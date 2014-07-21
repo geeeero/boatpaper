@@ -72,6 +72,7 @@ i.e., the case when prior and data coincide especially well) by increased poster
 \newcommand{\uz}{^{(0)}} % upper zero
 \newcommand{\un}{^{(n)}} % upper n
 \newcommand{\ui}{^{(i)}} % upper i
+\newcommand{\uinfty}{^{(\infty)}} % upper infty
 
 \newcommand{\ul}[1]{\underline{#1}}
 \newcommand{\ol}[1]{\overline{#1}}
@@ -119,6 +120,7 @@ i.e., the case when prior and data coincide especially well) by increased poster
 \def\PZ{\text{I}\!\Pi\uz}
 %\def\PZero{\PZ}
 \def\PN{\text{I}\!\Pi\un}
+\def\Pinfty{\text{I}\!\Pi\uinfty}
 \def\MZ{\mathcal{M}\uz}
 \def\MN{\mathcal{M}\un}
 
@@ -363,9 +365,8 @@ the lower and upper probability
 \end{align*}
 
 Special imprecise probability models are now obtained by specific choices of $\PZ$.
-
 We will classify the choices for $\PZ$ discussed in the imprecise probability literature into four groups:
-\begin{enumerate}%[(a)]
+\begin{enumerate}[(a)]
 \item $\nz$ is fixed, while $\yz$ varies in a set $\YZ$.\\
 \label{enum:modeltypes-a}%
 The IDM \cite{1996:walley::idm},
@@ -395,17 +396,30 @@ as in \cite[\S 2.3]{Walter2011a},
 or, vice versa, the range of $\nz$ may depend on the value of $\yz$, as in \cite{2012:benavolizaffalon}.
 \end{enumerate}
 
-All models of this class lead to models with favourable inference properties,
+All models of this class lead to models with generally favourable inference properties,
 but there are important differences that we will now briefly discuss.
 
-\textbf{*** brief list of inference properties, refer to diss? ***}
+\textbf{*** brief list of inference properties, refer to diss? ***}\\
+The larger $n$ relative to (values in the range of) $\nz$,
+c.p.\ the smaller $\PN$ and thus the more precise the inferences based on $\PN$.
+Indeed, for $n \to  \infty$, $\PN$ converges to a one-element set (models of type (\ref{enum:modeltypes-a}))
+or to a set $\Pinfty = y\uinfty \times \mathcal{N}\uinfty$,
+where $y\uinfty \to \ttau(x) \in \Y$ is a singleton 
+(models of type~(\ref{enum:varyn}), (\ref{enum:rectangular}) and (\ref{enum:generalset})).
+This can be seen as a Bayesian consistency property, as this means that all inferences based mainly on $\yn$
+will eventually converge to their respective sample equivalents***.
+Given enough data, we will learn the sample*** characteristics with certainty.
+For finite $n$, there is a clear relation between prior and posterior imprecision of inferences
+through the magnitude of $\MZ$ and $\MN$, wich in turn is governed by the size of $\PZ$ and $\PN$, respectively.
+The larger $\YZ$, c.p.\ the larger $\PN$.
+
 
 Models of type~(\ref{enum:varyn}), (\ref{enum:rectangular}) and (\ref{enum:generalset}) can lead to \pdc\ sensitivity,
 because they allow a range of $\nz$ values in $\PZ$,
 such that prior information (encoded in $\yz$) and data (via $\ttau(x)$) can have a range of weights.
 
 The model we propose belongs to type~(\ref{enum:generalset}),
-and results in models that also give more precise inferences when prior and data are in agreement.
+and results in models that also give more precise inferences when prior and data are in strong agreement.
 
 
 
