@@ -365,7 +365,7 @@ the lower and upper probability
 \end{align*}
 
 Special imprecise probability models are now obtained by specific choices of $\PZ$.
-We will classify the choices for $\PZ$ discussed in the imprecise probability literature into four groups:
+We classify the choices for $\PZ$ discussed in the imprecise probability literature into four groups:
 \begin{enumerate}[(a)]
 \item $\nz$ is fixed, while $\yz$ varies in a set $\YZ$.\\
 \label{enum:modeltypes-a}%
@@ -397,31 +397,35 @@ or, vice versa, the range of $\nz$ may depend on the value of $\yz$, as in \cite
 \end{enumerate}
 
 All models of this class lead to models with generally favourable inference properties,
-but there are important differences that we will now briefly discuss.
-
-\textbf{*** brief list of inference properties, refer to diss? ***}\\
-The larger $n$ relative to (values in the range of) $\nz$,
-c.p.\ the smaller $\PN$ and thus the more precise the inferences based on $\PN$.
-Indeed, for $n \to  \infty$, $\PN$ converges to a one-element set (models of type (\ref{enum:modeltypes-a}))
+which can be derived in essence from the update step \eqref{eq:canonicalupdate}
+and its effects on the location and magnitude of $\PN$.
+There is a clear relation between prior and posterior imprecision of inferences
+through the magnitude of $\MZ$ and $\MN$, which in turn is governed by the size of $\PZ$ and $\PN$, respectively.
+Obviously, the smaller $\YZ$, c.p.\ the smaller $\PN$ and thus the more precise the inferences based on $\PN$.
+Furthermore, the larger $n$ relative to (values in the range of) $\nz$,
+c.p.\ the smaller $\PN$, such that imprecision generally decreases with sample size.
+Indeed, for $n \to \infty$, $\PN$ converges to a one-element set (models of type (\ref{enum:modeltypes-a}))
 or to a set $\Pinfty = y\uinfty \times \mathcal{N}\uinfty$,
 where $y\uinfty \to \ttau(x) \in \Y$ is a singleton 
 (models of type~(\ref{enum:varyn}), (\ref{enum:rectangular}) and (\ref{enum:generalset})).
 This can be seen as a Bayesian consistency property, as this means that all inferences based mainly on $\yn$
-will eventually converge to their respective sample equivalents***.
-Given enough data, we will learn the sample*** characteristics with certainty.
-For finite $n$, there is a clear relation between prior and posterior imprecision of inferences
-through the magnitude of $\MZ$ and $\MN$, wich in turn is governed by the size of $\PZ$ and $\PN$, respectively.
-The larger $\YZ$, c.p.\ the larger $\PN$.
+will eventually converge to their respective infinite sample equivalents.
+For large enough sample sizes, posterior imprecision will fall below the threshold of relevance,
+such that effectively the same inferences as those based on a precise prior are obtained.
 
-
-Models of type~(\ref{enum:varyn}), (\ref{enum:rectangular}) and (\ref{enum:generalset}) can lead to \pdc\ sensitivity,
+While models of type (\ref{enum:modeltypes-a}) are so far the most common,
+they cannot reflect prior-data conflict in posterior imprecision of inferences,
+as the size of $\PN$ does not vary with $\ttau(x)$ \cite[Eq. (3.4), p.~64]{diss-gw}.
+Instead, models of type~(\ref{enum:varyn}), (\ref{enum:rectangular}) and (\ref{enum:generalset}) can lead to \pdc\ sensitivity,
 because they allow a range of $\nz$ values in $\PZ$,
-such that prior information (encoded in $\yz$) and data (via $\ttau(x)$) can have a range of weights.
+such that prior information (encoded in $\yz$) and data (via the sufficient statistic $\ttau(x)$) can have a range of weights,
+resulting in the stretch of $\yn$ values in $\PN$ being the larger the further $\ttau(x)$ is away from $\YZ$
+\cite[\S 3.1.4]{diss-gw}.
 
 The model we propose belongs to type~(\ref{enum:generalset}),
 and results in models that also give more precise inferences when prior and data are in strong agreement.
 
-
+For further details on this framework, see \citet[\S 3.1]{diss-gw}.
 
 \subsection{Rationale for switch of parameter space}
 \label{sec:rationale-for-miks-world}
