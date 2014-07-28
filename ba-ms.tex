@@ -194,7 +194,7 @@ and show that it indeed leads to the desired properties.
 ***emphazise that this is basically an idea for defining sets of priors***
 
 
-With the set shape unchanged by the update, 
+***With the set shape unchanged by the update, 
 tailoring shapes for desired inference behaviour is much easier in this representation.
 %because the \emph{shapes} remain constant.
 We propose thus a set shape %in this parametrisation
@@ -204,6 +204,16 @@ and more precise inferences in case of strong prior-data agreement,
 a behaviour we deem very desirable.
 We are thus able to offer a solution to this issue that allows to remain within the generalised Bayesian framework
 by using the Generalised Bayes' Rule for updating.
+
+***In the parametrisation from Section~\ref{sec:regularconjugates},
+$\yz$ can be easily interpreted as
+giving the (prior) expectation, or a prior guess, for the mean sample statistic $\ttau(x)$.
+%rays of constant expectation (i.e., $\approx \yn$)
+Naturally, $\eoz$ cannot have this property,
+but in the transformed space for the Beta-Binomial model, the points on rays emanating from the coordinate $(-2,0)$
+will give a constant expectation of $\E[\ttau(x) \mid \psi]$,
+such that interpretation of parameter sets in terms of $(\ezz,\eoz)$ is still relatively easy.
+
 
 
 \section{(Imprecise) Bayesian inference for binomial data}
@@ -507,7 +517,7 @@ and the update step in terms of $\eta_0$ and $\eta_1$ is given by
 \eta_1\un &= \eta_1\uz + \frac{1}{2}(s - (n-s)) = \eta_1\uz + s - \frac{n}{2}\,,
 \end{aligned}
 \end{equation}
-where $s$ is the number of successes in the $n$ Bernoulli trials.
+where $s$ is again the number of successes in the $n$ Bernoulli trials.
 A `success' in a Bernoulli trial thus
 leads to a step of $1$ in the $\eta_0$ direction and of $+\frac{1}{2}$ in the $\eta_1$ direction,
 while a `failure'
@@ -528,37 +538,32 @@ with rays of constant expectation for $y_c = \{0.1,0.2,\ldots,0.9\}$ (grey).}
 \label{fig:boatshape-domain}
 \end{figure}
 
-In the parametrisation from Section~\ref{sec:regularconjugates},
-giving the (prior) expectation, or a prior guess, for the mean sample statistic $\ttau(x)$.
-%rays of constant expectation (i.e., $\approx \yn$)
-Naturally, $\eoz$ cannot have this property,
-but in the transformed space for the Beta-Binomial model, the points on rays emanating from the coordinate $(-2,0)$
-will give a constant expectation of $\E[\ttau(x) \mid \psi]$,
-such that interpretation of parameter sets in terms of $(\ezz,\eoz)$ is still relatively easy.
-
 While $\yz$ had the convenient property of being equal to
-the prior expectation of the mean sample statistic $\ttau(x)$ (here, $s/n$),
+the prior expectation of the mean sample statistic $\ttau(x)$ (here, $\ttau(x) = s/n$),
 %$\E\big[\E[\ttau(x) \mid \psi] \mid \nz, \yz\big]$,
 $\eta_1$ is only slightly more difficult to interpret.
-From \eqref{eq:trafotony} we can derive that coordinates $(\eta_0,\eta_1) \in \Eta$ satifying
+From \eqref{eq:trafotony} we can derive that points $(\eta_0,\eta_1) \in \Eta$
+on rays emanating from the coordinate $(-2,0)$,
+i.e., coordinates satifying
 \begin{align}
 \label{eq:raysofconstantexpectation}
 \eta_1 = f(\eta_0) &= (\eta_0 + 2)(y_c - \frac{1}{2}) 
 \end{align}
-will have a constant expectation $y_c$.
+will have a constant expectation of $y_c$.
 The domain $\Eta$, and these \emph{rays of constant expectation} emanating from the coordinate $(-2,0)$,
 are depicted in Figure~\ref{fig:boatshape-domain}.
 
 
-\section{A Parameter Set Shape for Strong Prior-Data Agreement Modelling}
+%\section{A Parameter Set Shape for Strong Prior-Data Agreement Modelling}
 
-\subsection{Informal Rationale for Boat-Shaped Parameter Sets}
+%\subsection{Informal Rationale for Boat-Shaped Parameter Sets}
+\section{Parameter Sets and Imprecision in the Novel Parametrisation}
 \label{boatshape-rationale}
 
 In the parametrisation in terms of $(\nz,\yz)$ and $(\nn, \yn)$,
 posterior inferences become more precise,
 because the stretch in the main parameter dimension $y$, denoted by $\Delta_y(\PN)$,
-tends to $0$ for $n \to \infty$ (see the discussion in Section~\ref{sec:gbicp-properties-criteria}).
+tends to $0$ for $n \to \infty$ (see the discussion in Section~\ref{sec:ip-conjugateframework}).
 In the domain $\Eta$ as depicted in Figure~\ref{fig:boatshape-domain},
 instead the rays of constant expectation fan out for growing $n$, %**move outwards to the right,
 while a parameter set will retain its size in updating.
@@ -600,7 +605,7 @@ as illustrated in Figure~\ref{fig:boatshape-vertical}.
 %}
 \caption[Line segment parameter set $\EZ$ %
 and respective posterior sets for $s/n=0.5$ and $s/n=0.9$.]%
-{Parameter set $\EZ = \ezz \times [\text{\underline{$\eta$}${}_1\uz$},\eozu]$ and respective posterior sets $\EN$
+{Prior parameter set $\EZ = \ezz \times [\text{\underline{$\eta$}${}_1\uz$},\eozu]$ and respective posterior sets $\EN$
 for $s/n=0.5$ (left) and $s/n=0.9$ (right). Note that all sets have the same size,
 imprecision decreasing only through their position on the $\eta_0$ axis.}
 \label{fig:boatshape-vertical}
@@ -637,7 +642,7 @@ of the constant rays of expectation.
 The shape we suggest thus looks like a bullett, or like a boat with a transom stern
 (see, e.g., Figure~\ref{fig:boatshape-prior}).
 
-\subsection{The Boatshape}
+\section{The Boatshape}
 \label{sec:boatshape-2}
 
 In this section, %~\ref{sec:boatshape-2} below,
@@ -646,7 +651,8 @@ we will suggest a parametrisation for such a shape.
 The definition, along with some first graphical examples, is given in Section~\ref{sec:basicdefboat},
 and we discuss some first technical results for this shape in Sections~\ref{sec:touchpoints} -- \ref{sec:generalupdate}.
 
-\subsubsection{Basic Definition}
+
+\subsection{Basic Definition}
 \label{sec:basicdefboat}
 
 We will now present a parametrisation for such a boat-shaped parameter set $\EZ$.
@@ -739,7 +745,8 @@ would be larger than the ones depicted here, illustrating the extra gain in prec
 \label{fig:boatshape-posterior-normal}
 \end{figure}
 
-\subsubsection{Finding the Touchpoints for the Basic Set}
+
+\subsection{Finding the Touchpoints for the Basic Set}
 \label{sec:touchpoints}
 
 In contrast to models in the parametrization discussed in Section~\ref{sec:ip-conjugateframework},
@@ -791,7 +798,8 @@ that is, $\yzu$ %the upper expected value for the prior set
 is more away from $\frac{1}{2}$.
 Here, this means that the larger $\eta_0^u$, the more imprecise is the prior parameter set.
 
-\subsubsection{Strong Prior-Data Agreement Property}
+
+\subsection{Strong Prior-Data Agreement Property}
 \label{sec:spda-property}
 
 We will now prove the essential property that sets \eqref{eq:basicset}
@@ -883,7 +891,8 @@ being shifted to the right by $n$, would thus be on the right exponential curve.
 Because ${\eta_0^u}\un$ results from the intersection of the right exponential curve and the linear function,
 it is necessarily larger than ${\eta_0^u}\uz + n$, as the linear function is increasing.
 
-\subsubsection{General Update with \texorpdfstring{$s > \frac{n}{2}$}{s > n/2}}
+
+\subsection{General Update with \texorpdfstring{$s > \frac{n}{2}$}{s > n/2}}
 \label{sec:generalupdate}
 
 Let us now consider the update of the basic boatshape \eqref{eq:basicset} %symmetric around the $\eta_0$ axis,
@@ -1002,6 +1011,7 @@ Ultimately, when $s > s^u$ and $s > s^l$,
 both $\ynu$ and $\ynl$ will increase linearly in $s$, but with different slopes.
 $\ynu$ will increase with slope $\frac{1}{\ezl + n + 2}$,
 whereas $\ynl$ will increase with a lower slope $\frac{1}{\ezu + n + 2}$.
+
 
 \section{Example / Application?}
 
