@@ -4,7 +4,7 @@
 %
 \inserttype[ba0001]{article}
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
-\author{F. I. FirstFamilyName and S. I. SecondFamilyName }{
+\author{F. I. FirstFamilyName, S. I. SecondFamilyName and T. I. ThirdFamilyName}{
  \fnms{FirstAuthor I.}
  \snm{FirstFamilyName}
  \footnotemark[1]\ead{email1@example.com}
@@ -192,6 +192,18 @@ We propose a parametric description for such a shape
 and show that it indeed leads to the desired properties.
 
 ***emphazise that this is basically an idea for defining sets of priors***
+
+
+With the set shape unchanged by the update, 
+tailoring shapes for desired inference behaviour is much easier in this representation.
+%because the \emph{shapes} remain constant.
+We propose thus a set shape %in this parametrisation
+that allows for both \pdc\ sensitivity
+%and gives `bonus precision' if prior and data agree especially well,
+and more precise inferences in case of strong prior-data agreement,
+a behaviour we deem very desirable.
+We are thus able to offer a solution to this issue that allows to remain within the generalised Bayesian framework
+by using the Generalised Bayes' Rule for updating.
 
 
 \section{(Imprecise) Bayesian inference for binomial data}
@@ -435,11 +447,11 @@ a conjugate prior is updated to its respective posterior by a shift in the param
 given by \eqref{eq:canonicalupdate}:
 \begin{align*}
 \nz &\mapsto \nz + n\,, &
-\yz &\mapsto \frac{\nz}{\nz + n} \cdot \yz + \frac{n}{\nz + n} \cdot \frac{\tau(x)}{n} = \yz + \frac{\tau(x)-n\yz}{\nz+n}\,.
+\yz &\mapsto \frac{\nz}{\nz + n} \cdot \yz + \frac{n}{\nz + n} \cdot \ttau(x) = \yz + \frac{n \big(\ttau(x)-\yz\big)}{\nz+n}\,.
 \end{align*}
 We see thus that, while the shift for the $n$ coordinate is the same for all elements $(\nz,\yz)$
 in a prior parameter set $\PZ$,
-the shift in the $y$ coordinate depends on $\nz$, and the location of $\yz$ itself.
+the shift in the $y$ coordinate depends on $\nz$, $\tau(x)$, and the location of $\yz$ itself.
 Due to this, the shape of $\PZ$ will change during the update step.
 This shape change from $\PZ$ to $\PN$ is problematic for understanding of the update step in generalized Bayesian inference,
 as its effects on posterior inferences are difficult to grasp.
@@ -451,51 +463,23 @@ would be advantageous.
 Then updating of parameter sets
 could be expressed as a shift of the entire set within the parameter space.
 
-***change par depending on Mik's response***\\
-%yes, there is, see preliminary results by Mik Bickis (``personal communication'' if no citable work?).
-In fact, such a parametrisation has been developed by Mi\c{k}elis Bickis \cite[personal communication]{2011:bickis:geomip},
-and he is currently preparing a manuscript elaborating the details of his findings.
-In this parametrisation, a canonical prior is represented by a coordinate $(\ezz,\eoz)$,
-where $\eoz$ replaces the main prior parameter $\yz$,
-while $\ezz$ is just a shifted version of $\nz$.%
-%there, update step for $\nz$ is the same, and shift for parameter replacing $\yz$ is the same for all. 
-
-In the parametrisation from Section~\ref{sec:regularconjugates},
-$\yz$ had the convenient property of being equal to $\E\big[\E[\ttau(x) \mid \psi] \mid \nz, \yz\big]$,
-giving the (prior) expectation, or a prior guess, for the mean sample statistic $\ttau(x)$.
-%rays of constant expectation (i.e., $\approx \yn$)
-Naturally, $\eoz$ cannot have this property,
-but in the transformed space for the Beta-Binomial model, the points on rays emanating from the coordinate $(-2,0)$
-will give a constant expectation of $\E[\ttau(x) \mid \psi]$,
-such that interpretation of parameter sets in terms of $(\ezz,\eoz)$ is still relatively easy.
-
-With the set shape unchanged by the update, 
-tailoring shapes for desired inference behaviour is much easier in this representation.
-%because the \emph{shapes} remain constant.
-We propose thus a set shape %in this parametrisation
-that allows for both \pdc\ sensitivity
-%and gives `bonus precision' if prior and data agree especially well,
-and more precise inferences in case of strong prior-data agreement,
-a behaviour we deem very desirable.
-We are thus able to offer a solution to this issue that allows to remain within the generalised Bayesian framework
-by using the Generalised Bayes' Rule for updating.
+In fact, such a parametrisation has been developed by Mi\c{k}elis Bickis \cite[$+$ paper ms ref***]{2011:bickis:geomip},
+and we will introduce it in the next subsection.
+%and he is currently preparing a manuscript elaborating the details of his findings.
 
 
 \section{A Novel Parametrisation of Canonical Conjugate Priors}
 \label{sec:miksworld}
 
-This shape change to some extent obscures the posterior inference properties
-of a certain shape of the prior parameter set $\PZ$.
-Therefore, a different parametrisation of the canonical priors
-in which each coordinate has the same shift in updating would be advantageous.
-Then, updating of parameter sets
-could be expressed as a shift of the entire set within the parameter space.
-%Although interpretation of the shapes may be slightly more difficult due to the,
-
-***change par depending on Mik's response***\\
-A parametrisation developed by Mi\c{k}elis Bickis \cite[personal communication]{2011:bickis:geomip} achieves just that.
-He is currently preparing a manuscript elaborating the details of his findings,
-and we will present here a preview on the results for the Beta-Binomial case.
+In the novel parametrisation developed by Mi\c{k}elis Bickis \cite[$+$ paper ms ref***]{2011:bickis:geomip},
+a canonical prior is represented by a coordinate $(\ezz,\eoz)$,
+where $\eoz$ replaces the main prior parameter $\yz$,
+while $\ezz$ is just a shifted version of $\nz$.
+%there, update step for $\nz$ is the same, and shift for parameter replacing $\yz$ is the same for all. 
+To keep things simple, we will not present its derivation here,
+describe it in relation to the parametrisation from Section~\ref{sec:regularconjugates} instead,
+and give the form for the Beta-Binomial case only.
+For the general construction method for other sampling models, see ****. 
 
 In this parametrisation, a canonical prior is represented by a coordinate $(\ezz,\eoz)$,
 where $\eoz$ replaces the main prior parameter $\yz$,
@@ -544,10 +528,19 @@ with rays of constant expectation for $y_c = \{0.1,0.2,\ldots,0.9\}$ (grey).}
 \label{fig:boatshape-domain}
 \end{figure}
 
-$\eta_1$ cannot have the convenient property of being equal to
-the expectation of the mean sample statistic $\ttau(x)$ (here, $s/n$),
-as was the case for $y$.
-However, from \eqref{eq:trafotony} we can derive that coordinates $(\eta_0,\eta_1) \in \Eta$ satifying
+In the parametrisation from Section~\ref{sec:regularconjugates},
+giving the (prior) expectation, or a prior guess, for the mean sample statistic $\ttau(x)$.
+%rays of constant expectation (i.e., $\approx \yn$)
+Naturally, $\eoz$ cannot have this property,
+but in the transformed space for the Beta-Binomial model, the points on rays emanating from the coordinate $(-2,0)$
+will give a constant expectation of $\E[\ttau(x) \mid \psi]$,
+such that interpretation of parameter sets in terms of $(\ezz,\eoz)$ is still relatively easy.
+
+While $\yz$ had the convenient property of being equal to
+the prior expectation of the mean sample statistic $\ttau(x)$ (here, $s/n$),
+%$\E\big[\E[\ttau(x) \mid \psi] \mid \nz, \yz\big]$,
+$\eta_1$ is only slightly more difficult to interpret.
+From \eqref{eq:trafotony} we can derive that coordinates $(\eta_0,\eta_1) \in \Eta$ satifying
 \begin{align}
 \label{eq:raysofconstantexpectation}
 \eta_1 = f(\eta_0) &= (\eta_0 + 2)(y_c - \frac{1}{2}) 
