@@ -194,6 +194,16 @@ and show that it indeed leads to the desired properties.
 ***emphazise that this is basically an idea for defining sets of priors***
 
 
+
+***In the parametrisation from Section~\ref{sec:regularconjugates},
+$\yz$ can be easily interpreted as
+giving the (prior) expectation, or a prior guess, for the mean sample statistic $\ttau(x)$.
+%rays of constant expectation (i.e., $\approx \yn$)
+Naturally, $\eoz$ cannot have this property,
+but in the transformed space for the Beta-Binomial model, the points on rays emanating from the coordinate $(-2,0)$
+will give a constant expectation of $\E[\ttau(x) \mid \psi]$,
+such that interpretation of parameter sets in terms of $(\ezz,\eoz)$ is still relatively easy.
+
 ***With the set shape unchanged by the update, 
 tailoring shapes for desired inference behaviour is much easier in this representation.
 %because the \emph{shapes} remain constant.
@@ -205,14 +215,6 @@ a behaviour we deem very desirable.
 We are thus able to offer a solution to this issue that allows to remain within the generalised Bayesian framework
 by using the Generalised Bayes' Rule for updating.
 
-***In the parametrisation from Section~\ref{sec:regularconjugates},
-$\yz$ can be easily interpreted as
-giving the (prior) expectation, or a prior guess, for the mean sample statistic $\ttau(x)$.
-%rays of constant expectation (i.e., $\approx \yn$)
-Naturally, $\eoz$ cannot have this property,
-but in the transformed space for the Beta-Binomial model, the points on rays emanating from the coordinate $(-2,0)$
-will give a constant expectation of $\E[\ttau(x) \mid \psi]$,
-such that interpretation of parameter sets in terms of $(\ezz,\eoz)$ is still relatively easy.
 
 
 
@@ -247,11 +249,14 @@ like point estimators, interval estimators,
 or the \emph{posterior predictive distribution},
 giving the distribution of further observations based on the posterior.
 
-Traditional Bayesian inference is frequently based on so-called \emph{conjugate priors} related to a specific likelihood.
-Such priors have the convenient property that the posterior resulting from~\eqref{eq:bayesrule}
-belongs to the same class of parametric distributions as the prior, and thus only the parameters have to be updated,
-which makes calculation of the posterior and thus the whole Bayesian inference easily tractable.%
+Bayesian inference is frequently based on so-called \emph{conjugate priors} (related to a specific likelihood),
+having the convenient property that the posterior resulting from~\eqref{eq:bayesrule}
+belongs to the same class of parametric distributions as the prior.
+Then only the parameters have to be updated,
+which makes calculation of the posterior and thus the whole Bayesian inference easily tractable.
 
+In this paper, we will consider inference in a certain class of sampling distributions
+for which conjugate priors can be easily constructed:
 A sample distribution
 is said to belong to the \emph{(regular) canonical exponential family} if its density or mass function satisfies the decomposition
 \begin{align}
@@ -310,12 +315,12 @@ corresponds to the trust in conclusions based on such a real sample
 \label{sec:beta-binom}
 
 To keep things simple, we now consider the special case of the above framework
-where the sample distribution is a binomial, and the canoncially constructed prior is a Beta distribution.
+where the sampling distribution is a binomial, and the canoncially constructed prior is a Beta distribution.
 
 The binomial sample model is given by
 \begin{align}
 \label{eq:binomdens}
-f(x\mid\theta) &= {n \choose s}\theta^s (1-\theta)^{n-s}\,,
+f(x\mid\theta) &= \prod_{i=1}^n \theta^{x_i} (1-\theta)^{1-x_i} = {n \choose s}\theta^s (1-\theta)^{n-s}\,,
 \end{align}
 where $x$, the vector of $n$ observations, is composed of scalar $x_i$'s being either $0$ or $1$,
 denoting `failure' or `success' in an experiment with these two outcomes.
@@ -421,38 +426,60 @@ or, vice versa, the range of $\nz$ may depend on the value of $\yz$, as in \cite
 All models of this class lead to models with generally favourable inference properties,
 which can be derived in essence from the update step \eqref{eq:canonicalupdate}
 and its effects on the location and magnitude of $\PN$.
-There is a clear relation between prior and posterior imprecision of inferences
-through the magnitude of $\MZ$ and $\MN$, which in turn is governed by the size of $\PZ$ and $\PN$, respectively.
-Obviously, the smaller $\YZ$, c.p.\ the smaller $\PN$ and thus the more precise the inferences based on $\PN$.
+While the weighted average property leads to an intuitive position of $\PN$,
+there is also a clear relation between prior and posterior imprecision of inferences
+through the the size of $\PZ$ and $\PN$ (which governs the magnitude of $\MZ$ and $\MN$, respectively).
+From \eqref{eq:canonicalupdate}, we see that $\nnu - \nnl = \nzu - \nzl$,
+such that imprecision in the posterior strength dimension of $\PN$ will not change with growing sample sizes.
+However, for many inferences, posterior imprecision is dominated by
+imprecision in the main posterior parameter $\yn$.
+We will denote the stretch of $\PN$ in the main parameter dimension by $\Delta_y(\PN)$.%
+\footnote{When $\Y \subseteq \reals$, $\Delta_y(\PN) = \ynu -\ynl$.
+As mentioned above, for the Beta-Binomial model,
+$\yn$ is the probability that a future single draw is a success,
+so $\Delta_y(\PN)$ gives us directly the imprecision for this inference.
+In other inferences, $\nn$ can play a role as well,
+see the inferences studied in Section~\ref{sec:examples}.}
+
+Firstly, the smaller $\Delta_y(\PZ)$, c.p.\ the smaller $\Delta_y(\PN)$,
+and thus the more precise the inferences based on $\PN$.
 Furthermore, the larger $n$ relative to (values in the range of) $\nz$,
-c.p.\ the smaller $\PN$, such that imprecision generally decreases with sample size.
+c.p.\ the smaller $\Delta_y(\PN)$, such that imprecision generally decreases with sample size.% 
+\footnote{Thus, enlarging the prior main parameter imprecision $\Delta_y(\PZ)$ will increase the number of samples needed to
+arrive at the same level of posterior imprecision $\Delta_y(\PN)$.}
 Indeed, for $n \to \infty$, $\PN$ converges to a one-element set (models of type (\ref{enum:modeltypes-a}))
-or to a set $\Pinfty = y\uinfty \times \mathcal{N}\uinfty$,
+or to a set $\Pinfty = \mathcal{N}\uinfty \times y\uinfty$,
 where $y\uinfty \to \ttau(x) \in \Y$ is a singleton 
 (models of type~(\ref{enum:varyn}), (\ref{enum:rectangular}) and (\ref{enum:generalset})).
 This can be seen as a Bayesian consistency property, as this means that all inferences based mainly on $\yn$
-will eventually converge to their respective infinite sample equivalents.
+will eventually converge to their respective infinite sample equivalents.%
+\footnote{In the Beta-Binomial model,
+the posteriors in $\MN$ will concentrate all their probability mass in $y\uinfty \to \ttau(x)$.
+As $\ttau(x) \to \theta$ in probability, e.g., the posterior mean, median and mode will converge to $\theta$,
+and credibility intervals will contract around $\theta$.}
 For large enough sample sizes, posterior imprecision will fall below the threshold of relevance,
-such that effectively the same inferences as those based on a precise prior are obtained.
+such that effectively the same inferences as those based on a precise prior are obtained.%
+\footnote{For further details on inference properties of this framework, see \citet[\S 3.1.2]{diss-gw}.}
 
 While models of type (\ref{enum:modeltypes-a}) are so far the most common,
 they cannot reflect prior-data conflict in posterior imprecision of inferences,
-as the size of $\PN$ does not vary with $\ttau(x)$ \cite[Eq. (3.4), p.~64]{diss-gw}.
+as $\Delta_y(\PN)$ does not vary with $\ttau(x)$ \cite[Eq. (3.4), p.~64]{diss-gw}.
 Instead, models of type~(\ref{enum:varyn}), (\ref{enum:rectangular}) and (\ref{enum:generalset}) can lead to \pdc\ sensitivity,
 because they allow a range of $\nz$ values in $\PZ$,
-such that prior information (encoded in $\yz$) and data (via the sufficient statistic $\ttau(x)$) can have a range of weights,
-resulting in the stretch of $\yn$ values in $\PN$ being the larger the further $\ttau(x)$ is away from $\YZ$
+such that prior information (encoded in $\yz$) and data (via the sufficient statistic $\ttau(x)$)
+can have a range of weights in \eqref{eq:canonicalupdate},
+resulting in $\Delta_y(\PN)$ being the larger the further $\ttau(x)$ is away from $\YZ$
 \cite[\S 3.1.4]{diss-gw}.
 
 The model we propose belongs to type~(\ref{enum:generalset}),
-and results in models that also give more precise inferences when prior and data are in strong agreement.
+and results in models that, in addition to \pdc\ sensitivity,
+also give more precise inferences when prior and data are in strong agreement.
 
-For further details on this framework, see \citet[\S 3.1]{diss-gw}.
 
 \subsection{Rationale for switch of parameter space}
 \label{sec:rationale-for-miks-world}
 
-In the parametrisation in terms of $\nz$ and $\yz$, described in Section~\ref{sec:regularconjugates},
+In the parametrisation in terms of $\nz$ and $\yz$ as described in Section~\ref{sec:regularconjugates},
 a conjugate prior is updated to its respective posterior by a shift in the parameter space,
 given by \eqref{eq:canonicalupdate}:
 \begin{align*}
@@ -461,7 +488,7 @@ given by \eqref{eq:canonicalupdate}:
 \end{align*}
 We see thus that, while the shift for the $n$ coordinate is the same for all elements $(\nz,\yz)$
 in a prior parameter set $\PZ$,
-the shift in the $y$ coordinate depends on $\nz$, $\tau(x)$, and the location of $\yz$ itself.
+the shift in the $y$ coordinate depends on $\nz$, $\ttau(x)$, and the location of $\yz$ itself.
 Due to this, the shape of $\PZ$ will change during the update step.
 This shape change from $\PZ$ to $\PN$ is problematic for understanding of the update step in generalized Bayesian inference,
 as its effects on posterior inferences are difficult to grasp.
@@ -1014,6 +1041,7 @@ whereas $\ynl$ will increase with a lower slope $\frac{1}{\ezu + n + 2}$.
 
 
 \section{Example / Application?}
+\label{sec:examples}
 
 illustrate with simple inferences:\\
 $\ynl, \ynu$, further event of interest, and 95\% credibility interval
