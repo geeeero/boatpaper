@@ -1044,7 +1044,11 @@ whereas $\ynl$ will increase with a lower slope $\frac{1}{\ezu + n + 2}$.
 \label{sec:examples}
 
 illustrate with simple inferences:\\
-$\ynl, \ynu$, further event of interest, and 95\% credibility interval
+posterior mean $\E[\theta\mid\nn,\yn] = \yn$\\
+posterior predictive $\p(s^*=1,n^*=1\mid \nn, \yn) = \yn$\\
+$\modus(\theta\mid \nn, \yn) = \frac{\nn\yn -1}{\nn -2}$ (posterior mode)\\
+$\p(s^*=2,n^*=2\mid \nn, \yn) = \yn \frac{\nn\yn + 1}{\nn + 1}$ (two successes in two future samples)\\
+95\% credibility interval (symmetric or HPD? both must be derived numerically)
 
 compare with Berger/Walley model with $s=1$, $s=2$, and rectangular set.
 
