@@ -122,11 +122,24 @@ par(mar=c(5,4,4,2)+0.1)
 
 # predictive probability plot (PPP)
 # using example from fig 4 ("boatshape-posterior-mik.ps") with n=8
+pppn <- 10
+pppboat1 <- list(xp = c(-1,20), a = 1, b = 0.4, yc = 0.5, data = list(tau = 0, n = pppn))
+svec <- seq(0, pppn, by=0.01)
+ylvec <- ynfinder(boatobj = pppboat1, svec = svec)
+yuvec <- ynfinder(boatobj = pppboat1, svec = svec, lower = FALSE)
+plot(svec, yuvec, type="l", ylim=c(0,1))
+lines(svec, ylvec, type="l")
 
-pppn <- 8
-pppboat1 <- list(xp = c(1,6), a = 2, b = 0.8, yc = 0.5, data = list(tau = 0, n = pppn))
-svec <- seq(0,8, by=0.5)
+boatplotter(pppboat1)
+normalplotter(pppboat1)
+normalplotter(pppboat1, prior = F)
+pppboat1$data$tau <- pppn/2
+normalplotter(pppboat1, prior = F)
 
+ppplm <- luckenvelope(pppboat1)
+plot(ppplm, add=T, lty=2, control=controlList(polygonCol=NA, annotate=F))
+
+#lm1 <- LuckModel(n0=c(3,8),y0=c(res$lower[2],res$upper[2]), data=list(tau=4, n=8))
 
 
 bsp1 <- list(xp = c( 1,6), a = 2, b = 1/4, yc = 0.6, data = list(tau = 0, n = 0))

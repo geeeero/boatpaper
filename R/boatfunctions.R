@@ -124,7 +124,7 @@ normalplotter <- function(boatobj, prior = TRUE, xlims = NULL, ylims = c(0,1), m
   #xlabs <- bquote(n^(0))
   #ylabs <- bquote(y^(0))
   if(!add){ # set up new plot
-    if(is.null(xlims)) xlims <- c(-2, boatobj$xp[2] + data$n)
+    if(is.null(xlims)) xlims <- c(0, boatobj$xp[2] + data$n + 2)
     ax <- seq(xlims[1], xlims[2], length = seqx)
     plot(ax, rep(0, seqx), xlim = xlims, ylim = ylims, type = "l",
          xlab = xlabs, ylab = ylabs, ...)
@@ -149,6 +149,40 @@ normalplotter <- function(boatobj, prior = TRUE, xlims = NULL, ylims = c(0,1), m
   }
 }
 
+# for predictive probability plot (PPP)
+# returns vector of yn values for given vector of s values (s in [0, n])
+ynfinder <- function(boatobj, svec, lower = TRUE, seqx = 100){
+  if(lower){
+    wh <- -1
+  } else {
+    wh <- 1
+  }
+  res <- rep(0, length(svec))
+  for (i in 1:length(svec)){
+    boatobj$data$tau <- svec[i]
+    mikseq <- boatfu(boatobj = boatobj, wh =  wh, xlen = seqx, fw = TRUE,  prior = FALSE)
+    normalseq <- miktonormal(mikseq) # returns list(x=,y=)
+    if(lower){
+      theindex <- which.min(normalseq$y)
+    } else {
+      theindex <- which.max(normalseq$y)
+    }
+    #thex <- normalseq$x[theindex]
+    #they <- normalseq$y[theindex]
+    res[i] <- normalseq$y[theindex]
+  }
+  res
+}
 
+# determine (rectangular) luck model for a given boatshape object
+luckenvelope <- function(boatobj, seqx = 100){
+  uppermik <- boatfu(boatobj = boatobj, wh =  1, xlen = seqx)
+  lowermik <- boatfu(boatobj = boatobj, wh = -1, xlen = seqx)
+  upper <- miktonormal(uppermik)
+  lower <- miktonormal(lowermik)
+  ymax <- max(upper$y)
+  ymin <- min(lower$y)
+  LuckModel(n0=boatobj$xp + 2, y0 = c(ymin, ymax)) 
+}
 
 #
