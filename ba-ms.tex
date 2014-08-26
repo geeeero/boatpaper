@@ -884,40 +884,30 @@ a - a \big(1 + b({\eta_0^u}\un + 2)\big) e^{-b({\eta_0^u}\un - n - \ezl)} &\stac
 1 + b({\eta_0^u}\un + 2) &\stackrel{!}{=} e^{b({\eta_0^u}\un - n - \ezl)} \,.\label{eq:eta0uposterior}
 \end{align}
 We compare now \eqref{eq:eta0uposterior} to \eqref{eq:eta0u} and conclude
-that indeed ${\eta_0^u}\un > \ezz + n$.
-
+that indeed ${\eta_0^u}\un > \ezz + n$:
 \begin{figure}
 \centering
-\begin{tikzpicture}[pin distance=1cm,
-                    every pin edge/.style={thick}]
-\node (0,0) {%\fbox{% %trim=l b r t
-\includegraphics[trim = 45mm 35mm 45mm 45mm, clip, width=\textwidth]{R/prior-vs-posterior-eta0u}%
-};
-\coordinate (x1) at (-0.35,-1.21);
-\draw (x1) circle (2.5pt);
-\coordinate [pin=-93:${\eta_0^u}\uz$] (a1) at (-0.35,-3.24);
-\draw[dashed] (x1) -- (a1);
-\coordinate (x2) at ( 5.2 ,-0.15);
-\draw (x2) circle (2.5pt);
-\coordinate [pin=-75:${\eta_0^u}\un$] (a2) at ( 5.2,-3.24);
-\draw[dashed] (x2) -- (a2);
-\coordinate (x1n) at (3.8,-1.21);
-%\draw (x1n) circle (2.5pt);
-%\coordinate [label=below:${\eta_0^u}\uz + n$] (a1n) at (3.8,-3.5);
-\coordinate [pin=-93:${\eta_0^u}\uz + n$] (a1n) at (3.8,-3.24);
-\draw[dashed] (x1) -- (x1n) -- (a1n);
-\end{tikzpicture}
+%\fbox{
+%\includegraphics[trim = 45mm 35mm 45mm 45mm, clip, width=\textwidth]{R/prior-vs-posterior-eta0u}%
+\includegraphics[width=\textwidth]{R/prior-vs-posterior-eta0u.eps}
+%}
 \caption{Illustration for the argument that ${\eta_0^u}\un > {\eta_0^u}\uz + n$.}
 \label{fig:spda1}
 \end{figure}
-
-In Figure~\ref{fig:spda1}, the two exponential graphs have the same curvature,
-the right one is the same as the left, only being shifted to the right by $n$.
-The value of $\ezz + n$, defined as the abscissa of the intersection of the left exponential and the linear function,
-being shifted to the right by $n$, would thus be on the right exponential curve.
+In Figure~\ref{fig:spda1}, the two exponential graphs 
+represent the right hand side of equations \eqref{eq:eta0u} and \eqref{eq:eta0uposterior}.
+Both have the same curvature; the right one is the same as the left, only being shifted to the right by $n$.
+The left hand side of \eqref{eq:eta0u} and \eqref{eq:eta0uposterior} coincides and is the linear function.
+$\ezz$ and $\ezn$ are determined by the intersection of the linear with the exponential graphs.
+$\ezz + n$ is thus on the right exponential curve, being $\ezz$ shifted to the right by $n$.
 Because ${\eta_0^u}\un$ results from the intersection of the right exponential curve and the linear function,
 it is necessarily larger than ${\eta_0^u}\uz + n$, as the linear function is increasing.
 
+***also: the larger the bulkyness parameter $b$, the steeper the linear function
+and thus the larger the distance of ${\eta_0^u}\un$ to ${\eta_0^u}\uz + n$,
+that is, the stronger the prior-data agreement effect of the shape.
+Can see this also from normalworld***: a bulkyer the shape has more ueberhang
+which gets reduced by updating as it is located towards the left side of the set***
 
 \subsection{General Update with \texorpdfstring{$s > \frac{n}{2}$}{s > n/2}}
 \label{sec:generalupdate}
