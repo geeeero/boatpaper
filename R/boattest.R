@@ -77,12 +77,6 @@ expoprior     <- function(eta, etal, b, n = NULL) exp(b*(eta-etal))
 expoposterior <- function(eta, etal, b, n)        exp(b*(eta-etal-n))
 leftside      <- function(eta, b)                 1 + b*(eta + 2)
 
-
-etavec <- seq(0,15,by=0.01)
-etal <- 2
-b <- 0.25
-n <- 5
-
 eta0finder <- function(expfu, linfu, etal, b, n, rootinterval = c(-2, 100)){
   rootfu <- function(eta){
     expres <- do.call(expfu, list(eta=eta, etal=etal, b=b, n=n)) 
@@ -92,6 +86,11 @@ eta0finder <- function(expfu, linfu, etal, b, n, rootinterval = c(-2, 100)){
   res <- uniroot(rootfu, rootinterval)
   list(x=res$root, y=do.call(linfu, list(eta=res$root, b=b)))  
 }
+
+etavec <- seq(0,15,by=0.01)
+etal <- 2
+b <- 0.25
+n <- 5
 
 par(mar=c(5,4,1,1)+0.1)
 #pdf("prior-vs-posterior-eta0u.pdf", width=8, height=6)
@@ -119,8 +118,14 @@ text(x=c(eta0u0$x, eta0un$x, eta0u0pn$x), y=rep(-0.1,3),
               expression(eta[0]^u(0) + n)), pos=1)
 dev.off()
 par(mar=c(5,4,4,2)+0.1)
-#
 
+
+# predictive probability plot (PPP)
+# using example from fig 4 ("boatshape-posterior-mik.ps") with n=8
+
+pppn <- 8
+pppboat1 <- list(xp = c(1,6), a = 2, b = 0.8, yc = 0.5, data = list(tau = 0, n = pppn))
+svec <- seq(0,8, by=0.5)
 
 
 
