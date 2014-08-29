@@ -122,22 +122,49 @@ par(mar=c(5,4,4,2)+0.1)
 
 # predictive probability plot (PPP)
 # using example from fig 4 ("boatshape-posterior-mik.ps") with n=8
+
+# example tweaked to have visually curved PPP lines
 pppn <- 10
 pppboat1 <- list(xp = c(-1,20), a = 1, b = 0.4, yc = 0.5, data = list(tau = 0, n = pppn))
+# luck model with the same prior imprecision for y
+ppplm <- luckenvelope(pppboat1)
+# luck model with n0 = 1 and n0 = 2
+ppplm1 <- ppplm -> ppplm2
+n0(ppplm1) <- c(1,1)
+n0(ppplm2) <- c(2,2)
+
+
+# plots of the chosen boatset and luckenvelope
+#boatplotter(pppboat1)
+
+postscript("ppp-curved.eps", width=12, height=6)
+par(mfrow=c(1,2), mar=c(5,4.5,4,1)+0.1)
+# prior sets
+normalplotter(pppboat1, main="Prior parameter sets")
+plot(ppplm, add=T, lty=2, control=controlList(polygonCol=NA, annotate=F))
+# PPP for boatset
 svec <- seq(0, pppn, by=0.01)
 ylvec <- ynfinder(boatobj = pppboat1, svec = svec)
 yuvec <- ynfinder(boatobj = pppboat1, svec = svec, lower = FALSE)
-plot(svec, yuvec, type="l", ylim=c(0,1))
+plot(svec, yuvec, type="l", ylim=c(0,1), xlab="s", ylab=expression(y^(n)),
+     main = "Posterior imprecision")
 lines(svec, ylvec, type="l")
+# PPP for the luckenvelopes
+luckppplines(luckobj=ppplm, n=pppn, lty=2)
+luckppplines(luckobj=ppplm1, n=pppn, col="grey")
+luckppplines(luckobj=ppplm2, n=pppn, col="red")
+abline(v=5)
+legend("topleft", c("boatshape", "luckenvelope", "n0 = 1", "n0 = 2"),
+       col = c("black", "black", "grey", "red"),
+       lty = c(1, 2, 1, 1), lwd = rep(2, 4))
+par(mfrow=c(1,1))
+dev.off()
 
-boatplotter(pppboat1)
-normalplotter(pppboat1)
-normalplotter(pppboat1, prior = F)
-pppboat1$data$tau <- pppn/2
-normalplotter(pppboat1, prior = F)
 
-ppplm <- luckenvelope(pppboat1)
-plot(ppplm, add=T, lty=2, control=controlList(polygonCol=NA, annotate=F))
+normalplotter(pppboat1, prior = F)
+#pppboat1$data$tau <- pppn/2
+#normalplotter(pppboat1, prior = F)
+
 
 #lm1 <- LuckModel(n0=c(3,8),y0=c(res$lower[2],res$upper[2]), data=list(tau=4, n=8))
 

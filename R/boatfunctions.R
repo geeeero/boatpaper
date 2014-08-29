@@ -185,4 +185,21 @@ luckenvelope <- function(boatobj, seqx = 100){
   LuckModel(n0=boatobj$xp + 2, y0 = c(ymin, ymax)) 
 }
 
+# adding the PPP lines for a luck object
+# (notation see ISIPTA'11 paper)
+luckppplines <- function(luckobj, n, ...){
+  s1 <- n * y0(luckobj)[1]
+  s2 <- n * y0(luckobj)[2]
+  a  <- n0(luckobj)[1] * y0(luckobj)[1]/(n0(luckobj)[1] + n)
+  b  <- n0(luckobj)[2] * y0(luckobj)[2]/(n0(luckobj)[2] + n)
+  c  <- (n0(luckobj)[2] * y0(luckobj)[1] + n)/(n0(luckobj)[2] + n)
+  d  <- (n0(luckobj)[1] * y0(luckobj)[2] + n)/(n0(luckobj)[1] + n)
+  e1 <- y0(luckobj)[1]
+  e2 <- (n0(luckobj)[2] * y0(luckobj)[2] + n * y0(luckobj)[1])/(n0(luckobj)[2] + n)
+  f1 <- (n0(luckobj)[2] * y0(luckobj)[1] + n * y0(luckobj)[2])/(n0(luckobj)[2] + n)
+  f2 <- y0(luckobj)[2]
+  lines(c(0, s1, s2, n), c(a, e1, f1, c), ...)
+  lines(c(0, s1, s2, n), c(b, e2, f2, d), ...)
+}
+
 #
