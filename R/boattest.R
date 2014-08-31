@@ -120,46 +120,55 @@ dev.off()
 par(mar=c(5,4,4,2)+0.1)
 
 
-# predictive probability plot (PPP)
-# using example from fig 4 ("boatshape-posterior-mik.ps") with n=8
+
+# Predictive probability plots
+# if I want to have a strong pdc reaction, a wide n0 interval is needed. (xp[2] -> large)
+# this leads to high imprecision in the spda case for luck models
+# (y0 bounds at upper n0, bounds do not move fast)
+
 
 # example tweaked to have visually curved PPP lines
-pppn <- 10
-pppboat1 <- list(xp = c(-1,20), a = 1, b = 0.4, yc = 0.5, data = list(tau = 0, n = pppn))
-# luck model with the same prior imprecision for y
-ppplm <- luckenvelope(pppboat1)
-# luck model with n0 = 1 and n0 = 2
-ppplm1 <- ppplm -> ppplm2
-n0(ppplm1) <- c(1,1)
-n0(ppplm2) <- c(2,2)
-
-
-# plots of the chosen boatset and luckenvelope
-#boatplotter(pppboat1)
-
+pppn1 <- 10
+pppboat1 <- list(xp = c(-1,20), a = 1, b = 0.4, yc = 0.5, data = list(tau = 0, n = pppn1))
+boatplotter(pppboat1)
 postscript("ppp-curved.eps", width=12, height=6)
-par(mfrow=c(1,2), mar=c(5,4.5,4,1)+0.1)
-# prior sets
-normalplotter(pppboat1, main="Prior parameter sets")
-plot(ppplm, add=T, lty=2, control=controlList(polygonCol=NA, annotate=F))
-# PPP for boatset
-svec <- seq(0, pppn, by=0.01)
-ylvec <- ynfinder(boatobj = pppboat1, svec = svec)
-yuvec <- ynfinder(boatobj = pppboat1, svec = svec, lower = FALSE)
-plot(svec, yuvec, type="l", ylim=c(0,1), xlab="s", ylab=expression(y^(n)),
-     main = "Posterior imprecision")
-lines(svec, ylvec, type="l")
-# PPP for the luckenvelopes
-luckppplines(luckobj=ppplm, n=pppn, lty=2)
-luckppplines(luckobj=ppplm1, n=pppn, col="grey")
-luckppplines(luckobj=ppplm2, n=pppn, col="red")
-abline(v=5)
-legend("topleft", c("boatshape", "luckenvelope", "n0 = 1", "n0 = 2"),
-       col = c("black", "black", "grey", "red"),
-       lty = c(1, 2, 1, 1), lwd = rep(2, 4))
-par(mfrow=c(1,1))
+pppmaker(pppboat1, pppn1)
 dev.off()
 
+# using example from fig 4 ("boatshape-posterior-mik.ps") with n=8
+# not so much difference between boat and luck
+pppn2 <- 8
+pppboat2 <- list(xp = c(1,6), a = 2, b = 0.8, yc = 0.5, data = list(tau = 0, n = pppn2))
+boatplotter(pppboat2)
+normalplotter(pppboat2)
+postscript("pppboat2.eps", width=12, height=6)
+pppmaker(pppboat2, pppn2)
+dev.off()
+
+# prior interval approx. [0,1] (with xp[1] = -1, low b, high a)
+# luck has no pdc reaction, but boat has, with nicely curved lines
+pppn3 <- 10
+pppboat3 <- list(xp = c(-1,20), a = 2.7, b = 0.4, yc = 0.5, data = list(tau = 0, n = pppn3))
+boatplotter(pppboat3)
+normalplotter(pppboat3)
+postscript("pppboat3.eps", width=12, height=6)
+pppmaker(pppboat3, pppn3)
+dev.off()
+
+
+# prior interval approx. [0,1] (with xp[1] = 1, higher b, high a)
+# luck has no pdc reaction, but boat has, lines seem very straight
+pppn4 <- 10
+pppboat4 <- list(xp = c(1,20), a = 2.3, b = 2, yc = 0.5, data = list(tau = 0, n = pppn4))
+boatplotter(pppboat4)
+normalplotter(pppboat4)
+postscript("pppboat4.eps", width=12, height=6)
+pppmaker(pppboat4, pppn4)
+dev.off()
+
+
+
+# --------------
 
 normalplotter(pppboat1, prior = F)
 #pppboat1$data$tau <- pppn/2
@@ -167,7 +176,6 @@ normalplotter(pppboat1, prior = F)
 
 
 #lm1 <- LuckModel(n0=c(3,8),y0=c(res$lower[2],res$upper[2]), data=list(tau=4, n=8))
-
 
 bsp1 <- list(xp = c( 1,6), a = 2, b = 1/4, yc = 0.6, data = list(tau = 0, n = 0))
 bsp1 <- list(xp = c(-1,7), a = 1, b = 1/2, yc = 0.5, data = list(tau = 6, n = 10))

@@ -202,4 +202,40 @@ luckppplines <- function(luckobj, n, ...){
   lines(c(0, s1, s2, n), c(b, e2, f2, d), ...)
 }
 
+
+# to make predictive probability plots (PPP)
+pppmaker <- function(boatobj, pppn, svecby = 0.01){
+  # luck model with the same prior imprecision for y
+  ppplm <- luckenvelope(boatobj)
+  # luck model with n0 = 1 and n0 = 2
+  ppplm1 <- ppplm -> ppplm2
+  n0(ppplm1) <- c(1,1)
+  n0(ppplm2) <- c(2,2)
+  # plots of the chosen boatset and luckenvelope
+  par(mfrow=c(1,2), mar=c(5,4.5,4,1)+0.1)
+  # prior sets
+  normalplotter(boatobj, main="Prior parameter sets")
+  plot(ppplm, add=T, lty=2, control=controlList(polygonCol=NA, annotate=F))
+  lines(n0(ppplm1), y0(ppplm1), col="blue", lwd=2)
+  lines(n0(ppplm2), y0(ppplm2), col="red", lwd=2)
+  # PPP for boatset
+  svec <- seq(0, pppn, by=svecby)
+  ylvec <- ynfinder(boatobj = boatobj, svec = svec)
+  yuvec <- ynfinder(boatobj = boatobj, svec = svec, lower = FALSE)
+  plot(svec, yuvec, type="l", ylim=c(0,1), xlab="s", ylab=expression(y^(n)),
+       main = "Posterior imprecision")
+  lines(svec, ylvec, type="l")
+  # PPP for the luckenvelopes
+  luckppplines(luckobj=ppplm, n=pppn, lty=2)
+  luckppplines(luckobj=ppplm1, n=pppn, col="blue")
+  luckppplines(luckobj=ppplm2, n=pppn, col="red")
+  # prior range (at s=n/2, but could be anywhere)
+  lines(rep(pppn/2, 2), y0(ppplm), lwd=5, lend=2)
+  # legend
+  legend("topleft", c("boatshape", "luckenvelope", "n0 = 1", "n0 = 2"),
+         col = c("black", "black", "blue", "red"),
+         lty = c(1, 2, 1, 1), lwd = rep(1, 4))
+  par(mfrow=c(1,1))
+}
+
 #
