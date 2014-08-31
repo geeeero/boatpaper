@@ -96,7 +96,6 @@ boatplotter <- function(boatobj, prior = TRUE, xlims = NULL, ylims = NULL, minma
 
 
 # transformation function from Mik's world to 'normal' world
-
 miktonormal <- function(xylist){
   x <- xylist$x + 2
   y <- xylist$y/(xylist$x + 2) + 0.5
@@ -150,7 +149,7 @@ normalplotter <- function(boatobj, prior = TRUE, xlims = NULL, ylims = c(0,1), m
 }
 
 # for predictive probability plot (PPP)
-# returns vector of yn values for given vector of s values (s in [0, n])
+# returns vector of extreme yn values for given vector of s values (s in [0, n])
 ynfinder <- function(boatobj, svec, lower = TRUE, seqx = 100){
   if(lower){
     wh <- -1
@@ -223,7 +222,7 @@ pppmaker <- function(boatobj, pppn, svecby = 0.01){
   ylvec <- ynfinder(boatobj = boatobj, svec = svec)
   yuvec <- ynfinder(boatobj = boatobj, svec = svec, lower = FALSE)
   plot(svec, yuvec, type="l", ylim=c(0,1), xlab="s", ylab=expression(y^(n)),
-       main = "Posterior imprecision")
+       main = bquote(paste("Posterior imprecision (n=",.(pppn),")")))
   lines(svec, ylvec, type="l")
   # PPP for the luckenvelopes
   luckppplines(luckobj=ppplm, n=pppn, lty=2)

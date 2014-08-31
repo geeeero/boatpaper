@@ -166,6 +166,25 @@ postscript("pppboat4.eps", width=12, height=6)
 pppmaker(pppboat4, pppn4)
 dev.off()
 
+# larger xp[1], so small prior interval also with large b
+# not so pronounced pdc reaction, small difference between boat and luck
+pppn5 <- 5
+pppboat5 <- list(xp = c(5,20), a = 0.4, b = 4, yc = 0.5, data = list(tau = 0, n = pppn5))
+boatplotter(pppboat5)
+normalplotter(pppboat5)
+postscript("pppboat5.eps", width=12, height=6)
+pppmaker(pppboat5, pppn5)
+dev.off()
+
+# larger xp[1] and prior interval approx. [0,1] means large a and large b,
+# boat resembles anteater for large b
+pppn6 <- 20
+pppboat6 <- list(xp = c(5,20), a = 3.6, b = 16, yc = 0.5, data = list(tau = 0, n = pppn6))
+boatplotter(pppboat6)
+normalplotter(pppboat6)
+postscript("pppboat6.eps", width=12, height=6)
+pppmaker(pppboat6, pppn6)
+dev.off()
 
 
 # --------------
