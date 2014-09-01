@@ -131,6 +131,7 @@ par(mar=c(5,4,4,2)+0.1)
 pppn1 <- 10
 pppboat1 <- list(xp = c(-1,20), a = 1, b = 0.4, yc = 0.5, data = list(tau = 0, n = pppn1))
 boatplotter(pppboat1)
+normalplotter(pppboat1)
 postscript("ppp-curved.eps", width=12, height=6)
 pppmaker(pppboat1, pppn1)
 dev.off()
@@ -185,6 +186,14 @@ normalplotter(pppboat6)
 postscript("pppboat6.eps", width=12, height=6)
 pppmaker(pppboat6, pppn6)
 dev.off()
+
+# --------------
+
+modeplotter(pppboat2,pppn2)
+modeplotter(pppboat5,pppn5)
+modeplotter(pppboat6,pppn6)
+
+# print prior boatset, indicate min and max mode points
 
 
 # --------------
