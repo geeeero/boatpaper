@@ -4,46 +4,63 @@
 %
 \inserttype[ba0001]{article}
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
-\author{F. I. FirstFamilyName, S. I. SecondFamilyName and T. I. ThirdFamilyName}{
- \fnms{FirstAuthor I.}
- \snm{FirstFamilyName}
- \footnotemark[1]\ead{email1@example.com}
+\author{Gero Walter, Frank P.A. Coolen and Mi\c{k}elis G. Bickis}{
+ \fnms{Gero}
+ \snm{Walter}
+ \footnotemark[1]\ead{gero.walter@durham.ac.uk}
 and
-  \fnms{SecondAuthor I.}
-  \snm{SecondFamilyName}
-  \footnotemark[2]\ead{email2@example.com}
+  \fnms{Frank P.A.}
+  \snm{Coolen}
+  \footnotemark[2]\ead{frank.coolen@durham.ac.uk}
 and
-  \fnms{ThirdAuthor I.}
-  \snm{ThirdFamilyName}
-  \footnotemark[3]\ead{email3@example.com}
+  \fnms{Mi\c{k}elis G.}
+  \snm{Bickis}
+  \footnotemark[3]\ead{bickis@snoopy.usask.ca}
 }
 
 
-\title{Models for prior-data conflict and strong prior-data agreement}
+\title{Sets of Priors for Reflecting Prior-Data Conflict and Strong Prior-Data Agreement}
 
 \maketitle
 
 \footnotetext[1]{
- Affiliation First Author
- \href{mailto:email1@example.com}{email1@example.com}
+ Department of Mathematical Sciences, Durham University, Durham, UK,
+ \href{mailto:gero.walter@durham.ac.uk}{gero.walter@durham.ac.uk}
 }
 \footnotetext[2]{
- Affiliation Second Author
- \href{mailto:email2@example.com}{email2@example.com}
+ Department of Mathematical Sciences, Durham University, Durham, UK,
+ \href{mailto:frank.coolen@durham.ac.uk}{frank.coolen@durham.ac.uk}
 }
 \footnotetext[3]{
- Affiliation Third Author
- \href{mailto:email3@example.com}{email3@example.com}
+ Department of Mathematics and Statistics, University of Saskatchewan, Saskatoon, Canada,
+ \href{mailto:bickis@snoopy.usask.ca}{bickis@snoopy.usask.ca}
 }
 \renewcommand{\thefootnote}{\arabic{footnote}}
 
 \begin{abstract}
-Bayesian inference *** influence of prior if data are scarce *** prior-data conflict sensitivity ***
+The Bayesian approach to inference offers the advantage
+to represent prior knowledge together with the data in the reasoning process.
+The choice of a particular prior distribution to represent the available prior knowledge is, however,
+often debatable, especially when prior knowledge is limited or data are scarce,
+as then posterior inferences are higly dependent on the choice of prior.
+An approach accounting for this issue is robust Bayesian analysis,
+wherein it is inquired whether the considered posterior inference changes substantially
+when the prior distribution is varied within a set of distributions that contains all `reasonable' priors.
+Similar, but slightly different in scope, is the imprecise probability approach,
+formalising the idea that sets of probability distributions
+(or, equivalently, sets of desirable gambles or interval-valued previsions)
+should be taken to acurrately model prior knowledge in the Bayesian setting.
+
+
+*** influence of prior if data are scarce *** prior-data conflict sensitivity ***
 
 We will propose a new method for generating parameter prior sets in a conjugate setting
 that, in addition to prior-data conflict sensitivity, allow to mirror \emph{strong prior-data agreement},
 i.e., the case when prior and data coincide especially well) by increased posterior precision.
+Although presented here for the case of binary data only,
+it is easily extensible to the general exponential family case.
 
+motivation: clever choice of prior sets
 \keywords{\kwd{strong prior-data agreement}, \kwd{prior-data conflict}, \kwd{imprecise probability}, \kwd{conjugate priors}}
 \end{abstract}
 
