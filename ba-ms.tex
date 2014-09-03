@@ -39,7 +39,7 @@ and
 
 \begin{abstract}
 The Bayesian approach to inference offers the advantage
-to represent prior knowledge together with the data in the reasoning process.
+to include prior knowledge along with the data in the reasoning process.
 The choice of a particular prior distribution to represent the available prior knowledge is, however,
 often debatable, especially when prior knowledge is limited or data are scarce,
 as then posterior inferences are higly dependent on the choice of prior.
@@ -48,19 +48,16 @@ wherein it is inquired whether the considered posterior inference changes substa
 when the prior distribution is varied within a set of distributions that contains all `reasonable' priors.
 Similar, but slightly different in scope, is the imprecise probability approach,
 formalising the idea that sets of probability distributions
-(or, equivalently, sets of desirable gambles or interval-valued previsions)
-should be taken to acurrately model prior knowledge in the Bayesian setting.
-
-
-*** influence of prior if data are scarce *** prior-data conflict sensitivity ***
-
-We will propose a new method for generating parameter prior sets in a conjugate setting
+(or, equivalently, interval-valued previsions or sets of desirable gambles)
+should be taken to model prior knowledge in the Bayesian setting more acurrately.
+With imprecise probability, modeling prior-data conflict sensitivity is possible:
+Models have been proposed where the ranges of posterior inferences
+are substantially larger when prior and data are in conflict.
+We propose a new method for generating parameter prior sets in a conjugate setting
 that, in addition to prior-data conflict sensitivity, allow to mirror \emph{strong prior-data agreement},
 i.e., the case when prior and data coincide especially well) by increased posterior precision.
 Although presented here for the case of binary data only,
 it is easily extensible to the general exponential family case.
-
-motivation: clever choice of prior sets
 \keywords{\kwd{strong prior-data agreement}, \kwd{prior-data conflict}, \kwd{imprecise probability}, \kwd{conjugate priors}}
 \end{abstract}
 
@@ -199,6 +196,9 @@ motivation: clever choice of prior sets
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Introduction}
+
+motivation: clever choice of prior sets
+
 
 First, we will briefly characterise the novel parametrisation of canoncial conjugate priors this approach relies on.
 To keep things simple, we restrict ourselves here for the case of the Beta-Binomial model (see Section~\ref{sec:beta-binom}),
