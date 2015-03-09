@@ -13,7 +13,8 @@ bsp1 <- list(xp = c(-2,6), a = 2, b = 1/4, yc = 0.5, data = list(tau = 0, n = 0)
 # makes the rotation in "Mik's World" for a list(x = *, y = *) object from
 # 0.5-centered things to things centered around yc
 rotatefu <- function(xylist, yc, rotcntr = c(-2,0)){
-  atz <- atan(yc - 0.5)
+#  atz <- atan(yc - 0.5)
+  atz <- atan(0.5 -yc)
   x <- cos(atz)*(xylist$x - rotcntr[1]) - sin(atz)*(xylist$y - rotcntr[2]) + rotcntr[1]
   y <- sin(atz)*(xylist$x - rotcntr[1]) + cos(atz)*(xylist$y - rotcntr[2]) + rotcntr[2]
   return(list(x = x, y = y))

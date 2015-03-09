@@ -13,7 +13,15 @@ lines(test1, lwd=1.5)
 lines(test1rot1, lwd=1.5, col=2)
 lines(test1rot2, lwd=1.5, col=3)
 
-par(mfrow=c(1,2))
+# updatefu
+test1up <- updatefu(test1, data=list(tau=3, n=5))
+test1rot1up <- updatefu(test1rot1, data=list(tau=3, n=5))
+test1rot2up <- updatefu(test1rot2, data=list(tau=3, n=5))
+lines(test1up, lty=2)
+lines(test1rot1up, lty=2, col=2)
+lines(test1rot2up, lty=2, col=3)
+
+par(mfrow=c(1,1))
 boatplotter(bsp1)
 
 
