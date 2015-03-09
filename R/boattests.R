@@ -34,8 +34,18 @@ lines(boatfu(boatobj=bsp2, wh=-1))
 lines(boatfu(boatobj=bsp2, prior=F), lty=2)
 lines(boatfu(boatobj=bsp2, prior=F, wh=-1), lty=2)
 
-
-par(mfrow=c(1,1))
+# boatplotter
 boatplotter(bsp1)
+boatplotter(bsp1, xlims=c(-2,10), ylims=c(-6,6))
+boatplotter(bsp2, seqx=5)
+boatplotter(bsp2, prior=F)
 
+# normalplotter
+bsp3 <- list(xp = c(-1,7), a = 1, b = 1/2, yc = 0.6, data = list(tau = 6, n = 10))
+par(mfrow=c(1,2))
+boatplotter(bsp3, prior = F, col = 2)
+boatplotter(bsp3, add = T)
+normalplotter(bsp3, prior = F, col = 2)
+normalplotter(bsp3, add = T)
+par(mfrow=c(1,1))
 

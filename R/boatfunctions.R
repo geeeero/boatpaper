@@ -14,7 +14,7 @@ bsp1 <- list(xp = c(-2,6), a = 2, b = 1/4, yc = 0.5, data = list(tau = 0, n = 0)
 # 0.5-centered things to things centered around yc
 rotatefu <- function(xylist, yc, rotcntr = c(-2,0)){
 #  atz <- atan(yc - 0.5)
-  atz <- atan(0.5 -yc)
+  atz <- atan(0.5 - yc)
   x <- cos(atz)*(xylist$x - rotcntr[1]) - sin(atz)*(xylist$y - rotcntr[2]) + rotcntr[1]
   y <- sin(atz)*(xylist$x - rotcntr[1]) + cos(atz)*(xylist$y - rotcntr[2]) + rotcntr[2]
   return(list(x = x, y = y))
@@ -81,11 +81,9 @@ boatplotter <- function(boatobj, prior = TRUE, xlims = NULL, ylims = NULL, minma
   }
   upper <- boatfu(boatobj = boatobj, wh =  1, xlen = seqx, fw = TRUE,  prior = prior)
   lower <- boatfu(boatobj = boatobj, wh = -1, xlen = seqx, fw = FALSE, prior = prior)
-  #xlabs <- bquote(eta[0])
-  #ylabs <- bquote(eta[1])
-  if(is.null(xlims)) xlims <- c(-2, boatobj$xp[2] + data$n)
-  if(is.null(ylims)) ylims <- c(-1,1)*(1 + 0.5*(boatobj$xp[2] + data$n))
   if(!add){ # set up new plot
+    if(is.null(xlims)) xlims <- c(-2, boatobj$xp[2] + data$n)
+    if(is.null(ylims)) ylims <- c(-1,1)*(1 + 0.5*(boatobj$xp[2] + data$n))
     domainplotter(xlims=xlims, ylims=ylims, seqx=seqx, ...)
   }
   polygon(c(upper$x, lower$x), c(upper$y, lower$y), col = fillcol, border = col, ...)
@@ -118,12 +116,8 @@ normalplotter <- function(boatobj, prior = TRUE, xlims = NULL, ylims = c(0,1), m
   }
   uppermik <- boatfu(boatobj = boatobj, wh =  1, xlen = seqx, fw = TRUE,  prior = prior)
   lowermik <- boatfu(boatobj = boatobj, wh = -1, xlen = seqx, fw = FALSE, prior = prior)
-  #print(uppermik)
   upper <- miktonormal(uppermik)
-  #print(upper)
   lower <- miktonormal(lowermik)
-  #xlabs <- bquote(n^(0))
-  #ylabs <- bquote(y^(0))
   if(!add){ # set up new plot
     if(is.null(xlims)) xlims <- c(0, boatobj$xp[2] + data$n + 2)
     ax <- seq(xlims[1], xlims[2], length = seqx)
@@ -135,12 +129,12 @@ normalplotter <- function(boatobj, prior = TRUE, xlims = NULL, ylims = c(0,1), m
   }
   polygon(c(upper$x, lower$x), c(upper$y, lower$y), col = fillcol, border = col, ...)
   if(minmax){
-    minpos <- which(lower$y == min(lower$y))
+    minpos <- which.min(lower$y)
     if(abs(lower$y[minpos] - lower$y[length(lower$y)]) < minmaxtol)
       minpos <- length(lower$y)
     minx <- lower$x[minpos]
     miny <- lower$y[minpos]
-    maxpos <- which(upper$y == max(upper$y))
+    maxpos <- which.max(upper$y)
     if(abs(upper$y[maxpos] - upper$y[length(upper$y)]) < minmaxtol)
       maxpos <- length(upper$y)
     maxx <- upper$x[maxpos]
