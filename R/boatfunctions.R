@@ -58,8 +58,9 @@ boatfu <- function(x = NULL, boatobj, wh = 1, xlen = 100, fw = TRUE, prior = TRU
   list(x = x, y = y)
 }
 
-domainplotter <- function(xlims, ylims, seqx = 100, ...){
+domainplotter <- function(xlims, ylims = NULL, seqx = 100, ...){
   ax <- seq(xlims[1], xlims[2], length = seqx)
+  if(is.null(ylims)) ylims <- c(1 + 0.5*xlims[2], - 1 - 0.5*xlims[2])
   plot(ax, rep(0, seqx), xlim = xlims, ylim = ylims, type = "l", col = "grey",
        xlab = bquote(eta[0]), ylab = bquote(eta[1]), ...)
   lines(ax,  1 + 0.5*ax)     
