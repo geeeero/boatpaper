@@ -37,26 +37,27 @@ rayfu <- function(x, ray){
 # returns upper contour of a boat set with yc = 0.5
 # lower contour = -1*upper contour
 boatcont <- function(x, boatobj){
-  boatobj$a*(1-exp(-boatobj$b*(x-boatobj$xp[1])))
+  boatobj$a*(exp(-boatobj$b*(x-boatobj$xp[1])) - 1)
 }
 
 # returns lower [wh=-1] or upper [wh=1, default] x vector and contour y(x) of the boat 
 # shape for a boatobj as given in example above
 boatfu <- function(x = NULL, boatobj, wh = 1, xlen = 100, fw = TRUE, prior = TRUE){
-  atz <- atan(boatobj$yc - 0.5)
-  if(is.null(x)){   # if 
+  # create x vector if none given
+  if(is.null(x)){
     if (fw) xvec <- seq(boatobj$xp[1], boatobj$xp[2], length = xlen)
     else    xvec <- seq(boatobj$xp[2], boatobj$xp[1], length = xlen)
   } else xvec <- x
+  # upper basic contour
   yvec <- boatcont(x = xvec, boatobj = boatobj)
-  x <- cos(atz)*(xvec+2) - sin(atz)*yvec*wh - 2
-  y <- sin(atz)*(xvec+2) + cos(atz)*yvec*wh
-  if(!prior){
-    data <- boatobj$data
-    x <- x + data$n
-    y <- y + 1/2*(data$tau - (data$n-data$tau))
-  }
-  list(x = x, y = y)
+  # turned into lower contour if wh=-1
+  res <- list(x = xvec, y = yvec*wh)
+  # rotate it according to yc
+  res <- rotatefu(res, yc = boatobj$yc)
+  # update if posterior set needed
+  if(!prior)
+    res <- updatefu(res, data=boatobj$data)
+  return(res)
 }
 
 domainplotter <- function(xlims, ylims = NULL, seqx = 100, ...){
