@@ -5,18 +5,17 @@
 # boat object defined like this:
 bsp1 <- list(xp = c(-2,6), a = 2, b = 1/4, yc = 0.5, data = list(tau = 0, n = 0))
 # xp: start and end of set on eta_0 axis (before rotating)
-# a:  width of shape for eta_o upper -> infty
+# a:  width of shape for eta_0 upper -> infty
 # b:  bulkyness of shape
-# yc: central ray of shape, in (0,1)
+# yc: central ray of shape, 0 < yc < 1
 # data: contains tau = number of successes, n = numberof trials
 
 # makes the rotation in "Mik's World" for a list(x = *, y = *) object from
 # 0.5-centered things to things centered around yc
-# TODO: add rotationg center as argument, such that rotating and updating may commute
-rotatefu <- function(xylist, yc){
+rotatefu <- function(xylist, yc, rotcntr = c(-2,0)){
   atz <- atan(yc - 0.5)
-  x <- cos(atz)*(xylist$x + 2) - sin(atz)*xylist$y - 2
-  y <- sin(atz)*(xylist$x + 2) + cos(atz)*xylist$y
+  x <- cos(atz)*(xylist$x - rotcntr[1]) - sin(atz)*(xylist$y - rotcntr[2]) + rotcntr[1]
+  y <- sin(atz)*(xylist$x - rotcntr[1]) + cos(atz)*(xylist$y - rotcntr[2]) + rotcntr[2]
   return(list(x = x, y = y))
 }
 

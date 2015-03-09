@@ -122,6 +122,7 @@ par(mar=c(5,4,4,2)+0.1)
 
 
 # Predictive probability plots
+
 # if I want to have a strong pdc reaction, a wide n0 interval is needed. (xp[2] -> large)
 # this leads to high imprecision in the spda case for luck models
 # (y0 bounds at upper n0, bounds do not move fast)
