@@ -6,21 +6,41 @@ betamode <- function(n, y, trunkate = TRUE){
   # beware of numerical problems!
   # testing if n <= 2
   if(isTRUE(all.equal(n, 2)) || n <= 2)
-    stop(paste("No proper mode for n <= 2 (n = ", n, ")", sep=""))
+    stop(paste("No proper mode for n <= 2 (n = ", n, ") \n", sep=""))
   res <- (n*y - 1)/(n-2)
   if(trunkate){
-    if(res < 0) res <- 0
-    if(res > 1) res <- 1 
+    res[res < 0] <- 0
+    res[res > 1] <- 1 
   }
   res
 }
 
-# plot region where mode is defined in normal world and miksworld
-# mode undefined for priors with xp[1] < 0
-
+# plot region where mode is defined in normal world and miksworld?
+# mode undefined for priors with xp[1] < 0 (and strictly also for other conditions)
 
 # as the mode is monotone in y,
 # we will find the extremes on the lower and upper contours
+
+modefinder <- function(boatobj, seqx = 200, prior = TRUE){
+  lowermik <- boatfu(boatobj = boatobj, wh = -1, xlen = seqx, fw = FALSE,  prior = prior)
+  uppermik <- boatfu(boatobj = boatobj, wh =  1, xlen = seqx, fw = FALSE,  prior = prior)
+  lowernorm <- miktonormal(lowermik) # returns list(x=n0,y=y0)
+  uppernorm <- miktonormal(uppermik) # returns list(x=n0,y=y0)
+  lmodes <- betamode(lowernorm$x, lowernorm$y)
+  umodes <- betamode(uppernorm$x, uppernorm$y)
+  wml <- which.min(lmodes)
+  wmu <- which.max(umodes)
+  # mode and n, y coordinates for lower mode
+  lmode <- list(mode=lmodes[wml], ny=c(lowernorm$x[wml], lowernorm$y[wml]))
+  # mode and n, y coordinates for upper mode
+  umode <- list(mode=umodes[wmu], ny=c(uppernorm$x[wmu], uppernorm$y[wmu]))
+  list(lmode = lmode, umode = umode)
+}
+
+
+modeplotter <- function(boatobj,, prior = FALSE)
+  
+  
 
 # returns vector of extreme mode values for given vector of s values (s in [0, n])
 smodefinder <- function(boatobj, svec, lower = TRUE, seqx = 200, prior = FALSE){
@@ -44,18 +64,6 @@ smodefinder <- function(boatobj, svec, lower = TRUE, seqx = 200, prior = FALSE){
   res
 }
 
-modefinder <- function(boatobj, seqx = 200, prior = TRUE){
-  lowermik<- boatfu(boatobj = boatobj, wh = -1, xlen = seqx, fw = FALSE,  prior = prior)
-  uppermik <- boatfu(boatobj = boatobj, wh =  1, xlen = seqx, fw = FALSE,  prior = prior)
-  lowernorm <- miktonormal(lowermik) # returns list(x=n0,y=y0)
-  uppernorm <- miktonormal(uppermik) # returns list(x=n0,y=y0)
-  lmode <- betamode(lowernorm$x, lowernorm$y)
-  umode <- modefinder(priorboatobj, svec=c(0), lower = FALSE)
-  
-}
-
-
-modeplotter <- function(boatobj,, prior = FALSE)
 
 
 pppmodeplotter <- function(boatobj, pppn, svecby = 0.01){
