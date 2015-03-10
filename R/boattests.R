@@ -41,6 +41,11 @@ boatplotter(bsp1, xlims=c(-2,10), ylims=c(-6,6))
 boatplotter(bsp2, seqx=5)
 boatplotter(bsp2, prior=F)
 
+# miktonormal
+plot(miktonormal(test1), type="l")
+lines(miktonormal(test1rot1), col=2)
+lines(miktonormal(test1rot2), col=4)
+
 # normalplotter
 bsp3 <- list(xp = c(-1,7), a = 1, b = 1/2, yc = 0.6, data = list(tau = 6, n = 10))
 par(mfrow=c(1,2))
