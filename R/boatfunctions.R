@@ -103,6 +103,12 @@ miktonormal <- function(xylist){
   list(x = x, y = y)
 }
 
+# transformation function from 'normal' world to Mik's world
+normaltomik <- function(xylist){
+  x <- xylist$x - 2
+  y <- xylist$x*(xylist$y - 0.5)
+  list(x = x, y = y)
+}
 
 # plot the transformed set in "normal world"
 normalplotter <- function(boatobj, prior = TRUE, xlims = NULL, ylims = c(0,1), minmax = FALSE,

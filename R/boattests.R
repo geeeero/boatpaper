@@ -42,9 +42,25 @@ boatplotter(bsp2, seqx=5)
 boatplotter(bsp2, prior=F)
 
 # miktonormal
-plot(miktonormal(test1), type="l")
-lines(miktonormal(test1rot1), col=2)
-lines(miktonormal(test1rot2), col=4)
+mtn1 <- miktonormal(test1)
+mtn2 <- miktonormal(test1rot1)
+mtn3 <- miktonormal(test1rot2)
+plot(mtn1, type="l")
+lines(mtn2, col=2)
+lines(mtn3, col=4)
+
+# normaltomik
+par(mfrow=c(1,2))
+domainplotter(xlims=c(-2,10))
+lines(test1, lwd=1.5)
+lines(test1rot1, lwd=1.5, col=2)
+lines(test1rot2, lwd=1.5, col=4)
+domainplotter(xlims=c(-2,10))
+lines(normaltomik(mtn1), lwd=1.5)
+lines(normaltomik(mtn2), col=2)
+lines(normaltomik(mtn3), col=4)
+par(mfrow=c(1,1))
+
 
 # normalplotter
 bsp3 <- list(xp = c(-1,7), a = 1, b = 1/2, yc = 0.6, data = list(tau = 6, n = 10))
