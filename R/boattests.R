@@ -21,14 +21,15 @@ lines(test1rot2up, lty=2, col=3)
 
 # boatcont
 bsp1 <- list(xp = c(-2,6), a = 2, b = 1/4, yc = 0.5, data = list(tau = 0, n = 0))
+bsp2 <- list(xp = c(-2,6), a = 2, b = 1/4, yc = 0.6, data = list(tau = 3, n = 5))
 domainplotter(xlims=c(-2,10))
 xseq <-seq(-2,6,by=0.1)
 lines(xseq, boatcont(seq(-2,6,by=0.1), bsp1))
+#lines(xseq, boatcont(seq(-2,6,by=0.1), bsp2), col=2)
 
 # boatfu
 lines(boatfu(boatobj=bsp1), col=4)
 lines(boatfu(boatobj=bsp1, wh=-1), col=4)
-bsp2 <- list(xp = c(-2,6), a = 2, b = 1/4, yc = 0.6, data = list(tau = 3, n = 5))
 lines(boatfu(boatobj=bsp2))
 lines(boatfu(boatobj=bsp2, wh=-1))
 lines(boatfu(boatobj=bsp2, prior=F), lty=2)

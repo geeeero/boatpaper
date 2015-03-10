@@ -37,7 +37,7 @@ rayfu <- function(x, ray){
 # returns upper contour of a boat set with yc = 0.5
 # lower contour = -1*upper contour
 boatcont <- function(x, boatobj){
-  boatobj$a*(exp(-boatobj$b*(x-boatobj$xp[1])) - 1)
+  boatobj$a*(1 - exp(-boatobj$b*(x-boatobj$xp[1])))
 }
 
 # returns lower [wh=-1] or upper [wh=1, default] x vector and contour y(x) of the boat 
@@ -51,18 +51,20 @@ boatfu <- function(x = NULL, boatobj, wh = 1, xlen = 100, fw = TRUE, prior = TRU
   # upper basic contour
   yvec <- boatcont(x = xvec, boatobj = boatobj)
   # turned into lower contour if wh=-1
-  res <- list(x = xvec, y = yvec*wh)
+  res1 <- list(x = xvec, y = yvec*wh)
   # rotate it according to yc
-  res <- rotatefu(res, yc = boatobj$yc)
+  res2 <- rotatefu(res1, yc = boatobj$yc)
   # update if posterior set needed
-  if(!prior)
-    res <- updatefu(res, data=boatobj$data)
-  return(res)
+  if(!prior) {
+    return(updatefu(res2, data=boatobj$data))
+  } else {
+    return(res2)
+  }
 }
 
 domainplotter <- function(xlims, ylims = NULL, seqx = 100, ...){
   ax <- seq(xlims[1], xlims[2], length = seqx)
-  if(is.null(ylims)) ylims <- c(1 + 0.5*xlims[2], - 1 - 0.5*xlims[2])
+  if(is.null(ylims)) ylims <- c(-1, 1)*(1 + 0.5*xlims[2])
   plot(ax, rep(0, seqx), xlim = xlims, ylim = ylims, type = "l", col = "grey",
        xlab = bquote(eta[0]), ylab = bquote(eta[1]), ...)
   lines(ax,  1 + 0.5*ax)     
