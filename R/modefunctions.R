@@ -1,12 +1,24 @@
 # functions for the mode as posterior inference of interest
 
+# from http://stackoverflow.com/questions/18851623/how-can-i-speed-up-how-i-test-for-equality-between-numeric-in-r
+# to test approximate equality of numeric x and vector y
+# returns vector of type logical of same length as y
+almostEqual <- function(x, y, tolerance = .Machine$double.eps ^ 0.5) {
+  diff <- abs(x - y)
+  mag <- pmax( abs(x), abs(y) )
+  out <- logical(length(y))
+  out[ mag > tolerance ] <- (diff/mag <= tolerance)[ mag > tolerance]
+  out[ ! mag > tolerance ] <- (diff <= tolerance)[! mag > tolerance]
+  return( out )
+}
+
 # mode as function of n0 and y0 (where n   > 2, 1 < n*y < n-1)
 #                          (i.e. where a+b > 2, 1 < a   < a+b-1)
 betamode <- function(n, y, trunkate = TRUE){
   # beware of numerical problems!
   # testing if n <= 2
-  if(isTRUE(all.equal(n, 2)) || n <= 2)
-    stop(paste("No proper mode for n <= 2 (n = ", n, ") \n", sep=""))
+  if(any(n < 2) || any(almostEqual(2, n)) )
+    stop("No proper mode for n <= 2")
   res <- (n*y - 1)/(n-2)
   if(trunkate){
     res[res < 0] <- 0
