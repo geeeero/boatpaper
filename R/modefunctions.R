@@ -51,8 +51,20 @@ modefinder <- function(boatobj, seqx = 200, prior = TRUE){
   list(lmode = lmode, umode = umode)
 }
 
-
-modeplotter <- function(boatobj,, prior = FALSE)
+# plots a boatset in mik's and normal world with bar for mode range
+# and set points for which extreme modes are obtained
+modeplotter <- function(boatobj, seqx = 200, prior = TRUE, minmax = FALSE){
+  mobj <- modefinder(boatobj=boatobj, seqx=seqx, prior=prior)
+  par(mfrow=c(1,2))
+  boatplotter(boatobj=boatobj, prior=prior, minmax=minmax)
+  points(mobj$lmode$eta01, pch=20)
+  points(mobj$umode$eta01, pch=20)
+  normalplotter(boatobj=boatobj, prior=prior, minmax=minmax)
+  points(mobj$lmode$ny, pch=20)
+  points(mobj$umode$ny, pch=20)
+  lines(rep(0,2), c(mobj$lmode$mode, mobj$umode$mode), lwd=3, lend=2)
+  par(mfrow=c(1,1))
+}
   
   
 

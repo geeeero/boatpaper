@@ -20,8 +20,8 @@ lines(test1rot1up, lty=2, col=2)
 lines(test1rot2up, lty=2, col=3)
 
 # boatcont
-bsp1 <- list(xp = c(-2,6), a = 2, b = 1/4, yc = 0.5, data = list(tau = 0, n = 0))
-bsp2 <- list(xp = c(-2,6), a = 2, b = 1/4, yc = 0.6, data = list(tau = 3, n = 5))
+bsp1 <- list(xp = c(-1.5,6), a = 2, b = 1/4, yc = 0.5, data = list(tau = 0, n = 0))
+bsp2 <- list(xp = c(-1.5,6), a = 2, b = 1/4, yc = 0.6, data = list(tau = 3, n = 5))
 domainplotter(xlims=c(-2,10))
 xseq <-seq(-2,6,by=0.1)
 lines(xseq, boatcont(seq(-2,6,by=0.1), bsp1))

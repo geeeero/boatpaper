@@ -45,4 +45,18 @@ points(bsp2mode$lmode$ny, col=2)
 points(bsp2mode$umode$ny, col=2)
 lines(rep(0,2), c(bsp2mode$lmode$mode, bsp2mode$umode$mode), lwd=3, lend=2)
 par(mfrow=c(1,1))
+
+# modeplotter
+modeplotter(bsp2, prior=F, minmax=T)
+modeplotter(bsp3, prior=F, minmax=T)
+
+bsp4 <- list(xp = c(0.1,5), a = 1, b = 1/2, yc = 0.8, data = list(tau = 1, n = 10))
+boatplotter(bsp4, prior=F, minmax=T)
+boatplotter(bsp4, add=T, minmax=T)
+normalplotter(bsp4, prior=F, minmax=T)
+normalplotter(bsp4, add=T, minmax=T)
+
+modeplotter(bsp4, prior=F, minmax=T)
+modeplotter(bsp4, prior=T, minmax=T)
+
 #
