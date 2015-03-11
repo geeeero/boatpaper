@@ -29,7 +29,20 @@ betamode(2.1,0.5)
 betamode(seq(1, 3, length.out=101), rep(0.5, 101))
 betamode(seq(3, 4, length.out=101), rep(0.5, 101))
 betamode(seq(2, 4, length.out=101), rep(0.5, 101))
+betamode(seq(3, 4, length.out=101), seq(0.4,0.6, length.out=101))
+betamode(seq(4, 3, length.out=101), seq(0.4,0.6, length.out=101))
 
+# modefinder
+modefinder(bsp2, prior=F)
 
-
+par(mfrow=c(1,2))
+boatplotter(bsp2, prior=F)
+bsp2mode <- modefinder(bsp2, prior=F)
+points(bsp2mode$lmode$eta01, col=2)
+points(bsp2mode$umode$eta01, col=2)
+normalplotter(bsp2, prior=F, minmax=T)
+points(bsp2mode$lmode$ny, col=2)
+points(bsp2mode$umode$ny, col=2)
+lines(rep(0,2), c(bsp2mode$lmode$mode, bsp2mode$umode$mode), lwd=3, lend=2)
+par(mfrow=c(1,1))
 #

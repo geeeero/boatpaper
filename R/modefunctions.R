@@ -42,10 +42,12 @@ modefinder <- function(boatobj, seqx = 200, prior = TRUE){
   umodes <- betamode(uppernorm$x, uppernorm$y)
   wml <- which.min(lmodes)
   wmu <- which.max(umodes)
+  nyl <- list(x=lowernorm$x[wml], y=lowernorm$y[wml])
+  nyu <- list(x=uppernorm$x[wmu], y=uppernorm$y[wmu])
   # mode and n, y coordinates for lower mode
-  lmode <- list(mode=lmodes[wml], ny=c(lowernorm$x[wml], lowernorm$y[wml]))
+  lmode <- list(mode=lmodes[wml], ny=nyl, eta01=normaltomik(nyl))
   # mode and n, y coordinates for upper mode
-  umode <- list(mode=umodes[wmu], ny=c(uppernorm$x[wmu], uppernorm$y[wmu]))
+  umode <- list(mode=umodes[wmu], ny=nyu, eta01=normaltomik(nyu))
   list(lmode = lmode, umode = umode)
 }
 

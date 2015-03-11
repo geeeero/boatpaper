@@ -72,7 +72,7 @@ domainplotter <- function(xlims, ylims = NULL, seqx = 100, ...){
     lines(ax, (1 + 0.5*ax)*2*(i-0.5), col = "grey")
 }
 
-boatplotter <- function(boatobj, prior = TRUE, xlims = NULL, ylims = NULL, minmax = TRUE,
+boatplotter <- function(boatobj, prior = TRUE, xlims = NULL, ylims = NULL, minmax = FALSE,
                         seqx = 100, fillcol = "gray", add = FALSE, col = 1, ...){
   if(!prior) {
     data <- boatobj$data
@@ -88,11 +88,11 @@ boatplotter <- function(boatobj, prior = TRUE, xlims = NULL, ylims = NULL, minma
     domainplotter(xlims=xlims, ylims=ylims, seqx=seqx, ...)
   }
   polygon(c(upper$x, lower$x), c(upper$y, lower$y), col = fillcol, border = col, ...)
-  #if(minmax){
-  # minmaxn <- c(nseqf[which.min(lower)], nseqb[which.max(upper)])
-  # minmaxy <- c(min(lower), max(upper))
-  # points(minmaxn, minmaxy, cex = 1.5)
-  #}
+  if(minmax){
+    eta01mm <- eta01minmax(lower=lower, upper=upper, ...)
+    points(eta01mm$ymin, cex = 1.5)
+    points(eta01mm$ymax, cex = 1.5)
+  }
 }
 
 
@@ -112,7 +112,6 @@ normaltomik <- function(xylist){
 
 # plot the transformed set in "normal world"
 normalplotter <- function(boatobj, prior = TRUE, xlims = NULL, ylims = c(0,1), minmax = FALSE,
-                          minmaxtol = 1e-6,
                           xlabs = bquote(n^(0)), ylabs = bquote(y^(0)), seqx = 100,
                           fillcol = "gray", add = FALSE, col = 1, ...){
   if(!prior) {
@@ -136,19 +135,35 @@ normalplotter <- function(boatobj, prior = TRUE, xlims = NULL, ylims = c(0,1), m
   }
   polygon(c(upper$x, lower$x), c(upper$y, lower$y), col = fillcol, border = col, ...)
   if(minmax){
-    minpos <- which.min(lower$y)
-    if(abs(lower$y[minpos] - lower$y[length(lower$y)]) < minmaxtol)
-      minpos <- length(lower$y)
-    minx <- lower$x[minpos]
-    miny <- lower$y[minpos]
-    maxpos <- which.max(upper$y)
-    if(abs(upper$y[maxpos] - upper$y[length(upper$y)]) < minmaxtol)
-      maxpos <- length(upper$y)
-    maxx <- upper$x[maxpos]
-    maxy <- upper$y[maxpos]
-    points(c(minx,maxx), c(miny,maxy), cex = 1.5)
-    return(list(lower=c(minx,miny), upper=c(maxx,maxy)))
+    nymm <- nyminmax(lower=lower, upper=upper, ...)
+    points(nymm$ymin, cex = 1.5)
+    points(nymm$ymax, cex = 1.5)
   }
+}
+
+
+# gives points on ny contour corresponding to min and max y
+nyminmax <- function(lower, upper, minmaxtol = 1e-6){
+  minpos <- which.min(lower$y)
+  if(abs(lower$y[minpos] - lower$y[length(lower$y)]) < minmaxtol)
+    minpos <- length(lower$y)
+  minx <- lower$x[minpos]
+  miny <- lower$y[minpos]
+  maxpos <- which.max(upper$y)
+  if(abs(upper$y[maxpos] - upper$y[length(upper$y)]) < minmaxtol)
+    maxpos <- length(upper$y)
+  maxx <- upper$x[maxpos]
+  maxy <- upper$y[maxpos]
+  return(list(ymin=list(x=minx, y=miny), ymax=list(x=maxx, y=maxy)))
+}
+
+# gives points on eta01 contour corresponding to min and max y,
+# i.e., the lower and upper touchpoints
+eta01minmax <- function(lower, upper, minmaxtol = 1e-6){
+  normlower <- miktonormal(lower)
+  normupper <- miktonormal(upper)
+  normminmax <- nyminmax(lower=normlower, upper=normupper, minmaxtol=minmaxtol)
+  return(list(ymin=normaltomik(normminmax$ymin), ymax=normaltomik(normminmax$ymax)))
 }
 
 # for predictive probability plot (PPP)
