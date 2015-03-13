@@ -193,14 +193,16 @@ ynfinder <- function(boatobj, svec, lower = TRUE, seqx = 100){
 }
 
 # determine (rectangular) luck model for a given boatshape object
-luckenvelope <- function(boatobj, seqx = 100){
-  uppermik <- boatfu(boatobj = boatobj, wh =  1, xlen = seqx)
-  lowermik <- boatfu(boatobj = boatobj, wh = -1, xlen = seqx)
+luckenvelope <- function(boatobj, seqx = 100, prior = TRUE){
+  uppermik <- boatfu(boatobj = boatobj, wh =  1, xlen = seqx, prior = prior)
+  lowermik <- boatfu(boatobj = boatobj, wh = -1, xlen = seqx, prior = prior)
   upper <- miktonormal(uppermik)
   lower <- miktonormal(lowermik)
   ymax <- max(upper$y)
   ymin <- min(lower$y)
-  LuckModel(n0=boatobj$xp + 2, y0 = c(ymin, ymax)) 
+  nmax <- max(c(lower$x, upper$x))
+  nmin <- min(c(lower$x, upper$x))
+  LuckModel(n0 = c(nmin, nmax), y0 = c(ymin, ymax)) 
 }
 
 # adding the PPP lines for a luck object

@@ -49,6 +49,7 @@ dev.off()
 postscript("boatshape-posterior-mik.ps", width=10, height=6)
 boat1 <- list(xp = c(1,6), a = 2, b = 0.8, yc = 0.5, data = list(tau = 8, n = 8))
 boatplotter(boat1, prior=F, xlims=c(0,23), ylims=c(-5,10))
+text(x=11.5, y=4, labels=bquote(paste("s/n = ", .(boat1$data$tau/boat1$data$n), ", n = ", .(boat1$data$n), sep="" )), cex=0.8)
 boatplotter(boat1, add=T)
 boat1$data <- list(tau = 4, n = 8)
 boatplotter(boat1, prior=F, add=T)
@@ -147,8 +148,6 @@ postscript("pppboat2.eps", width=12, height=6)
 pppmaker(pppboat2, pppn2)
 dev.off()
 
-# prior interval approx. [0,1] (with xp[1] = -1, low b, high a)
-# luck has no pdc reaction, but boat has, with nicely curved lines
 pppn3 <- 10
 pppboat3 <- list(xp = c(-1,20), a = 2.7, b = 0.4, yc = 0.5, data = list(tau = 0, n = pppn3))
 boatplotter(pppboat3)
@@ -188,22 +187,57 @@ postscript("pppboat6.eps", width=12, height=6)
 pppmaker(pppboat6, pppn6)
 dev.off()
 
+# -------------- !!!!!!!!!!!!! ---------------------------
 
 pppn7 <- 10
-pppboat7 <- list(xp = c(5,20), a = 1, b = 0.8, yc = 0.9, data = list(tau = 0, n = pppn7))
+pppboat7 <- list(xp = c(5,20), a = 0.9, b = 0.8, yc = 0.9, data = list(tau = 0, n = pppn7))
 boatplotter(pppboat7)
 normalplotter(pppboat7)
 postscript("ppp.eps", width=12, height=6)
 pppmaker(pppboat7, pppn7)
 dev.off()
 
+# -------------- !!!!!!!!!!!!! ---------------------------
+
+
+pppn8 <- 10
+pppboat8 <- list(xp = c(5,20), a = 1, b = 2, yc = 0.8, data = list(tau = 0, n = pppn8))
+boatplotter(pppboat8)
+normalplotter(pppboat8)
+postscript("pppboat8.eps", width=12, height=6)
+pppmaker(pppboat8, pppn8)
+dev.off()
+ppp8env <- luckenvelope(pppboat8)
+plot(ppp8env, add=T, lty=2, control=controlList(polygonCol=NA, annotate=F))
+
+# ------------------------------
+
+
+postscript("modeparams2.eps", width=12, height=6)
+modeplotter(bsp2, prior=F, minmax=T)
+title(main="Posterior mode range and extreme parameters vs. extreme y")
+dev.off()
+
+postscript("modeparams3.eps", width=12, height=6)
+modeplotter(bsp3, prior=F, minmax=T)
+title(main="Posterior mode range and extreme parameters vs. extreme y")
+dev.off()
+
+
+
+
+
+
+
+
+
 
 
 # --------------
 
-modeplotter(pppboat2,pppn2)
-modeplotter(pppboat5,pppn5)
-modeplotter(pppboat6,pppn6)
+pppmodeplotter(pppboat2,pppn2)
+pppmodeplotter(pppboat5,pppn5)
+pppmodeplotter(pppboat6,pppn6)
 
 # print prior boatset, indicate min and max mode points
 

@@ -56,7 +56,10 @@ boatplotter(bsp4, add=T, minmax=T)
 normalplotter(bsp4, prior=F, minmax=T)
 normalplotter(bsp4, add=T, minmax=T)
 
-modeplotter(bsp4, prior=F, minmax=T)
 modeplotter(bsp4, prior=T, minmax=T)
+modeplotter(bsp4, prior=F, minmax=T)
+bsp4spda <- bsp4
+bsp4spda$data <- list(tau=8, n=10)
+modeplotter(bsp4spda, prior=F, minmax=T)
 
 #
