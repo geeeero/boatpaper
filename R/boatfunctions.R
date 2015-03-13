@@ -264,7 +264,7 @@ pppmaker <- function(boatobj, pppn, svecby = 0.01, luckmodels = TRUE){
     luckppplines(luckobj=ppplm1, n=pppn, col="blue")
     luckppplines(luckobj=ppplm2, n=pppn, col="red")
     # prior range (at s=n/2, but could be anywhere)
-    lines(rep(pppn/2, 2), y0(ppplm), lwd=5, lend=2)
+    lines(rep(pppn*boatobj$yc, 2), y0(ppplm), lwd=5, lend=2)
     # legend
     legend("topleft", c("boatshape", "luckenvelope", "n0 = 1", "n0 = 2"),
            col = c("black", "black", "blue", "red"),
