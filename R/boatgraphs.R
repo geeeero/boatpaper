@@ -187,17 +187,13 @@ postscript("pppboat6.eps", width=12, height=6)
 pppmaker(pppboat6, pppn6)
 dev.off()
 
-# -------------- !!!!!!!!!!!!! ---------------------------
-
 pppn7 <- 10
 pppboat7 <- list(xp = c(5,20), a = 0.9, b = 0.8, yc = 0.9, data = list(tau = 0, n = pppn7))
 boatplotter(pppboat7)
 normalplotter(pppboat7)
-postscript("ppp.eps", width=12, height=6)
+postscript("pppboat7.eps", width=12, height=6)
 pppmaker(pppboat7, pppn7)
 dev.off()
-
-# -------------- !!!!!!!!!!!!! ---------------------------
 
 
 pppn8 <- 10
@@ -207,11 +203,9 @@ normalplotter(pppboat8)
 postscript("pppboat8.eps", width=12, height=6)
 pppmaker(pppboat8, pppn8)
 dev.off()
-ppp8env <- luckenvelope(pppboat8)
-plot(ppp8env, add=T, lty=2, control=controlList(polygonCol=NA, annotate=F))
 
-# ------------------------------
 
+# --------------------- mode ------------------------------
 
 postscript("modeparams2.eps", width=12, height=6)
 modeplotter(bsp2, prior=F, minmax=T)
