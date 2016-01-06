@@ -55,7 +55,7 @@ Models have been proposed where the ranges of posterior inferences
 are substantially larger when prior and data are in conflict.
 We propose a new method for generating parameter prior sets in a conjugate setting
 that, in addition to prior-data conflict sensitivity, allow to mirror \emph{strong prior-data agreement},
-i.e., the case when prior and data coincide especially well) by increased posterior precision.
+i.e., the case when prior and data coincide especially well, by increased posterior precision.
 Although presented here for the case of binary data only,
 it is easily extensible to the general exponential family case.
 \keywords{\kwd{strong prior-data agreement}, \kwd{prior-data conflict}, \kwd{imprecise probability}, \kwd{conjugate priors}}
@@ -760,7 +760,8 @@ For $[\yzl, \yzu]$, the choice of $\ezu$ is irrelevant.%
 \begin{figure}  %trim=l b r t
 \centering
 %\fbox{%
-\includegraphics[trim = 20mm 35mm 30mm 45mm, clip, width=\textwidth]{R/boatshape-posterior-mik}%
+%\includegraphics[trim = 20mm 35mm 30mm 45mm, clip, width=\textwidth]{R/boatshape-posterior-mik}%
+\includegraphics[width=\textwidth]{R/boatshape-posterior-mik}%
 %}
 \caption[Boatshape prior and posterior sets for data in accordance and in conflict with the prior.]%
 {Boatshape prior and posterior sets for data in accordance and in conflict with the prior.
@@ -769,9 +770,9 @@ While the posterior sets for $\frac{s}{n}=0.5$ move along the ray for $y_c=0.5$,
 the posterior sets for $\frac{s}{n}=1$ are shifted away from the ray for $y_c=0.5$,
 resulting in increased posterior imprecision.
 Note that lower and upper touchpoints are in the middle of the contour
-for the prior and the posterior resulting for data $\frac{s}{n}=\frac{4}{8}$,
+for the prior set and the posterior set resulting for data $\frac{s}{n}=\frac{4}{8}$,
 while at least one touchpoint is at the end for all other sets.
-(see also Figure~\ref{fig:boatshape-posterior-normal}).}
+(See also Figure~\ref{fig:boatshape-posterior-normal}).}
 \label{fig:boatshape-posterior-mik}
 \end{figure}
 
@@ -779,10 +780,11 @@ while at least one touchpoint is at the end for all other sets.
 \begin{figure}  %trim=l b r t
 \centering
 %\fbox{%
-\includegraphics[trim = 15mm 45mm 25mm 60mm, clip, width=\textwidth]{R/boatshape-posterior-normal}%
+%\includegraphics[trim = 15mm 45mm 25mm 60mm, clip, width=\textwidth]{R/boatshape-posterior-normal}%
+\includegraphics[width=\textwidth]{R/boatshape-posterior-normal}%
 %}
-\caption[Boatshape prior and posterior sets from Figure~\ref{fig:boatshape-posterior-mik} in the parametrisation via $(\nz,\yz)$.]%
-{Boatshape prior and posterior sets from Figure~\ref{fig:boatshape-posterior-mik} in the parametrisation via $(\nz,\yz)$.
+\caption[Boatshape prior and posterior sets from Figure~\ref{fig:boatshape-posterior-mik} in the $(\nz,\yz)$ parametrisation.]%
+{Boatshape prior and posterior sets from Figure~\ref{fig:boatshape-posterior-mik} in the $(\nz,\yz)$ parametrisation.
 Note that in the strong prior-data agreement case,
 posterior sets based on a rectangular prior set with the same prior main parameter imprecision
 would be larger than the ones depicted here, illustrating the extra gain in precision.}
