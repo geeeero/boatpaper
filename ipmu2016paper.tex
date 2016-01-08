@@ -1,0 +1,234 @@
+\documentclass[runningheads,a4paper]{llncs}
+
+\usepackage[utf8]{inputenc}
+\usepackage[OT1]{fontenc}
+\usepackage[english]{babel}
+
+\usepackage{amsfonts}
+\usepackage{amssymb}
+%\usepackage{amsthm}
+\usepackage{amssymb}
+
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{etoolbox}
+\usepackage{url}
+\usepackage[bookmarks]{hyperref}
+
+\setcounter{tocdepth}{3}
+
+\newcommand{\keywords}[1]{\par\addvspace\baselineskip
+\noindent\keywordname\enspace\ignorespaces#1}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\pdc{prior-data conflict}
+
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\posreals}{\reals_{>0}}
+\newcommand{\posrealszero}{\reals_{\ge 0}}
+\newcommand{\naturals}{\mathbb{N}}
+
+\newcommand{\dd}{\,\mathrm{d}}
+
+\newcommand{\mbf}[1]{\mathbf{#1}}
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+
+\newcommand{\btheta}{\bs{\theta}}
+\newcommand{\bpsi}{\bs{\psi}}
+\newcommand{\bbeta}{\bs{\beta}}
+\newcommand{\balpha}{\bs{\alpha}}
+
+\newcommand{\uz}{^{(0)}} % upper zero
+\newcommand{\un}{^{(n)}} % upper n
+\newcommand{\ui}{^{(i)}} % upper i
+\newcommand{\uinfty}{^{(\infty)}} % upper infty
+
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\ol}[1]{\overline{#1}}
+
+\def\yz{y\uz}
+\def\yn{y\un}
+\def\yi{y\ui}
+
+\def\yzl{\ul{y}\uz}
+\def\yzu{\ol{y}\uz}
+
+\def\ynl{\ul{y}\un}
+\def\ynu{\ol{y}\un}
+
+\def\yil{\ul{y}\ui}
+\def\yiu{\ol{y}\ui}
+
+\def\nz{n\uz}
+\def\nn{n\un}
+\def\ni{n\ui}
+
+\def\nzl{\ul{n}\uz}
+\def\nzu{\ol{n}\uz}
+
+\def\nnl{\ul{n}\un}
+\def\nnu{\ol{n}\un}
+
+\def\nil{\ul{n}\ui}
+\def\niu{\ol{n}\ui}
+
+\def\taux{\tau(x)}
+\def\ttau{\tilde{\tau}}
+\def\ttaux{\ttau(x)}
+
+\def\pz{\psi\uz}
+\def\pn{\psi\un}
+
+\def\Y{\mathcal{Y}}
+\def\YZ{\Y\uz}
+\def\YN{\Y\un}
+\def\YI{\Y\ui}
+\def\N{\mathcal{N}}
+\def\NZ{\N\uz}
+\def\NN{\N\un}
+\def\PZ{\text{I}\!\Pi\uz}
+%\def\PZero{\PZ}
+\def\PN{\text{I}\!\Pi\un}
+\def\Pinfty{\text{I}\!\Pi\uinfty}
+\def\MZ{\mathcal{M}\uz}
+\def\MN{\mathcal{M}\un}
+
+\def\Eta{\mathrm{H}}
+\def\EZ{\mathrm{H}\uz}
+\def\EN{\mathrm{H}\un}
+
+\def\ezl{\ul{\eta}_0}
+\def\ezu{\ol{\eta}_0}
+
+\def\ezz{\eta_0\uz}
+\def\ezn{\eta_0\un}
+\def\eoz{\eta_1\uz}
+\def\eon{\eta_1\un}
+
+\def\ezzl{\ul{\eta}_0\uz}
+\def\ezzu{\ol{\eta}_0\uz}
+\def\eznl{\ul{\eta}_0\un}
+\def\ezzn{\ol{\eta}_0\un}
+
+\def\eozl{\ul{\eta}_1\uz}
+\def\eozu{\ol{\eta}_1\uz}
+\def\eonl{\ul{\eta}_1\un}
+\def\eonu{\ol{\eta}_1\un}
+
+\def\eol{\ul{\eta}_1}
+\def\eou{\ol{\eta}_1}
+
+\def\czl{\ul{c}\uz}
+\def\czu{\ol{c}\uz}
+
+\newcommand{\cdf}{\operatorname{F}}
+\newcommand{\p}{\operatorname{P}}
+\newcommand{\q}{\operatorname{Q}}
+\newcommand{\E}{\operatorname{E}}
+\newcommand{\V}{\operatorname{Var}}
+\newcommand{\med}{\operatorname{med}} % Median
+\newcommand{\modus}{\operatorname{mode}} % Mode
+\newcommand{\logit}{\operatorname{logit}} % logit
+
+%\DeclareMathOperator*{\argmin}{arg\,min}
+%\DeclareMathOperator*{\argmax}{arg\,max}
+
+\def\El{\ul{\E}}
+\def\Eu{\ol{\E}}
+
+\def\Pl{\ul{\p}}
+\def\Pu{\ol{\p}}
+
+\newcommand{\ber}{\operatorname{Ber}}   % Bernoulli Distribution
+\newcommand{\bin}{\operatorname{Binom}} % Binomial Distribution
+\newcommand{\be}{\operatorname{Beta}}   % Beta Distribution
+\newcommand{\B}{\operatorname{B}}   % Beta Function
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Manuscript body
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+\mainmatter  % start of an individual contribution
+
+% first the title is needed
+\title{Sets of Prior Distributions\\ for Reflecting Prior-Data Conflict\\ and Strong Prior-Data Agreement}
+
+% a short form should be given in case it is too long for the running head
+\titlerunning{Sets of Priors for Reflecting Prior-Data Conflict and Strong Prior-Data Agreement}
+
+% the name(s) of the author(s) follow(s) next
+%
+% NB: Chinese authors should write their first names(s) in front of
+% their surnames. This ensures that the names appear correctly in
+% the running heads and the author index.
+%
+\author{Gero Walter\inst{1}%
+\thanks{Gero Walter was supported by the Dinalog project
+``Coordinated Advanced Maintenance and Logistics Planning for the Process Industries'' (CAMPI).}%
+\and Frank P.A.\ Coolen\inst{2}}
+%
+%\authorrunning{Lecture Notes in Computer Science: Authors' Instructions}
+% (feature abused for this document to repeat the title also on left hand pages)
+
+% the affiliations are given next; don't give your e-mail address
+% unless you accept that it will be published
+\institute{%
+School of Industrial Engineering,\\
+Eindhoven University of Technology, Eindhoven, NL\\
+\url{g.m.walter@tue.nl}
+\and
+Department of Mathematical Sciences,\\
+Durham University, Durham, UK\\
+\url{frank.coolen@durham.ac.uk}
+}
+
+%
+% NB: a more complex sample for affiliations and the mapping to the
+% corresponding authors can be found in the file "llncs.dem"
+% (search for the string "\mainmatter" where a contribution starts).
+% "llncs.dem" accompanies the document class "llncs.cls".
+%
+
+\maketitle
+
+
+\begin{abstract}
+The Bayesian approach to inference offers the advantage
+to include prior knowledge along with the data in the reasoning process.
+The choice of a particular prior distribution to represent the available prior knowledge is, however,
+often debatable, especially when prior knowledge is limited or data are scarce,
+as then posterior inferences are higly dependent on the choice of prior.
+Robust Bayesian analysis accounts for this issue by
+inquiring whether posterior inferences change substantially
+when the prior distribution is varied within a set of distributions that contains all `reasonable' priors.
+Similar, but slightly different in scope, is the imprecise probability approach,
+formalising the idea that sets of probability distributions
+%(or, equivalently, interval-valued previsions or sets of desirable gambles)
+should be taken to model prior knowledge more acurrately.
+With imprecise probability, modeling prior-data conflict sensitivity is possible:
+Models have been proposed where the ranges of posterior inferences
+are substantially larger when prior and data are in conflict.
+Here we propose a new method for generating parameter prior sets in a conjugate setting
+that, in addition to prior-data conflict sensitivity, allow to mirror \emph{strong prior-data agreement},
+i.e., the case when prior and data coincide especially well, by increased posterior precision.
+Although presented here for the case of binary data only,
+it is easily extensible to the general exponential family case.
+\keywords{Bayesian inference, strong prior-data agreement, prior-data conflict, imprecise probability, conjugate priors}
+\end{abstract}
+
+
+\section{Introduction}
+
+
+
+\end{document}
