@@ -270,33 +270,85 @@ while a robust Bayesian would base his analyses on a single posterior from the s
 in case (s)he was able to conclude that quantities of interest are not `too sensitive' to the choice of prior.
 In contrast, our viewpoint is rooted in the theory of imprecise or interval probability \cite{itip,1991:walley},
 where sets of distributions are used to express the precision of probability statements themselves:
-the smaller the set of posteriors, the more precise the probability statement.
+the smaller the set of posteriors, the more precise the probability statements.
 
-
+The central idea in imprecise probability is that the magnitude of a set of distributions,
+and, in turn, the width of probability ranges based on it,
+should reflect the precision of probabilistic knowledge.
+A situation where this relation should especially hold is that of \emph{\pdc}:
 % from abstract esrelpaper
-A problem that can arise in Bayesian inference is called prior-data conflict:
-from the viewpoint of the prior, the observed data seem very surprising,
-i.e., the information from data is in conflict with the prior assumptions.
-It has been recognised that models based on conjugate priors can be insensitive to prior-data conflict,
-in the sense that the spread of the posterior distribution does not increase in case of such a conflict,
-thus conveying a false sense of certainty by communicating that we know what's going on quite precisely when in fact we do not.
+%A problem that can arise in Bayesian inference is called prior-data conflict:
+From the viewpoint of the prior $p(\vartheta)$, the observed data $\vec{x}$ seem very surprising,
+i.e., information from data is in conflict with prior assumptions.
+This is most relevant when there is not enough data to overrule the prior;
+as it is then unclear whether to put more trust to prior assumptions or to the observations,
+posterior inferences should clearly reflect this state of uncertainty.
+It was pointed out by Walter \& Augustin \cite{Walter2009a} that
+both precise and imprecise models based on conjugate priors can be insensitive to prior-data conflict.
 
+For Bayesian inference based on a single, precise conjugate prior,
+learning from data amounts to averaging between prior and data,
+as will be illustrated in Sect.~\ref{sec:beta-binom}.
+While this averaging property allows for great tractability,
+it is also at the root of prior-data conflict insensitivity: 
+When observed data are very much different from what is assumed in the prior,
+this conflict is simply averaged out,
+and is not reflected in the spread or variance of the posterior,
+ultimately conveying a false sense of certainty:
+A posterior with a small variance indicates that we know what's going on quite precisely -- but in case of \pdc\ we in fact do not.
 
-motivation: clever choice of prior sets
+Prior-data conflict is instead reflected by a larger set of posteriors,
+i.e., more cautious probability statements,
+when using carefully tailored sets of conjugate priors,
+as suggested by \cite{Walter2009a}.
+In this approach, sets of conjugate priors are defined via sets of canonical parameters,
+and conditions for the shape of these parameter sets were derived that ensure \pdc\ sensitivity.
+\cite{Walter2009a} then suggested a parameter set shape
+that balances tractability and ease of elicitation
+with desired inference properties.
+The approach has since been successfully applied in common-cause failure modelling \cite{Troffaes2014a}
+and system reliability estimation \cite{2015:walter}.
 
-***emphazise that this is basically an idea for defining sets of priors***
+In the present paper, we want to further refine this approach
+by complementing the increased imprecision reaction to \pdc\
+with a `bonus' in precision for the case when prior and data coincide especially well,
+a situation that we will call \emph{strong prior-data agreement}.
+In the vein of the discussion at the end of \cite[\S~3.1.4]{2013:diss-gw},
+we thus sacrifice a bit of tractability through employing a more complex parameter set shape
+in order to obtain a further refined model behaviour.%
+\footnote{Some first results in this direction were already presented in \cite[\S~A.2]{2013:diss-gw}.}
 
-First, we will briefly characterise the novel parametrisation of canoncial conjugate priors this approach relies on.
-To keep things simple, we restrict ourselves here for the case of the Beta-Binomial model (see Section~\ref{sec:beta-binom}),
-but the approach is generalisable to arbitrary canonical conjugate priors.
-Then we will suggest a shape in this parametrisation that accomplishes
-both \pdc\ sensitivity and `bonus precision' in case of strong prior-data agreement.
+As such, the present work presents an idea how to define, through a novel parameter set shape,
+sets of priors such that the correpsonding sets of posteriors
+show both \pdc\ sensitivity and a reaction to strong prior-data agreement.
+%***motivation: clever choice of prior sets
+%***emphazise that this is basically an idea for defining sets of priors***
+To keep things simple, we restrict ourselves here to the case of the Beta-Binomial model (see Sect.~\ref{sec:beta-binom}),
+but the approach is generalisable to arbitrary canonical conjugate priors,
+and we will comment on this in the concluding remarks (Sect.~\ref{sec:concluding}).
+
+\cite{Walter2009a} used a parametrization 
+that allows for an intuitive interpretation of the parameters of the Beta distribution
+and clearly shows that the update step from prior to posterior
+amounts to a weighted average in the conjugate setting (Sect.~{***}).
+The new shape is instead defined in terms of another parametrization
+which was recently suggested by Bickis \cite{2015:mik-isipta}.
+We will therefore briefly characterise this novel parametrisation of canoncial conjugate priors (Sect.~***), %this approach relies on.
+and then go on to suggest a shape in this parametrisation that accomplishes
+both \pdc\ sensitivity and `bonus precision' in case of strong prior-data agreement (Sect.~***).
 We propose a parametric description for such a shape
-and show that it indeed leads to the desired properties.
+and show that it indeed leads to the desired properties (Sect.~***).
+Sect.~*** concludes the paper by discussing generalizations and potential applications. 
+
+
+\section{The Beta-Binomial Model}
+\label{sec:beta-binom}
 
 
 
-The combination of a Binomial observation model with a Beta prior is often called Beta-Binomial model.
+
+\section{Discussion and Concluding Remarks}
+\label{sec:concluding}
 
 
 % ------------ bibliography -------------
