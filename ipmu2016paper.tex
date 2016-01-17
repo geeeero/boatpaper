@@ -104,6 +104,11 @@
 \def\MZ{\mathcal{M}\uz}
 \def\MN{\mathcal{M}\un}
 
+\newcommand{\az}{\alpha\uz}
+\newcommand{\an}{\alpha\un}
+\newcommand{\bz}{\beta\uz}
+\newcommand{\bn}{\beta\un}
+
 \def\Eta{\mathrm{H}}
 \def\EZ{\mathrm{H}\uz}
 \def\EN{\mathrm{H}\un}
@@ -170,7 +175,7 @@
 \title{Sets of Prior Distributions\\ for Reflecting Prior-Data Conflict\\ and Strong Prior-Data Agreement}
 
 % a short form should be given in case it is too long for the running head
-\titlerunning{Sets of Priors for Reflecting Prior-Data Conflict and Strong Prior-Data Agreement}
+\titlerunning{Sets of Priors for Reflecting Prior-Data Conflict and Agreement}
 
 % the name(s) of the author(s) follow(s) next
 %
@@ -247,7 +252,8 @@ In light of the sample $\vec{x}$, the prior distribution is updated by Bayes' Ru
 to obtain the so-called \emph{posterior distribution}
 \begin{align}
 \label{eq:bayesrule}
-p(\vartheta\mid\vec{x}) \propto f(\vec{x}\mid\vartheta) \cdot p(\vartheta)\,.
+p(\vartheta\mid\vec{x}) &= \frac{f(\vec{x}\mid\vartheta) f(\vartheta)}{\int f(\vec{x}\mid\vartheta) f(\vartheta) \dd \vartheta}
+                         \propto f(\vec{x}\mid\vartheta) \cdot p(\vartheta)\,.
 \end{align}
 The posterior distribution is understood to comprise all information from the sample and the prior knowledge.
 It therefore underlies all further inferences on the parameter $\vartheta$,
@@ -279,7 +285,7 @@ A situation where this relation should especially hold is that of \emph{\pdc}:
 % from abstract esrelpaper
 %A problem that can arise in Bayesian inference is called prior-data conflict:
 From the viewpoint of the prior $p(\vartheta)$, the observed data $\vec{x}$ seem very surprising,
-i.e., information from data is in conflict with prior assumptions.
+i.e., information from data is in conflict with prior assumptions \cite[see, e.g.,][]{2006:evans}.
 This is most relevant when there is not enough data to overrule the prior;
 as it is then unclear whether to put more trust to prior assumptions or to the observations,
 posterior inferences should clearly reflect this state of uncertainty.
@@ -287,8 +293,9 @@ It was pointed out by Walter \& Augustin \cite{Walter2009a} that
 both precise and imprecise models based on conjugate priors can be insensitive to prior-data conflict.
 
 For Bayesian inference based on a single, precise conjugate prior,
-learning from data amounts to averaging between prior and data,
-as will be illustrated in Sect.~\ref{sec:beta-binom}.
+learning from data amounts to averaging between prior and data
+\cite[see, e.g.,][\S~1.2.3.1]{2013:diss-gw}.
+%as will be illustrated in Sect.~\ref{sec:beta-binom}.
 While this averaging property allows for great tractability,
 it is also at the root of prior-data conflict insensitivity: 
 When observed data are very much different from what is assumed in the prior,
@@ -330,7 +337,7 @@ and we will comment on this in the concluding remarks (Sect.~\ref{sec:concluding
 \cite{Walter2009a} used a parametrization 
 that allows for an intuitive interpretation of the parameters of the Beta distribution
 and clearly shows that the update step from prior to posterior
-amounts to a weighted average in the conjugate setting (Sect.~{***}).
+amounts to a weighted average in the conjugate setting (Sect.~\ref{sec:beta-binom}).
 The new shape is instead defined in terms of another parametrization
 which was recently suggested by Bickis \cite{2015:mik-isipta}.
 We will therefore briefly characterise this novel parametrisation of canoncial conjugate priors (Sect.~***), %this approach relies on.
@@ -343,6 +350,54 @@ Sect.~*** concludes the paper by discussing generalizations and potential applic
 
 \section{The Beta-Binomial Model}
 \label{sec:beta-binom}
+
+Consider an experiment where there are only two possible outcomes,
+\emph{success} and \emph{failure}, and success arising with some probability $p$.
+The number of successes $s$ in a series of $n$ independent trials
+has then a Binomial distribution with parameters $p$ and $n$,
+where $n$ is known but $p \in [0,1]$ is unknown.
+In short, $S\mid p \sim \bin(n,p)$, which means
+\begin{align}
+f(s\mid p) &= P(S = s \mid p) = {n \choose s} p^s (1-p)^{n-s},\quad s \in \{0, 1, \ldots, n\}\,.
+\label{eq:binompmf}
+\end{align}
+In a Bayesian setting, information about unknown parameters (here, $p$) is then expressed
+by a so-called prior distribution, here $f(p)$, usually derived from expert information.
+In general, the posterior distribution according to Bayes' rule is hard to obtain,
+especially due to the integral in the denominator of \eqref{eq:bayesrule}.
+The posterior can be approximated with numerical methods,
+for example the Laplace approximation, or simulation methods like MCMC (Markov chain Monte Carlo).
+
+However, Bayesian inference not necessarily entails complex calculations and simulation methods.
+With a clever choice of parametric family for the prior distribution,
+the posterior distribution belongs to the same parametric family as the prior, just with updated parameters.
+Such prior distributions are called \emph{conjugate} priors.
+Basically, with conjugate priors one trades flexibility for tractability:
+The parametric family restricts the form of the prior pdf,
+but with the advantage of much easier computations.
+
+The conjugate prior for the Binomial distribution \eqref{eq:binompmf} is the Beta distribution,
+which is usually parametrised with parameters $\alpha > 0$ and $\beta > 0$,
+\begin{align}
+f(p\mid\alpha,\beta) &= \frac{1}{B(\alpha,\beta)}\, p^{\alpha-1}\, (1-p)^{\beta-1}\,,
+\label{eq:betadensab}
+\end{align}
+where $B(\cdot,\cdot)$ is the Beta function.
+In short, we write $p \sim \be(\alpha,\beta)$.
+
+In the rest of the paper, we will denote prior parameter values by an upper index~${}\uz$,
+and updated, posterior parameter values by an upper index~${}\un$.
+With this notational convention,
+let $S\mid p \sim \bin(n,p)$ and $p \sim \be(\az,\bz)$.
+Then it holds that $p \mid s \sim \be(\an,\bn)$,
+where $\an$ and $\bn$ are updated, posterior parameters, obtained as
+%\begin{align}
+$\an = \az + s$ and $\bn= \bz + n - s$.
+%\label{eq:betapostab}
+%\end{align}
+Note that $\az$ and $\bz$ can be interpreted as pseudocounts,
+forming a hypothetical sample with $\az$ sucesses and $\bz$ failures.
+
 
 
 
