@@ -97,10 +97,11 @@
 \def\N{\mathcal{N}}
 \def\NZ{\N\uz}
 \def\NN{\N\un}
-\def\PZ{\text{I}\!\Pi\uz}
-%\def\PZero{\PZ}
-\def\PN{\text{I}\!\Pi\un}
-\def\Pinfty{\text{I}\!\Pi\uinfty}
+%\def\PZ{\text{I}\!\Pi\uz}
+\def\PZ{I\!\!\Pi\uz}
+%\def\PN{\text{I}\!\Pi\un}
+\def\PN{I\!\!\Pi\un}
+%\def\Pinfty{\text{I}\!\Pi\uinfty}
 \def\MZ{\mathcal{M}\uz}
 \def\MN{\mathcal{M}\un}
 
@@ -278,7 +279,7 @@ In contrast, our viewpoint is rooted in the theory of imprecise or interval prob
 where sets of distributions are used to express the precision of probability statements themselves:
 the smaller the set of posteriors, the more precise the probability statements.
 
-The central idea in imprecise probability is that the magnitude of a set of distributions,
+A central idea in imprecise probability is that the magnitude of a set of distributions,
 and, in turn, the width of probability ranges based on it,
 should reflect the precision of probabilistic knowledge.
 A situation where this relation should especially hold is that of \emph{\pdc}:
@@ -348,7 +349,7 @@ and show that it indeed leads to the desired properties (Sect.~***).
 Sect.~*** concludes the paper by discussing generalizations and potential applications. 
 
 
-\section{The Beta-Binomial Model}
+\section{The Beta-Binomial Model in Two Parametrizations}
 \label{sec:beta-binom}
 
 Consider an experiment where there are only two possible outcomes,
@@ -377,16 +378,21 @@ The parametric family restricts the form of the prior pdf,
 but with the advantage of much easier computations.
 
 The conjugate prior for the Binomial distribution \eqref{eq:binompmf} is the Beta distribution,
-which is usually parametrised with parameters $\alpha > 0$ and $\beta > 0$,
+which is usually parametrized with parameters $\alpha > 0$ and $\beta > 0$,
 \begin{align}
 f(p\mid\alpha,\beta) &= \frac{1}{B(\alpha,\beta)}\, p^{\alpha-1}\, (1-p)^{\beta-1}\,,
 \label{eq:betadensab}
 \end{align}
 where $B(\cdot,\cdot)$ is the Beta function.
 In short, we write $p \sim \be(\alpha,\beta)$.
+%$\alpha$ and $\beta$ can be interpreted as pseudocounts,
+%giving the number of virtual successes and failures, respectively.
+The combination of a Binomial sampling model with this conjugate Beta prior is called \emph{Beta-Binomial model},
+and parameters identifying the prior distribution are often called \emph{hyperparameters}.
 
-In the rest of the paper, we will denote prior parameter values by an upper index~${}\uz$,
-and updated, posterior parameter values by an upper index~${}\un$.
+In the remainder of the paper, we will denote prior parameter values by an upper index~${}\uz$,
+in contrast to posterior parameter values obtained after observing $n$ trials,
+which are indicated by an upper index~${}\un$.
 With this notational convention,
 let $S\mid p \sim \bin(n,p)$ and $p \sim \be(\az,\bz)$.
 Then it holds that $p \mid s \sim \be(\an,\bn)$,
@@ -397,6 +403,164 @@ $\an = \az + s$ and $\bn= \bz + n - s$.
 %\end{align}
 Note that $\az$ and $\bz$ can be interpreted as pseudocounts,
 forming a hypothetical sample with $\az$ sucesses and $\bz$ failures.
+
+We will consider now a different parametrisation of the Beta distribution
+which is more useful when we generalize to sets of priors. % we find more intuitive
+It is defined as
+%\begin{align}
+$\nz = \az + \bz$, $\yz = \frac{\az}{\az+\bz}$.
+%\label{eq:betareparam}
+%\end{align}
+Writing $p \sim \be(\nz,\yz)$ thus corresponds to
+%\begin{align}
+%$f(p\mid\nz,\yz) = \frac{p^{\nz\yz-1}\, (1-p)^{\nz(1-\yz)-1}}{B(\nz\yz,\nz(1-\yz))}$.
+$f(p) \propto p^{\nz\yz-1}\, (1-p)^{\nz(1-\yz)-1}$.
+%\label{eq:betadensny}
+%\end{align}
+$\nz > 0$ and $\yz \in (0,1)$ are sometimes called \emph{canonical} parameters,
+identified from rewriting the density in canonical form;
+see for example \cite[pp.~202 and 272f]{2000:bernardosmith}, or \cite[\S 1.2.3.1]{2013:diss-gw}.
+(This canonical form gives a common structure to all conjugacy results in exponential families.)
+%In this parametrisation, the updated, posterior parameters are given by
+%\begin{align}
+%\nn &= \nz + n\,, &
+%\yn &= \frac{\nz}{\nz + n} \cdot \yz + \frac{n}{\nz + n} \cdot \frac{s}{n}\,.
+%\label{eq:betapostny}
+%\end{align}
+%and we write $p\mid s \sim \be(\nn,\yn)$.
+From the properties of the Beta distribution,
+it follows that $\yz = \E[p]$ is the prior expectation for the functioning probability $p$,
+and that larger $\nz$ values lead to greater concentration of probability mass around $\yz$,
+since $\V(p) = \frac{\yz (1-\yz)}{\nz + 1}$.
+Consequently, $\nz$ represents the prior strength
+and moreover can be directly interpreted as a (total) pseudocount due to the relation $\nz = \az + \bz$.
+
+The posterior given that $s$ out of $n$ components function,
+written in terms of $\nz$ and $\yz$,
+is a Beta distribution with updated parameters
+\begin{align}
+\nn &= \nz + n\,, &
+\yn &= \frac{\nz}{\nz + n} \cdot \yz + \frac{n}{\nz + n} \cdot \frac{s}{n}\,.
+\label{eq:nyupdate}
+\end{align}
+Thus, after observing $s$ successes in $n$ trials,
+the posterior mean $\yn$ for $p$ is a weighted average of
+the prior mean $\yz$ and $s/n$ (the observed fraction of successes),
+with weights $\nz$ and $n$, respectively.
+So $\nz$ takes on the same role for the prior mean $\yz$
+as the sample size $n$ does for the observed mean $s/n$,
+confirming its interpretation as a pseudocount.
+
+The parametrization in terms of prior mean and prior strength (or pseudocount)
+makes clear that in this conjugate setting,
+learning from data corresponds to averaging between prior and data.
+This form is attractive because it enhances the interpretability of the model and prior specification,
+and makes Bayesian inference easily tractable.
+However, it also makes clear what should be a serious concern in any Bayesian analysis:
+when observed data differ greatly from what is expressed in the prior,
+this conflict is simply averaged out
+and is not reflected in the posterior or posterior predictive distributions.
+
+
+\section{Generalized Bayesian Inference with Sets of Beta Priors}
+\label{sec:setsofbetapriors}
+
+As was shown by \cite{Walter2009a}, %Walter \& Augustin (2009),
+it is possible obtain a meaningful reaction to prior-data conflict while retaining tractability
+by using sets of priors $\MZ$ produced through parameter sets $\PZ = [\nzl, \nzu] \times [\yzl, \yzu]$.
+%(a detailed discussion of different choices for $\PktZ$ is given in \citet[\S 3.1]{2013:diss-gw}.)
+More generally, \cite[\S 3.1]{2013:diss-gw} describes a framework for
+Bayesian inference using sets of conjugate priors based on arbitrary parameter sets $\PZ$.
+%This sets of priors approach also allows to model vague and incomplete expert knowledge.
+Applying this framework to the Beta-Binomial model described above,
+each prior parameter pair $(\nz, \yz) \in \PZ$ corresponds to a Beta prior,
+so one may take $\MZ$ directly as a set of Beta priors.
+Alternatively, one may take the convex hull of all Beta priors with $(\nz, \yz) \in \PZ$ as $\MZ$,
+i.e., $\MZ$ consists of all finite mixtures of Beta priors with $(\nz, \yz) \in \PZ$.
+
+It is a modeling decision whether to take $\MZ$ as containing only Beta priors or also the mixtures.
+In the first case, bounds for any inferences can be obtained by optimizing over $\PZ$.
+In the second case, optimizing over $\PZ$ will only yield bounds for all inferences
+that are \emph{linear functions} of $\nz$ and $\yz$,
+as the linearity ensures that bounds must correspond to the extreme points of the convex set of priors,
+which are the Beta priors with $(\nz, \yz) \in \PZ$.
+For inferences not linear in $\nz$ and $\yz$, meaningful bounds might not exist.%
+\footnote{Consider for example the prior variance for $p$, $\V(p) = \frac{\yz (1-\yz)}{\nz + 1}$,
+being nonlinear in $\nz$ and $\yz$.
+It is intuitively clear that $\V(p)$ can be larger for mixture distributions than for `pure' Beta distributions.}
+
+In both cases, the set of posteriors $\MN$ is obtained by updating each prior in $\MZ$ according to Bayes' Rule.
+This element-by-element updating can be rigorously justified
+as ensuring coherence \cite[\S 2.5]{1991:walley}, and was termed ``Generalized Bayes' Rule'' by Walley \cite[\S 6.4]{1991:walley}.
+In the first case, $\MN$ is a set of Beta distributions with parameters $(\nn, \yn)$,
+obtained by updating $(\nz, \yz) \in \PZ$ according to \eqref{eq:nyupdate},
+leading to the set of updated parameters
+\begin{align}
+\PN &= \Big\{ (\nn, \yn) \mid (\nz, \yz) \in \PZ = [\nzl, \nzu] \times [\yzl, \yzu] \Big\}\,.
+\label{eq:paramsets}
+\end{align}
+In the second case, the set of Beta distributions corresponding to $(\nn, \yn) \in \PN$
+forms the extreme points of the convex set of posteriors $\MN$,
+such that, just like $\MZ$, $\MN$ can be described as a set of all finite mixtures of Beta distributions,
+but now with $(\nn, \yn) \in \PN$, see \cite[pp.~56f]{2013:diss-gw}.
+
+The set of posteriors $\MN$ forms the basis for all inferences,
+leading to probability \emph{ranges} obtained by optimizing over $\MN$.
+As a running example, in the Beta-Binomial model %as discussed in Section~\ref{sec:beta-binom},
+the posterior predictive probability %$[\lpr,\upr]$
+for the event that a future single draw is a success is equal to $\yn$, and so we get,
+for an imprecise model $\MZ$ based on $\PZ$,
+the lower and upper probability
+\begin{align*}
+\inf_{\PN} \yn &= \inf_{\PZ} \frac{\nz\yz + s}{\nz +n} & &\text{and} &
+\sup_{\PN} \yn &= \sup_{\PZ} \frac{\nz\yz + s}{\nz +n}\,.
+\end{align*}
+
+The relation between $\PZ$ and $\MZ$, as well as between $\PN$ and $\MN$,
+allows to characterize model properties through properties of $\PZ$ and $\PN$,
+as is done in \cite[\S 3.1.2 -- 3.1.4]{2013:diss-gw}.
+In particular, specific imprecise probability models are obtained by certain choices of $\PZ$.
+The well-known Imprecise Dirichlet Model \cite{1996:walley::idm}
+corresponds to a choice of $\PZ = \nz \times (\yzl, \yzu)$ where $(\yzl, \yzu) = (0,1)$.
+The model proposed by \cite{2005:quaeghebeurcooman} generally assumes $\PZ = \nz \times [\yzl, \yzu]$,
+and was shown to be insensitive to prior-data conflict by \cite{Walter2009a},
+who proposed parameter sets $\PZ = [\nzl, \nzu] \times [\yzl, \yzu]$ instead.
+
+*** lower, upper $\yn$ \& range for QdC, rectangle, discuss some inference properties.
+
+As discussed at the end of \cite[\S 3.1.4]{2013:diss-gw},
+the shape of $\PZ$ thus represents a trade-off:
+Less complex shapes are easy to handle and lead to tractable models,
+but will offer less flexibility in expressing prior information
+and may have undesired inference properties.
+In contrast, more complex shades may allow for more sophisticated model behaviour
+at the cost of more complex handling.
+
+
+\section{A Third Parametrization for Beta Priors}
+\label{sec:miksworld}
+
+In the parametrization in terms of $\nz$ and $\yz$ as described in Section~\ref{sec:beta-binom},
+a conjugate Beta prior is updated to its respective posterior by a shift in the parameter space,
+given by rewriting \eqref{eq:nyupdate}:
+\begin{align*}
+\nz &\mapsto \nz + n\,, &
+\yz &\mapsto %\frac{\nz}{\nz + n} \cdot \yz + \frac{n}{\nz + n} \cdot \frac{s}{n} = 
+             \yz + \frac{s - n \yz}{\nz+n}\,.
+\end{align*}
+We see thus that, while the shift for the $n$ coordinate is the same for all elements $(\nz,\yz)$ of $\PZ$,
+the shift in the $y$ coordinate depends on $\nz$, $s$, and the location of $\yz$ itself.
+Due to this, the shape of $\PZ$ will change during the update step.
+This shape change from $\PZ$ to $\PN$ is problematic for understanding of the update step in generalized Bayesian inference,
+as its effects on posterior inferences are difficult to grasp.
+
+Therefore, to isolate the influence of a set shape,
+a different parametrisation of the canonical priors
+in which each coordinate has the same shift in updating
+would be advantageous, as then the updating of a parameter set
+would correspond to a shift of the entire set within the parameter space.
+Such a parametrisation has been developed by \cite{2015:mik-isipta}, %Mi\c{k}elis Bickis
+and we will now briefly introduce it. %in the next subsection.
 
 
 
