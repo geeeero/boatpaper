@@ -526,10 +526,29 @@ The model proposed by \cite{2005:quaeghebeurcooman} generally assumes $\PZ = \nz
 and was shown to be insensitive to prior-data conflict by \cite{Walter2009a},
 who proposed parameter sets $\PZ = [\nzl, \nzu] \times [\yzl, \yzu]$ instead.
 
-*** lower, upper $\yn$ \& range for QdC, rectangle, discuss some inference properties.
+%*** lower, upper $\yn$ \& range for QdC, rectangle, discuss some inference properties.
+Indeed, with $\PZ = \nz \times [\yzl, \yzu]$, we have $\PN = \nn \times [\ynl, \ynu]$, where
+\begin{align*}
+\ynl &= \frac{\nz\yzl + s}{\nz + n} & &\text{and} &
+\ynu &= \frac{\nz\yzu + s}{\nz + n}\,.
+\end{align*}
+The posterior imprecision in the $y$ dimension, denoted by $\Delta_y(\PN)$, is 
+\begin{align*}
+%\label{eq:deltay}
+\Delta_y(\PN) &= \ynu - \ynl = \frac{\nz (\yzu - \yzl)}{\nz +n}\,,
+\end{align*}
+and so the same for any fixed $n$, independent of $s$.
+In contrast, parameter sets $\PZ = [\nzl, \nzu] \times [\yzl, \yzu]$
+provide prior-data conflict sensitivity, since
+%\footnote{See \cite{Walter2009a} or \cite[\S 3.1.4]{2013:diss-gw} for more details.}
+\begin{align*}
+%\label{eq:deltay2}
+\Delta_y(\PN) &= \frac{\nzu (\yzu - \yzl)}{\nzu + n} %\nonumber\\
+               + \inf_{\yz \in [\yzl,\yzu]} |s/n - \yz| \frac{n (\nzu - \nzl)}{(\nzl + n)(\nzu + n)}\,.
+\end{align*}
 
 As discussed at the end of \cite[\S 3.1.4]{2013:diss-gw},
-the shape of $\PZ$ thus represents a trade-off:
+the shape of $\PZ$ thus poses a trade-off:
 Less complex shapes are easy to handle and lead to tractable models,
 but will offer less flexibility in expressing prior information
 and may have undesired inference properties.
@@ -559,9 +578,44 @@ a different parametrisation of the canonical priors
 in which each coordinate has the same shift in updating
 would be advantageous, as then the updating of a parameter set
 would correspond to a shift of the entire set within the parameter space.
-Such a parametrisation has been developed by \cite{2015:mik-isipta}, %Mi\c{k}elis Bickis
+Such a parametrisation has been developed by Bickis \cite{2015:mik-isipta}, %Mi\c{k}elis Bickis
 and we will now briefly introduce it. %in the next subsection.
 
+In this novel parametrisation, a prior is represented by a coordinate $(\ezz,\eoz)$,
+where $\eoz$ replaces $\yz$, while $\ezz$ is just a shifted version of $\nz$.
+%there, update step for $\nz$ is the same, and shift for parameter replacing $\yz$ is the same for all. 
+To keep things simple, we will not present its derivation here, this is described in detail in \cite{2015:mik-isipta}.
+The relation of $(\ezz,\eoz)$ to $(\nz, \yz)$ is as follows:
+%\begin{equation}
+\begin{align}
+\label{eq:trafotony}
+%\begin{aligned}
+\nz &= \ezz + 2\,, &
+\yz &= \frac{\eoz}{\ezz + 2} + \frac{1}{2}\,.
+%\end{aligned}
+%\end{equation}
+\end{align}
+The domain of $\eta_0$ and $\eta_1$ in case of the Beta-Binomial model is
+\begin{align}
+\label{eq:eta-domain}
+\Eta &= \Big\{ (\eta_0,\eta_1) \Big| \eta_0 > -2,\ |\eta_1| < \frac{1}{2}(\eta_0 + 2) \Big.\Big\}\,,
+\end{align}
+and the update step in terms of $\eta_0$ and $\eta_1$ is given by
+\begin{equation}
+\label{eq:eta-update}
+\begin{aligned}
+\eta_0\un &= \eta_0\uz + n\,, & 
+\eta_1\un &= \eta_1\uz + \frac{1}{2}(s - (n-s)) = \eta_1\uz + s - \frac{n}{2}\,.
+\end{aligned}
+\end{equation}
+%where $s$ is again the number of successes in the $n$ Bernoulli trials.
+Each success thus
+leads to a step of $1$ in the $\eta_0$ direction and of $+\frac{1}{2}$ in the $\eta_1$ direction,
+while each failure
+leads to a step of $1$ in the $\eta_0$ direction and of $-\frac{1}{2}$ in the $\eta_1$ direction. %
+%\footnote{We will treat $s$ as a a real-valued observation in $[0,n]$
+%because the continuous representation is convenient for our discussions,
+%keeping in mind that in reality it can only take integer values.}
 
 
 
