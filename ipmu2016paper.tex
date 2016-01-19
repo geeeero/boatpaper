@@ -568,24 +568,23 @@ given by rewriting \eqref{eq:nyupdate}:
              \yz + \frac{s - n \yz}{\nz+n}\,.
 \end{align*}
 We see thus that, while the shift for the $n$ coordinate is the same for all elements $(\nz,\yz)$ of $\PZ$,
-the shift in the $y$ coordinate depends on $\nz$, $s$, and the location of $\yz$ itself.
-Due to this, the shape of $\PZ$ will change during the update step.
+the shift in the $y$ coordinate depends on $\nz$, $n$, $s$, and the location of $\yz$ itself
+(namely, how far $\yz$ is from $s/n$).
+Due to this, the shape of $\PZ$ changes during the update step.
 This shape change from $\PZ$ to $\PN$ is problematic for understanding of the update step in generalized Bayesian inference,
 as its effects on posterior inferences are difficult to grasp.
 
 Therefore, to isolate the influence of a set shape,
-a different parametrisation of the canonical priors
-in which each coordinate has the same shift in updating
-would be advantageous, as then the updating of a parameter set
-would correspond to a shift of the entire set within the parameter space.
-Such a parametrisation has been developed by Bickis \cite{2015:mik-isipta}, %Mi\c{k}elis Bickis
-and we will now briefly introduce it. %in the next subsection.
-
-In this novel parametrisation, a prior is represented by a coordinate $(\ezz,\eoz)$,
+we now consider a different parametrisation of the prior
+where each coordinate has the same shift in updating.
+The updating of a parameter set
+then corresponds to a shift of the entire set within the parameter space.
+This parametrization has recently been developed by Bickis \cite{2015:mik-isipta}. %Mi\c{k}elis Bickis
+In this novel parametrization, a prior is represented by a coordinate $(\ezz,\eoz)$,
 where $\eoz$ replaces $\yz$, while $\ezz$ is just a shifted version of $\nz$.
 %there, update step for $\nz$ is the same, and shift for parameter replacing $\yz$ is the same for all. 
-To keep things simple, we will not present its derivation here, this is described in detail in \cite{2015:mik-isipta}.
-The relation of $(\ezz,\eoz)$ to $(\nz, \yz)$ is as follows:
+To keep things simple, we will not describe its derivation here (this is described in detail in \cite{2015:mik-isipta}),
+and present it in relation to $(\nz, \yz)$:
 %\begin{equation}
 \begin{align}
 \label{eq:trafotony}
@@ -616,8 +615,120 @@ leads to a step of $1$ in the $\eta_0$ direction and of $-\frac{1}{2}$ in the $\
 %\footnote{We will treat $s$ as a a real-valued observation in $[0,n]$
 %because the continuous representation is convenient for our discussions,
 %keeping in mind that in reality it can only take integer values.}
+\begin{figure}  %trim=l b r t
+\centering
+%\fbox{%
+\includegraphics[trim = 86mm 48mm 94mm 62mm, clip, width=0.7\textwidth]{R/boatshape-domain}%
+%}
+\caption[Bounds for the domain of $\eta_0$ and $\eta_1$ for the Beta-Binomial model,
+with rays of constant expectation for $y_c = \{0.1,0.2,\ldots,0.9\}$.]%
+{Bounds for the domain of $\eta_0$ and $\eta_1$ for the Beta-Binomial model (black),
+with rays of constant expectation for $y_c = \{0.1,0.2,\ldots,0.9\}$ (grey).}
+\label{fig:boatshape-domain}
+\end{figure}
+
+While $\yz$ had the convenient property of being equal to
+the prior expectation of the mean sample statistic $s/n$,
+$\eta_1$ is only slightly more difficult to interpret.
+From \eqref{eq:trafotony} we can derive that points $(\eta_0,\eta_1) \in \Eta$
+on rays emanating from the coordinate $(-2,0)$,
+i.e., coordinates satifying
+\begin{align}
+\label{eq:raysofconstantexpectation}
+\eta_1 = f(\eta_0) &= (\eta_0 + 2)(y_c - 1/2) 
+\end{align}
+will have a constant expectation of $y_c$.
+The domain $\Eta$, and these \emph{rays of constant expectation} emanating from the coordinate $(-2,0)$,
+are depicted in Figure~\ref{fig:boatshape-domain}.
+
+In the parametrisation in terms of $(\nz,\yz)$,
+posterior inferences based on $\yn$ become more precise with increasing $n$
+because $\Delta_y(\PN) \to 0$ for $n \to \infty$.
+In the domain $\Eta$ as depicted in Figure~\ref{fig:boatshape-domain},
+instead the rays of constant expectation fan out for growing $n$,
+while a parameter set will retain its size in updating.
+Increased precision in a posterior parameter set $\EN$, which is just
+its prior counterpart $\EZ$ shifted to the right,
+is given by the fact that the more $\EN$ is located to the right,
+the fewer rays of constant expectation $\EN$ it will intercept.
+Imprecision in terms of $\yn$
+can thus be imagined as the size of the `shadow' that a set $\EN$ casts
+when considering a light source in $(-2,0)$. %(the point from which the rays of constant expectation emanate).
+The smaller this shadow, the more precise the inferences.
+In terms of the $(\nz, \yz)$ parametrization, we will denote the bounds of this shadow by $\ynl$ and $\ynu$:
+\begin{align*}
+\ynl &:= \min_{(\ezn,\eon) \in \EN} \frac{\eon}{\ezn+2} + \frac{1}{2}\,, &
+\ynu &:= \max_{(\ezn,\eon) \in \EN} \frac{\eon}{\ezn+2} + \frac{1}{2}\,.
+\end{align*}
+We call the coordinates $\arg\min_{(\eta_0,\eta_1) \in \EN} \yn$ and $\arg\max_{(\eta_0,\eta_1) \in \EN} \yn$
+the \emph{lower} and \emph{upper touchpoints} of $\EN$ responsible for the shadow $[\ynl, \ynu]$.
+Mutatis mutandis, the same definitions can be made for the prior set $\EZ$.
+
+Due to the fanning out of rays, most shapes for $\EZ$ will lead to decreasing imprecision for increasing $n$.
+Indeed, models with $\PZ = \nz \times [\yzl, \yzu]$
+are represented here again by a line segment $\EZ = \ezz \times [\eozl,\eozu]$,
+such that the posterior touchpoints are, for any $s$ and $n$, $(\ezn,\eonl)$ and $(\ezz,\eonu)$,
+where $\eonl$ and $\eonu$ are the updated versions of $\eozl$ and $\eozu$, respectively.
+Due to \eqref{eq:eta-update}, it holds that $\eonu-\eonl = \eozu-\eozl$;
+therefore, imprecision decreases here because a line segment of fixed size
+will cast a smaller shadow when further to the right,
+as illustrated in Figure~\ref{fig:boatshape-vertical}.
+\begin{figure}  %trim=l b r t
+\centering
+%\fbox{%
+\includegraphics[trim = 16mm 48mm 25mm 62mm, clip, width=\textwidth]{R/boatshape-vertical}%
+%}
+\caption[Line segment parameter set $\EZ$ %
+and respective posterior sets for $s/n=0.5$ and $s/n=0.9$.]%
+{Prior parameter set $\EZ = \ezz \times [\text{\underline{$\eta$}${}_1\uz$},\eozu]$ and respective posterior sets $\EN$
+for $s/n=0.5$ (left) and $s/n=0.9$ (right). Note that all sets have the same size,
+imprecision decreasing only through their position on the $\eta_0$ axis.}
+\label{fig:boatshape-vertical}
+\end{figure}
+
+For \pdc\ sensitivity, we need shapes that cover a range of $\eta_0$ values,
+just like we needed sets with a range of $\nz$ values to ensure this property.
+Sets that are elongated along a certain ray of constant expectation
+will behave here similar to the rectangular shapes of Section~\ref{sec:setsofbetapriors}.
+When shifted along its ray of constant expectation,
+imprecision will be reduced as the shadow of the set will become smaller just as described above for line segments.
+When such a shape is instead shifted away from its ray of constant expectation,
+imprecision will be increased, as a prolonged shape that is now turned away from its ray 
+will cast a larger shadow.%
+\footnote{This will become clear from the depiction of boatshape sets in Figure~\ref{fig:boatshape-posterior-mik}.} 
+A set $\EZ$ allowing for less imprecison in case of strong prior-data agreement
+must thus be able to cast a smaller shadow if the update shift is along the direction of its ray.
+%of $s/n$ according the information,
 
 
+\section{The Boatshape}
+\label{sec:boatshape}
+
+The shape for $\EZ$ that we suggest to obtain both \pdc\ sensitivity and increased precision
+in case of strong prior-data agreement looks like a bullett, or like a boat with a transom stern
+(see, e.g., Figure~\ref{fig:boatshape-prior} below), hence its name.
+It is curved along its length in the direction of its constant rays of expectation,
+this leads to smaller $\Delta_y(\PN)$ as compared to a rectangular $\PZ$ with the same prior range $\Delta_y(\PZ)$,
+as illustrated in Figure~\ref{}.
+
+The strong prior-data agreement effect is further enhanced
+due to the touchpoints determining $\ynl$ and $\ynu$
+being attained at higher values of $\eta_0$ for larger $n$,
+as will be demonstrated in Section~\ref{***}.
+This is advantageous when considering that the spread of the Beta posteriors is determined by $\eta_0 = \nz - 2$.
+In case of strong prior-data agreement, variances in the `critical' distributions
+at the boundary of the posterior expectation interval $[\ynl,\ynu]$ will be lower.
+As an example, credible intervals for these `critical' distributions will be shorter, 
+such that also unions of credible intervals,
+as posterior inference reflecting uncertainty due to vague prior knowledge and stochasticity, will be shorter.
+
+In the remainder of this section, 
+we will suggest a parametrisation for a curved shape in the $(\eta_0, \eta_1)$ space.
+The definition, along with some graphical examples, is given in Section~\ref{sec:basicdefboat},
+and we discuss a number of technical results for this shape in Sections~\ref{sec:touchpoints} -- \ref{sec:generalupdate}.
+
+
+\subsection{}
 
 
 \section{Discussion and Concluding Remarks}
