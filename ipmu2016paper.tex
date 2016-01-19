@@ -615,17 +615,17 @@ leads to a step of $1$ in the $\eta_0$ direction and of $-\frac{1}{2}$ in the $\
 %\footnote{We will treat $s$ as a a real-valued observation in $[0,n]$
 %because the continuous representation is convenient for our discussions,
 %keeping in mind that in reality it can only take integer values.}
-\begin{figure}  %trim=l b r t
-\centering
+%\begin{figure}  %trim=l b r t
+%\centering
 %\fbox{%
-\includegraphics[trim = 86mm 48mm 94mm 62mm, clip, width=0.7\textwidth]{R/boatshape-domain}%
+%\includegraphics[trim = 86mm 48mm 94mm 62mm, clip, width=0.5\textwidth]{R/boatshape-domain}%
 %}
-\caption[Bounds for the domain of $\eta_0$ and $\eta_1$ for the Beta-Binomial model,
-with rays of constant expectation for $y_c = \{0.1,0.2,\ldots,0.9\}$.]%
-{Bounds for the domain of $\eta_0$ and $\eta_1$ for the Beta-Binomial model (black),
-with rays of constant expectation for $y_c = \{0.1,0.2,\ldots,0.9\}$ (grey).}
-\label{fig:boatshape-domain}
-\end{figure}
+%\caption[Bounds for the domain of $\eta_0$ and $\eta_1$ for the Beta-Binomial model,
+%with rays of constant expectation for $y_c = \{0.1,0.2,\ldots,0.9\}$.]%
+%{Bounds for the domain of $\eta_0$ and $\eta_1$ for the Beta-Binomial model (black),
+%with rays of constant expectation for $y_c = \{0.1,0.2,\ldots,0.9\}$ (grey).}
+%\label{fig:boatshape-domain}
+%\end{figure}
 
 While $\yz$ had the convenient property of being equal to
 the prior expectation of the mean sample statistic $s/n$,
@@ -639,12 +639,12 @@ i.e., coordinates satifying
 \end{align}
 will have a constant expectation of $y_c$.
 The domain $\Eta$, and these \emph{rays of constant expectation} emanating from the coordinate $(-2,0)$,
-are depicted in Figure~\ref{fig:boatshape-domain}.
+can be seen in Figure~\ref{fig:boatshape-vertical}.
 
 In the parametrisation in terms of $(\nz,\yz)$,
 posterior inferences based on $\yn$ become more precise with increasing $n$
 because $\Delta_y(\PN) \to 0$ for $n \to \infty$.
-In the domain $\Eta$ as depicted in Figure~\ref{fig:boatshape-domain},
+In the domain $\Eta$, %as depicted in Figure~\ref{fig:boatshape-domain},
 instead the rays of constant expectation fan out for growing $n$,
 while a parameter set will retain its size in updating.
 Increased precision in a posterior parameter set $\EN$, which is just
@@ -680,9 +680,12 @@ as illustrated in Figure~\ref{fig:boatshape-vertical}.
 %}
 \caption[Line segment parameter set $\EZ$ %
 and respective posterior sets for $s/n=0.5$ and $s/n=0.9$.]%
-{Prior parameter set $\EZ = \ezz \times [\text{\underline{$\eta$}${}_1\uz$},\eozu]$ and respective posterior sets $\EN$
-for $s/n=0.5$ (left) and $s/n=0.9$ (right). Note that all sets have the same size,
-imprecision decreasing only through their position on the $\eta_0$ axis.}
+%{Bounds for the domain of $\eta_0$ and $\eta_1$ for the Beta-Binomial model (black),
+%with rays of constant expectation for $y_c = \{0.1,0.2,\ldots,0.9\}$ (grey).}
+{Prior parameter set $\EZ = \ezz \times [\text{\underline{$\eta$}${}_1\uz$},\eozu]$
+and respective posterior sets $\EN$ for $s/n=0.5$ (left) and $s/n=0.9$ (right).
+Bounds for the domain $\Eta$ are in black, with rays of constant expectation for $y_c = \{0.1,0.2,\ldots,0.9\}$ in grey. 
+Note that all sets have the same size, imprecision decreasing only through their position on the $\eta_0$ axis.}
 \label{fig:boatshape-vertical}
 \end{figure}
 
@@ -696,7 +699,7 @@ When such a shape is instead shifted away from its ray of constant expectation,
 imprecision will be increased, as a prolonged shape that is now turned away from its ray 
 will cast a larger shadow.%
 \footnote{This will become clear from the depiction of boatshape sets in Figure~\ref{fig:boatshape-posterior-mik}.} 
-A set $\EZ$ allowing for less imprecison in case of strong prior-data agreement
+A set $\EZ$ allowing for more precison in case of strong prior-data agreement
 must thus be able to cast a smaller shadow if the update shift is along the direction of its ray.
 %of $s/n$ according the information,
 
@@ -706,10 +709,10 @@ must thus be able to cast a smaller shadow if the update shift is along the dire
 
 The shape for $\EZ$ that we suggest to obtain both \pdc\ sensitivity and increased precision
 in case of strong prior-data agreement looks like a bullett, or like a boat with a transom stern
-(see, e.g., Figure~\ref{fig:boatshape-prior} below), hence its name.
+(see, e.g., Figure~\ref{fig:boatshape-posterior-mik} below), hence its name.
 It is curved along its length in the direction of its constant rays of expectation,
 this leads to smaller $\Delta_y(\PN)$ as compared to a rectangular $\PZ$ with the same prior range $\Delta_y(\PZ)$,
-as illustrated in Figure~\ref{}.
+as illustrated in Figure~\ref{fig:boatshape-posterior-normal}.
 
 The strong prior-data agreement effect is further enhanced
 due to the touchpoints determining $\ynl$ and $\ynu$
@@ -720,7 +723,7 @@ In case of strong prior-data agreement, variances in the `critical' distribution
 at the boundary of the posterior expectation interval $[\ynl,\ynu]$ will be lower.
 As an example, credible intervals for these `critical' distributions will be shorter, 
 such that also unions of credible intervals,
-as posterior inference reflecting uncertainty due to vague prior knowledge and stochasticity, will be shorter.
+taken as a posterior inference reflecting uncertainty due to both vague prior knowledge and stochasticity, will be shorter.
 
 In the remainder of this section, 
 we will suggest a parametrisation for a curved shape in the $(\eta_0, \eta_1)$ space.
@@ -728,8 +731,105 @@ The definition, along with some graphical examples, is given in Section~\ref{sec
 and we discuss a number of technical results for this shape in Sections~\ref{sec:touchpoints} -- \ref{sec:generalupdate}.
 
 
-\subsection{}
+\subsection{Basic Definition}
+\label{sec:basicdefboat}
 
+We will now present a parametrisation for such a boat-shaped parameter set $\EZ$.
+To keep things simple, we will consider at first only prior sets
+that are symmetric around the $\eta_0$ axis, i.e., centered around $y_c = 0.5$,
+expressing the prior information that we deem a fraction of successes of $\frac{s}{n} = \frac{1}{2}$
+as the most probable. Sets $\EZ$ with central ray $y_c \neq 0.5$
+will be discussed in Section~\ref{sec:boatshape-outlook}.****
+
+For the contours of $\EZ$, we suggest an exponential function as the functional form,
+where the `prow' of the set is located at $(\ezl, 0)$.
+The lower and the upper contour $\czl(\eta_0)$ and $\czu(\eta_0)$ are defined as
+%\begin{align*}
+%\czl(\eta_0) &= -a \left( 1 - e^{-b(\eta_0 - \ezl)} \right)\,, \\
+%\czu(\eta_0) &= \phantom{-}%
+%                 a \left( 1 - e^{-b(\eta_0 - \ezl)} \right)\,, 
+%\end{align*}
+\begin{align*}
+\czl(\eta_0) &= -a \left( 1 - e^{-b(\eta_0 - \ezl)} \right)\,, &
+\czu(\eta_0) &=  a \left( 1 - e^{-b(\eta_0 - \ezl)} \right)\,, 
+\end{align*}
+where $a$ and $b$ are parameters controlling the shape of $\EZ$.
+%We will also need the respective derivations with respect to $\eta_0$, given by
+%\begin{align*}
+%\frac{d}{d\eta_0} \czl(\eta_0) &= -ab e^{-b(\eta_0 - \ezl)}\,, \\
+%\frac{d}{d\eta_0} \czu(\eta_0) &= \phantom{-}%
+%                                   ab e^{-b(\eta_0 - \ezl)}\,.
+%\end{align*}
+Given parameters $\ezl$, $\ezu$, $a$, and $b$, $\EZ$ is thus defined as
+\begin{align}
+\label{eq:basicset}
+\EZ =
+\{(\eta_0,\eta_1) \colon \ezl \le \eta_0 \le \ezu, \czl(\eta_0) \le  \eta_1 \le \czu(\eta_0) \}\,.
+\end{align}
+A prior boatshape set with $\ezl=1$, $\ezu=6$, $a=2$, and $b=0.8$,
+together with corresponding posterior sets for different observations,
+is depicted in Figure~\ref{fig:boatshape-posterior-mik}.
+The same prior and posterior sets in terms of $(\nz, \yz)$ are depicted in Fig.~\ref{fig:boatshape-posterior-normal}.
+%shown in terms of $(\eta_0,\eta_1)$ (left) and in terms of $(\nz, \yz)$ (right).
+%\begin{figure}  %trim=l b r t
+%\centering
+%\fbox{%
+%\includegraphics[trim = 15mm 45mm 25mm 60mm, clip, width=\textwidth]{R/boatshape-prior}%
+%}
+%\caption[Boatshape prior set in the parametrisation via $(\eta_0,\eta_1)$ and via $(\nz,\yz)$.]%
+%{Boatshape prior set in the parametrisation via $(\eta_0,\eta_1)$ (left) and via $(\nz,\yz)$ (right),
+%with parameters $\ezl=1$, $\ezu=6$, $a=2$, and $b=0.8$.}
+%\label{fig:boatshape-prior}
+%\end{figure}
+\begin{figure}  %trim=l b r t
+\centering
+%\fbox{%
+%\includegraphics[trim = 20mm 35mm 30mm 45mm, clip, width=\textwidth]{R/boatshape-posterior-mik}%
+\includegraphics[width=\textwidth]{R/boatshape-posterior-mik}%
+%}
+\caption[Boatshape prior and posterior sets for data in accordance and in conflict with the prior set.]%
+{Boatshape prior and posterior sets for data in accordance and in conflict with the prior set.
+The parameters for the prior set are $\ezl=1$, $\ezu=6$, $a=2$, and $b=0.8$.
+While the posterior sets for $\frac{s}{n}=0.5$ move along the ray for $y_c=0.5$,
+the posterior sets for $\frac{s}{n}=1$ are shifted away from the ray for $y_c=0.5$,
+resulting in increased posterior imprecision.
+Note that lower and upper touchpoints are in the middle of the contour
+for the prior set and the posterior set resulting for data $\frac{s}{n}=\frac{4}{8}$,
+while at least one touchpoint is at the end for all other sets.
+(See also Figure~\ref{fig:boatshape-posterior-normal}).}
+\label{fig:boatshape-posterior-mik}
+\end{figure}
+
+We have as yet no appealing formal description for the role of the parameters $a$ and $b$. %that,
+%togeher with $\ezl$ and $\ezu$, define the boat-set (see Section~\ref{sec:basicdefboat} below).
+Informally, $a$ determines the half-width of the set;
+the width, i.e., the size in the $\eta_1$ dimension, would be $a$ if $\ezu \to \infty$.
+$b$ instead determines the `bulkyness' of the shape.
+Together with $\ezl$, $a$ and $b$ determine the prior interval for the expected success probability $[\yzl, \yzu]$.
+Increasing each of $\ezl$, $a$ and $b$ while keeping the other two fixed leads to a wider prior interval $[\yzl, \yzu]$.%
+%For fixed $\ezl$ and $a$, increasing $b$ leads to a wider prior expectation interval.
+%For $[\yzl, \yzu]$, the choice of $\ezu$ is irrelevant.%
+$\ezu$ plays only a role in determining when the `unhappy learning' phase starts
+(see end of Section~\ref{sec:generalupdate}).
+\begin{figure}  %trim=l b r t
+\centering
+%\fbox{%
+%\includegraphics[trim = 15mm 45mm 25mm 60mm, clip, width=\textwidth]{R/boatshape-posterior-normal}%
+\includegraphics[width=\textwidth]{R/boatshape-posterior-normal}%
+%}
+\caption[Boatshape prior and posterior sets from Figure~\ref{fig:boatshape-posterior-mik} in the $(\nz,\yz)$ parametrisation.]%
+{Boatshape prior and posterior sets from Figure~\ref{fig:boatshape-posterior-mik} in the $(\nz,\yz)$ parametrisation.
+Note that in the strong prior-data agreement case,
+posterior sets based on a rectangular prior set with the same prior main parameter imprecision
+would be larger than the ones depicted here, illustrating the extra gain in precision.}
+\label{fig:boatshape-posterior-normal}
+\end{figure}
+
+
+
+%\footnote{We will treat $s$ as a a real-valued observation in $[0,n]$
+%because the continuous representation is convenient for our discussions,
+%keeping in mind that in reality it can only take integer values.}
 
 \section{Discussion and Concluding Remarks}
 \label{sec:concluding}

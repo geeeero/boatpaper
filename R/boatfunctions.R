@@ -113,7 +113,7 @@ normaltomik <- function(xylist){
 # plot the transformed set in "normal world"
 normalplotter <- function(boatobj, prior = TRUE, xlims = NULL, ylims = c(0,1), minmax = FALSE,
                           xlabs = bquote(n^(0)), ylabs = bquote(y^(0)), seqx = 100,
-                          fillcol = "gray", add = FALSE, col = 1, ...){
+                          fillcol = "gray", add = FALSE, col = 1, addluck = FALSE, ...){
   if(!prior) {
     data <- boatobj$data
     if(is.null(data$tau) | is.null(data$n)) stop(paste("No data specified in ", quote(boatobj)))
@@ -134,10 +134,24 @@ normalplotter <- function(boatobj, prior = TRUE, xlims = NULL, ylims = c(0,1), m
       lines(ax, rep(i, seqx), col = "grey")
   }
   polygon(c(upper$x, lower$x), c(upper$y, lower$y), col = fillcol, border = col, ...)
+  nymm <- nyminmax(lower=lower, upper=upper, ...)
   if(minmax){
-    nymm <- nyminmax(lower=lower, upper=upper, ...)
     points(nymm$ymin, cex = 1.5)
     points(nymm$ymax, cex = 1.5)
+  }
+  if(addluck){
+    if(prior){
+      luck1 <- LuckModel(n0=boatobj$xp+2, y0=c(nymm$ymin$y, nymm$ymax$y))
+    } else {
+      uppermik2 <- boatfu(boatobj = boatobj, wh =  1, xlen = seqx, fw = TRUE,  prior = TRUE)
+      lowermik2 <- boatfu(boatobj = boatobj, wh = -1, xlen = seqx, fw = FALSE, prior = TRUE)
+      upper2 <- miktonormal(uppermik2)
+      lower2 <- miktonormal(lowermik2)
+      nymm2 <- nyminmax(lower=lower2, upper=upper2, ...)
+      luck1 <- LuckModel(n0=boatobj$xp+2, y0=c(nymm2$ymin$y, nymm2$ymax$y))
+      data(luck1) <- boatobj$data
+    }
+    plot(luck1, control=controlList(posterior=!prior, polygonCol=NA, annotate=FALSE), add = TRUE, lty = 2)
   }
 }
 
