@@ -48,7 +48,7 @@ dev.off()
 # in Mik's world
 postscript("boatshape-posterior-mik.eps", width=8, height=4)
 par(mar=c(4,4,0,0)+0.1)
-boat1 <- list(xp = c(1,6), a = 1.5, b = 0.8, yc = 0.5, data = list(tau = 8, n = 8))
+boat1 <- list(xp = c(1,6), a = 1.5, b = 0.9, yc = 0.5, data = list(tau = 8, n = 8))
 boatplotter(boat1, prior=F, xlims=c(0,23), ylims=c(-5,10))
 text(x=12, y=4, labels=bquote(paste("s = ", .(boat1$data$tau), ", n = ", .(boat1$data$n), sep="" )), cex=0.8)
 boatplotter(boat1, add=T)
@@ -65,7 +65,7 @@ dev.off()
 
 # in normal world
 postscript("boatshape-posterior-normal.eps", width=8, height=4)
-boat1 <- list(xp = c(1,6), a = 1.5, b = 0.8, yc = 0.5, data = list(tau = 8, n = 8))
+boat1 <- list(xp = c(1,6), a = 1.5, b = 0.9, yc = 0.5, data = list(tau = 8, n = 8))
 par(mar=c(4,4.5,0,0)+0.1)
 normalplotter(boat1, prior=F, xlims=c(2,25), addluck=T)
 text(x=14, y=0.8, labels=bquote(paste("s = ", .(boat1$data$tau), ", n = ", .(boat1$data$n), sep="" )), cex=0.8)

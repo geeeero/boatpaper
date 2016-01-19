@@ -795,8 +795,8 @@ the posterior sets for $\frac{s}{n}=1$ are shifted away from the ray for $y_c=0.
 resulting in increased posterior imprecision.
 Note that lower and upper touchpoints are in the middle of the contour
 for the prior set and the posterior set resulting for data $\frac{s}{n}=\frac{4}{8}$,
-while at least one touchpoint is at the end for all other sets.
-(See also Figure~\ref{fig:boatshape-posterior-normal}).}
+while at least one touchpoint is at the end for all other sets.}
+%(See also Figure~\ref{fig:boatshape-posterior-normal}).}
 \label{fig:boatshape-posterior-mik}
 \end{figure}
 
@@ -806,7 +806,7 @@ Informally, $a$ determines the half-width of the set;
 the width, i.e., the size in the $\eta_1$ dimension, would be $a$ if $\ezu \to \infty$.
 $b$ instead determines the `bulkyness' of the shape.
 Together with $\ezl$, $a$ and $b$ determine the prior interval for the expected success probability $[\yzl, \yzu]$.
-Increasing each of $\ezl$, $a$ and $b$ while keeping the other two fixed leads to a wider prior interval $[\yzl, \yzu]$.%
+Increasing each of $\ezl$, $a$ and $b$ while keeping the other two fixed leads to a wider prior interval $[\yzl, \yzu]$.
 %For fixed $\ezl$ and $a$, increasing $b$ leads to a wider prior expectation interval.
 %For $[\yzl, \yzu]$, the choice of $\ezu$ is irrelevant.%
 $\ezu$ plays only a role in determining when the `unhappy learning' phase starts
@@ -819,12 +819,39 @@ $\ezu$ plays only a role in determining when the `unhappy learning' phase starts
 %}
 \caption[Boatshape prior and posterior sets from Figure~\ref{fig:boatshape-posterior-mik} in the $(\nz,\yz)$ parametrisation.]%
 {Boatshape prior and posterior sets from Figure~\ref{fig:boatshape-posterior-mik} in the $(\nz,\yz)$ parametrisation.
-Note that in the strong prior-data agreement case,
-posterior sets based on a rectangular prior set with the same prior main parameter imprecision
-would be larger than the ones depicted here, illustrating the extra gain in precision.}
+The rectangular prior set with the same prior range for $\yz$ as the prior boatshape set
+and the corresponding posterior sets are shown as dashed lines. 
+Note that posterior boatshape sets are generally smaller than posterior rectangle sets.}
 \label{fig:boatshape-posterior-normal}
 \end{figure}
 
+We see from the prior set in Figure~\ref{fig:boatshape-posterior-normal}
+that the lower and the upper bound for $\yz$
+is attained in the middle of the set contour.
+To determine $\yzl$ and $\yzu$, we thus need to find the corresponding
+touchpoints $(\eta_0^l,\czl(\eta_0^l))$ and $(\eta_0^u,\czu(\eta_0^u))$.
+This can be done by identifying the rays of constant expectation \eqref{eq:raysofconstantexpectation}
+that are tangents to $\EZ$ and then solve for $\eta_0$.
+With $\EZ$ being symmetric to the $\eta_0$ axis, we have $\eta_0^u = \eta_0^l$,
+we will determine $\eta_0^u$ only by considering the upper contour tangent.
+We get
+\begin{align}
+a - a \big(1 + b(\eta_0^u + 2)\big) e^{-b(\eta_0^u - \ezl)} &\stackrel{!}{=} 0
+& &\Longleftrightarrow &
+1 + b(\eta_0^u + 2) &\stackrel{!}{=} e^{b(\eta_0^u - \ezl)}\,.
+\label{eq:eta0u}
+\end{align}
+This equation has only one solution for $\eta_0^u > \ezl$
+that is, however, not available in closed form.
+Generally, the nearer $\eta_0^u$ is to $\ezl$, the larger $\frac{d}{d\eta_0} \czu(\eta_0^u)$,
+such that $\yzu$ %the upper expected value for the prior set
+is further away from $\frac{1}{2}$.
+Here, this means that the larger $\eta_0^u$, the more imprecise the prior parameter set.
+
+\subsection{Strong Prior-Data Agreement Property}
+\label{sec:spda-property}
+
+Nevertheless
 
 
 %\footnote{We will treat $s$ as a a real-valued observation in $[0,n]$
