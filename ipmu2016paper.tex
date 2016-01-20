@@ -703,8 +703,8 @@ When shifted along its ray of constant expectation,
 imprecision will be reduced as the shadow of the set will become smaller just as described above for line segments.
 When such a shape is instead shifted away from its ray of constant expectation,
 imprecision will increase, as a prolonged shape that is now turned away from its ray 
-will cast a larger shadow.%
-\footnote{This will become clear from the depiction of boatshape sets in Figure~\ref{fig:boatshape-posterior-mik}.} 
+will cast a larger shadow (see Figure~\ref{fig:boatshape-posterior-mik} below).%
+%\footnote{This will become clear from the depiction of boatshape sets in Figure~\ref{fig:boatshape-posterior-mik}.} 
 %A set $\EZ$ allowing for more precison in case of strong prior-data agreement
 %must thus be able to cast a smaller shadow if the update shift is along the direction of its ray.
 %of $s/n$ according the information,
@@ -762,7 +762,7 @@ The lower and the upper contour $\czl(\eta_0)$ and $\czu(\eta_0)$ are defined as
 \czu(\eta_0) &=  a \left( 1 - e^{-b(\eta_0 - \ezl)} \right)\,, 
 \label{eq:basiccontours}
 \end{align}
-where $a$ and $b$ are parameters controlling the shape of $\EZ$.
+where $a > 0$ and $b > 0$ are parameters controlling the shape of $\EZ$.
 %We will also need the respective derivations with respect to $\eta_0$, given by
 %\begin{align*}
 %\frac{d}{d\eta_0} \czl(\eta_0) &= -ab e^{-b(\eta_0 - \ezl)}\,, \\
@@ -887,16 +887,147 @@ The equation to identify the posterior upper touchpoint is then
 \label{eq:eta0uposterior}
 \end{align}
 We compare now \eqref{eq:eta0uposterior} to \eqref{eq:eta0uprior} and conclude
-that indeed ${\eta_0^u}\un > {\eta_0^u}\uz + n$:
+that indeed ${\eta_0^u}\un > {\eta_0^u}\uz + n$.
 
+The left hand side of both \eqref{eq:eta0uprior} and \eqref{eq:eta0uposterior}
+gives the identical linear function with slope $b$ and intercept $1+2b$. %of ${\eta_0^u}\uz$ or ${\eta_0^u}\un$, respectively.
+The exponential funcion on the right hand side of \eqref{eq:eta0uposterior} is instead the function 
+on the right hand side of \eqref{eq:eta0uprior} shifted to the right by $n$.
+We can picture this situation as in Figure~\ref{fig:spda1}:
+${\eta_0^u}\uz$ is identified by the intersection of the linear function with the left,
+non-shifted exponential function,
+whereas ${\eta_0^u}\un$ is at the intersection of the linear fuction with the right,
+shifted exponential function.
+Since $b > 0$, ${\eta_0^u}\un$ is necessarily larger than ${\eta_0^u}\uz + n$.
+\begin{figure}  %trim=l b r t
+\centering
+\fbox{
+%\includegraphics[trim = 48mm 35mm 49mm 47mm, clip, width=0.8\textwidth]{R/prior-vs-posterior-eta0u.eps}%
+\includegraphics[trim = 1mm 5mm 10mm 20mm, clip, width=0.8\textwidth]{R/prior-vs-posterior-eta0u.eps}%
+}
+\caption{Illustration for the argument that ${\eta_0^u}\un > {\eta_0^u}\uz + n$.}
+\label{fig:spda1}
+\end{figure}
 
-%\footnote{We will treat $s$ as a a real-valued observation in $[0,n]$
-%because the continuous representation is convenient for our discussions,
-%keeping in mind that in reality it can only take integer values.}
+We can also conclude that the larger $b$, the steeper the linear function
+and thus the larger the distance of ${\eta_0^u}\un$ to ${\eta_0^u}\uz + n$,
+that is, the stronger the prior-data agreement effect of the shape.
+%Can see this also from normalworld***: a bulkyer the shape has more ueberhang
+%which gets reduced by updating as it is located towards the left side of the set***
+
+%\subsection{Touchpoints for Update with \texorpdfstring{$s > \frac{n}{2}$}{s > n/2}}
+\subsection{Touchpoints for Arbitrary Update}
+\label{sec:generalupdate}
+
+Let us now consider the update of the basic boatshape \eqref{eq:basicset} %symmetric around the $\eta_0$ axis,
+in the general case $s \neq \frac{n}{2}$,
+investigating the effect that different values of $s$ for fixed $n$ have
+on ${\eta_0^l}\un$ and ${\eta_0^u}\un$, %and in turn on $\ynl$ and $\ynu$.%
+considering ${\eta_0^l}\un$ and ${\eta_0^u}\un$ as functions of s.%
+\footnote{We will treat $s$ as a a real-valued observation in $[0,n]$
+because the continuous representation is convenient for our discussions,
+keeping in mind that in reality it can only take integer values.}
+For $s \neq \frac{n}{2}$, $\EN$ is not symmetric to the $\ez$ axis,
+and we have to derive the touchpoints ${\eta_0^l}\un$ and ${\eta_0^u}\un$ separately.
+%
+The upper and lower contours for $\EN$ are
+\begin{align*}
+\ol{c}\un(\eta_0)                   &= s - \frac{n}{2} + a - a e^{-b(\eta_0 - n - \ezl)} \,, &
+%\frac{d}{d\eta_0} \ol{c}(\eta_0) &=                      ab e^{-b(\eta_0 - n - \ezl)} \,,\\
+\ul{c}\un(\eta_0)                   &= s - \frac{n}{2} - a + a e^{-b(\eta_0 - n - \ezl)} \,,
+%\frac{d}{d\eta_0} \ul{c}(\eta_0) &=                     -ab e^{-b(\eta_0 - n - \ezl)} \,.
+\end{align*}
+leading to
+\begin{align}
+%s - \frac{n}{2} + a - a \big(1 + b(\eta_0^u + 2)\big) e^{-b(\eta_0^u - n - \ezl)} &\stackrel{!}{=} 0 \nonumber\\
+\label{eq:eta0u-general}
+\frac{a}{s - \frac{n}{2} + a} \big(1 + b({\eta_0^u}\un + 2)\big) &\stackrel{!}{=} e^{b({\eta_0^u}\un - n - \ezl)} \,,\\
+\label{eq:eta0l-general}
+\frac{a}{\frac{n}{2} -s  + a} \big(1 + b({\eta_0^l}\un + 2)\big) &\stackrel{!}{=} e^{b({\eta_0^l}\un - n - \ezl)} \,.
+\end{align}
+We see thus that the graph from Figure~\ref{fig:spda1} holds here as well,
+except that the linear function on the left hand side of 
+\eqref{eq:eta0u-general} and \eqref{eq:eta0l-general} is changed in slope and intercept by a factor.
+(Equivalently, we can consider it to be rotated around the root $-2-\frac{1}{b}$.)
+For $s=\frac{n}{2}$, this factor is 1 for both \eqref{eq:eta0u-general} and \eqref{eq:eta0l-general},
+reducing to \eqref{eq:eta0uposterior}.
+Due to symmetry of the prior set, we will, without loss of generality,
+consider only the case $s > \frac{n}{2}$.
+
+%\paragraph{Description of ${\eta_0^u}\un$.}
+
+The factor $\frac{a}{s - \frac{n}{2} + a}$
+in \eqref{eq:eta0u-general} is thus smaller than $1$ and decreasing in $s$.
+The larger $s$, the smaller the factor, the most extreme case being $s=n$,
+where the factor is $\frac{a}{\frac{n}{2} + a}$.
+As the linear function's slope will be less steep (the intercept is lowered as well),
+%\footnote{The common root of the linear functions for any $s$ is at $\eta_0 = -2 -\frac{1}{b}$.}
+the intersection with the exponential function moves to the left,
+i.e.\ ${\eta_0^u}\un(s) < {\eta_0^u}\un(\frac{n}{2})$ for $\frac{n}{2} < s < n$.
+This means that $\ynu(s) > \ynu(\frac{n}{2})$.
+However, ${\eta_0^u}\un(s)$ can decrease only to $\ezl+n$:
+When ${\eta_0^u}\un(s)$ reaches the left end of $\EN$ at $\ezl+n$,
+the gradual increase of $\ynu$ through the changing tangent slope 
+%for $\ezl+n \le \eta_0^u(s) \le \eta_0^u(\frac{n}{2})$ 
+is replaced by a different change mechanism,
+where increase of $\ynu$ is solely due to the shift of $\EN$ in the $\eta_1$ coordinate.
+Due to \eqref{eq:trafotony}, $\ynu$ is then linear in $s$.
+
+%\paragraph{Description of ${\eta_0^l}\un$.}
+
+In \eqref{eq:eta0l-general}, the factor to the linear function is $\frac{a}{\frac{n}{2} - s + a}$.
+Here, we have to distinguish the two cases $\frac{n}{2} \le s < \frac{n}{2} + a$
+and $s \ge \frac{n}{2} + a$.
+In the first case, the factor is larger than $1$ and increasing in $s$.
+Therefore, the intersection of the linear function with the exponential function
+will move to the right, such that ${\eta_0^l}\un(s)$ becomes larger, and $\ynl$ increases.
+In the second case, the factor is undefined (for $s = \frac{n}{2} + a$)
+or negative (for $s > \frac{n}{2} + a$).
+Either way, there will be no intersection of the linear function with the exponential function
+for any $\eta_0 > \ezl + n$, and for $s \downarrow \frac{n}{2} + a$, the slope $\to \infty$.
+In fact, for $s \ge \frac{n}{2} + a$, the whole set is above the $\eta_0$ axis,
+and the touchpoint must be thus at $\ezu + n$.
+Actually, ${\eta_0^l}\un(s) = \ezu + n$ already for some $\frac{n}{2} \le s < \frac{n}{2} + a$,
+when the intersection point reaches $\ezu + n$.
+At this point, gradual increase of $\ynl$ resulting from the movement of ${\eta_0^l}\un(s)$ along the set
+towards the right is replaced by a linear increase in $s$.
+Again, this linear increase is due to the $\eta_1$ coordinate being incremented
+according to \eqref{eq:eta-update},
+and from \eqref{eq:trafotony} we see that $\ynl$ is linear in $\eta_1$.
+
+To summarize, for $s > \frac{n}{2}$, both $\ynu$ and $\ynl$ will at first increase gradually with $s$,
+as ${\eta_0^u}\un$ moves to the left, and ${\eta_0^l}\un$ moves to the right.
+We will call such updating of the prior parameter set
+where both lower and upper posterior touchpoint are in the middle of the set as \emph{happy learning}.
+%
+At some $s^u$, ${\eta_0^u}\un$ will reach $\ezl + n$,
+and at some $s^l$, ${\eta_0^l}\un$ will reach $\ezu + n$.
+Whether $s^l < s^u$ or vice versa depends on
+the choice of parameters $\ezl, \ezu, a$ and $b$.
+When $s$ is larger than either of $s^l$ or $s^u$,
+we have \emph{unhappy learning},
+where data $s$ is very much out of line with our prior expectations as expressed by $\EZ$.
+Ultimately, when $s > s^u$ and $s > s^l$,
+both $\ynu$ and $\ynl$ will increase linearly in $s$, but with different slopes.
+$\ynu$ will increase with slope $\frac{1}{\ezl + n + 2}$,
+whereas $\ynl$ will increase with the lower slope $\frac{1}{\ezu + n + 2}$.
+
+***PPPlots
+
+***discuss $y_c \neq 0.5$
+
 
 \section{Discussion and Concluding Remarks}
 \label{sec:concluding}
 
+***it's worth to study more shapes to cater for other objectives in inference behaviour
+
+***more detailed study in elicitation of the boatshape set parameters necessary,
+which should be done by pre-posterior analysis
+
+***with the boatshape, we have a more flexible model for prior information
+while remaining within the generalized Bayesian paradigm,
+opening up a wide field for research
 
 % ------------ bibliography -------------
 
