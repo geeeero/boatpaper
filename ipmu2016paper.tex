@@ -141,6 +141,9 @@
 \def\czl{\ul{c}\uz}
 \def\czu{\ol{c}\uz}
 
+\def\cnl{\ul{c}\un}
+\def\cnu{\ol{c}\un}
+
 \newcommand{\cdf}{\operatorname{F}}
 \newcommand{\p}{\operatorname{P}}
 \newcommand{\q}{\operatorname{Q}}
@@ -638,7 +641,7 @@ on rays emanating from the coordinate $(-2,0)$,
 i.e., coordinates satifying
 \begin{align}
 \label{eq:raysofconstantexpectation}
-\eta_1 = f(\eta_0) &= (\eta_0 + 2)(y_c - 1/2) 
+\eta_1 &= (\eta_0 + 2)(y_c - 1/2) 
 \end{align}
 will have a constant expectation of $y_c$.
 The domain $\Eta$, and these \emph{rays of constant expectation} emanating from the coordinate $(-2,0)$,
@@ -663,16 +666,16 @@ In terms of the $(\nz, \yz)$ parametrization, we will denote the bounds of this 
 \ynl &:= \min_{(\ezn,\eon) \in \EN} \frac{\eon}{\ezn+2} + \frac{1}{2}\,, &
 \ynu &:= \max_{(\ezn,\eon) \in \EN} \frac{\eon}{\ezn+2} + \frac{1}{2}\,.
 \end{align*}
-We call the coordinates $\arg\min_{(\eta_0,\eta_1) \in \EN} \yn$ and $\arg\max_{(\eta_0,\eta_1) \in \EN} \yn$
-the \emph{lower} and \emph{upper touchpoints} of $\EN$ responsible for the shadow $[\ynl, \ynu]$.
+We call the $\ez$ coordinate of $\arg\min_{(\eta_0,\eta_1) \in \EN} \yn$ and $\arg\max_{(\eta_0,\eta_1) \in \EN} \yn$
+the \emph{lower} and \emph{upper touchpoint} of $\EN$ responsible for the shadow $[\ynl, \ynu]$.
 Mutatis mutandis, the same definitions can be made for the prior set $\EZ$.
 
 Due to the fanning out of rays, most shapes for $\EZ$ will lead to decreasing imprecision for increasing $n$.
 Indeed, models with $\PZ = \nz \times [\yzl, \yzu]$
-are represented here again by a line segment $\EZ = \ezz \times [\eozl,\eozu]$,
-such that the posterior touchpoints are, for any $s$ and $n$, $(\ezn,\eonl)$ and $(\ezz,\eonu)$,
-where $\eonl$ and $\eonu$ are the updated versions of $\eozl$ and $\eozu$, respectively.
-Due to \eqref{eq:eta-update}, it holds that $\eonu-\eonl = \eozu-\eozl$;
+are represented here again by a line segment $\EZ = \ezz \times [\eozl,\eozu]$.
+%such that the lower and upper posterior touchpoint is at $\ezn$, for any $s$ and $n$.
+Defining $\eonl$ and $\eonu$ as the updated versions of $\eozl$ and $\eozu$, respectively,
+we see that $\eonu-\eonl = \eozu-\eozl$;
 therefore, imprecision decreases here because a line segment of fixed size
 will cast a smaller shadow when further to the right,
 as illustrated in Figure~\ref{fig:boatshape-vertical}.
@@ -699,11 +702,11 @@ will behave here similar to the rectangular shapes of Section~\ref{sec:setsofbet
 When shifted along its ray of constant expectation,
 imprecision will be reduced as the shadow of the set will become smaller just as described above for line segments.
 When such a shape is instead shifted away from its ray of constant expectation,
-imprecision will be increased, as a prolonged shape that is now turned away from its ray 
+imprecision will increase, as a prolonged shape that is now turned away from its ray 
 will cast a larger shadow.%
 \footnote{This will become clear from the depiction of boatshape sets in Figure~\ref{fig:boatshape-posterior-mik}.} 
-A set $\EZ$ allowing for more precison in case of strong prior-data agreement
-must thus be able to cast a smaller shadow if the update shift is along the direction of its ray.
+%A set $\EZ$ allowing for more precison in case of strong prior-data agreement
+%must thus be able to cast a smaller shadow if the update shift is along the direction of its ray.
 %of $s/n$ according the information,
 
 
@@ -713,8 +716,8 @@ must thus be able to cast a smaller shadow if the update shift is along the dire
 The shape for $\EZ$ that we suggest to obtain both \pdc\ sensitivity and increased precision
 in case of strong prior-data agreement looks like a bullett, or like a boat with a transom stern
 (see, e.g., Figure~\ref{fig:boatshape-posterior-mik} below), hence its name.
-It is curved along its length in the direction of its constant rays of expectation,
-this leads to smaller $\Delta_y(\PN)$ as compared to a rectangular $\PZ$ with the same prior range $\Delta_y(\PZ)$,
+The curvature along its length in the direction of its constant rays of expectation
+leads to smaller $\Delta_y(\PN)$ as compared to a rectangular $\PZ$ with the same prior range $\Delta_y(\PZ)$,
 as illustrated in Figure~\ref{fig:boatshape-posterior-normal}.
 
 The strong prior-data agreement effect is realized
@@ -732,7 +735,7 @@ taken as a posterior inference reflecting uncertainty due to both vague prior kn
 In the remainder of this section, 
 we will suggest a parametrisation for a curved shape in the $(\eta_0, \eta_1)$ space.
 The definition, along with some graphical examples, is given in Section~\ref{sec:basicdefboat},
-and we discuss a number of technical results for this shape in subsequent Sections.
+and we discuss a number of technical results for this shape in subsequent sections.
 %Sections~\ref{sec:touchpoints} -- \ref{sec:generalupdate}.
 
 
@@ -754,10 +757,11 @@ The lower and the upper contour $\czl(\eta_0)$ and $\czu(\eta_0)$ are defined as
 %\czu(\eta_0) &= \phantom{-}%
 %                 a \left( 1 - e^{-b(\eta_0 - \ezl)} \right)\,, 
 %\end{align*}
-\begin{align*}
+\begin{align}
 \czl(\eta_0) &= -a \left( 1 - e^{-b(\eta_0 - \ezl)} \right)\,, &
 \czu(\eta_0) &=  a \left( 1 - e^{-b(\eta_0 - \ezl)} \right)\,, 
-\end{align*}
+\label{eq:basiccontours}
+\end{align}
 where $a$ and $b$ are parameters controlling the shape of $\EZ$.
 %We will also need the respective derivations with respect to $\eta_0$, given by
 %\begin{align*}
@@ -771,7 +775,7 @@ Given parameters $\ezl$, $\ezu$, $a$, and $b$, $\EZ$ is thus defined as
 \EZ =
 \{(\eta_0,\eta_1) \colon \ezl \le \eta_0 \le \ezu, \czl(\eta_0) \le  \eta_1 \le \czu(\eta_0) \}\,.
 \end{align}
-A prior boatshape set with $\ezl=1$, $\ezu=6$, $a=2$, and $b=0.8$,
+A prior boatshape set with $\ezl=1$, $\ezu=6$, $a=1.5$, and $b=0.9$,
 together with corresponding posterior sets for different observations,
 is depicted in Figure~\ref{fig:boatshape-posterior-mik}.
 The same prior and posterior sets in terms of $(\nz, \yz)$ are depicted in Fig.~\ref{fig:boatshape-posterior-normal}.
@@ -794,7 +798,7 @@ The same prior and posterior sets in terms of $(\nz, \yz)$ are depicted in Fig.~
 %}
 \caption[Boatshape prior and posterior sets for data in accordance and in conflict with the prior set.]%
 {Boatshape prior and posterior sets for data in accordance and in conflict with the prior set.
-The parameters for the prior set are $\ezl=1$, $\ezu=6$, $a=2$, and $b=0.8$.
+The parameters for the prior set are $\ezl=1$, $\ezu=6$, $a=1.5$, and $b=0.9$.
 While the posterior sets for $\frac{s}{n}=0.5$ move along the ray for $y_c=0.5$,
 the posterior sets for $\frac{s}{n}=1$ are shifted away from the ray for $y_c=0.5$,
 resulting in increased posterior imprecision.
@@ -824,9 +828,9 @@ $\ezu$ plays only a role in determining when the `unhappy learning' phase starts
 %}
 \caption[Boatshape prior and posterior sets from Figure~\ref{fig:boatshape-posterior-mik} in the $(\nz,\yz)$ parametrisation.]%
 {Boatshape prior and posterior sets from Figure~\ref{fig:boatshape-posterior-mik} in the $(\nz,\yz)$ parametrisation.
-The rectangular prior set with the same prior range for $\yz$ as the prior boatshape set
-and the corresponding posterior sets are shown as dashed lines. 
-Note that posterior boatshape sets are generally smaller than posterior rectangle sets.}
+The rectangular prior set with the same range for $\yz$ as the prior boatshape set
+and the corresponding posterior sets are drawn with dashed lines. 
+Note that all posterior boatshape sets have shorter $\yn$ ranges than their corresponding posterior rectangle sets.}
 \label{fig:boatshape-posterior-normal}
 \end{figure}
 
@@ -834,41 +838,56 @@ We see from the prior set in Figure~\ref{fig:boatshape-posterior-normal}
 that the lower and the upper bound for $\yz$
 is attained in the middle of the set contour.
 To determine $\yzl$ and $\yzu$, we thus need to find the corresponding
-touchpoints $(\eta_0^l,\czl(\eta_0^l))$ and $(\eta_0^u,\czu(\eta_0^u))$.
+touchpoints ${\eta_0^l}\uz$ and ${\eta_0^u}\uz$.
 This can be done by identifying the rays of constant expectation \eqref{eq:raysofconstantexpectation}
-that are tangents to $\EZ$ and then solve for $\eta_0$.
-With $\EZ$ being symmetric to the $\eta_0$ axis, we have $\eta_0^u = \eta_0^l$,
-we will determine $\eta_0^u$ only by considering the upper contour tangent.
+that are tangents to $\EZ$ and then solving for $\eta_0$.
+With $\EZ$ being symmetric to the $\eta_0$ axis, we have ${\eta_0^u}\uz = {\eta_0^l}\uz$,
+so we will determine ${\eta_0^u}\uz$ only by considering the upper contour tangent.
 We get
 \begin{align}
 %a - a \big(1 + b(\eta_0^u + 2)\big) e^{-b(\eta_0^u - \ezl)} &\stackrel{!}{=} 0
 %& &\Longleftrightarrow &
-1 + b(\eta_0^u + 2) &\stackrel{!}{=} e^{b(\eta_0^u - \ezl)}\,.
-\label{eq:eta0u}
+1 + b({\eta_0^u}\uz + 2) &\stackrel{!}{=} e^{b({\eta_0^u}\uz - \ezl)}\,.
+\label{eq:eta0uprior}
 \end{align}
-This equation has only one solution for $\eta_0^u > \ezl$
+This equation has only one solution for ${\eta_0^u}\uz > \ezl$
 that is, however, not available in closed form.
-Generally, the nearer $\eta_0^u$ is to $\ezl$, the larger $\frac{d}{d\eta_0} \czu(\eta_0^u)$,
+Generally, the nearer ${\eta_0^u}\uz$ is to $\ezl$, the larger $\frac{d}{d\eta_0} \czu({\eta_0^u}\uz)$,
 such that $\yzu$ %the upper expected value for the prior set
 is further away from $\frac{1}{2}$.
-Here, this means that the larger $\eta_0^u$, the more imprecise the prior parameter set.
+This means that, for fixed $\ezl$, the smaller ${\eta_0^u}\uz$, the more imprecise the prior parameter set.
 
 
 \subsection{Strong Prior-Data Agreement Property}
 \label{sec:spda-property}
 
 We will now derive the essential property that sets \eqref{eq:basicset}
-will lead to especially precise inferences when data are strongly supporting prior information
-since the touchpoint moves further to the right when updating with strong-agreement data.
+will lead to especially precise inferences when data are strongly supporting prior information,
+since the touchpoint moves further to the right in that case. %when updating with strong-agreement data.
 The basic shape is symmetric around the $\ez$ axis ($\EZ$ has central ray $y_c = 0.5$),
 and update with strong-agreement data $s/n = 0.5$ means that $\EZ$ is shifted along the $\ez$ axis by $n$,
 such that also $\EN$ is symmetric around the $\ez$ axis.
 We thus need to consider only one of the two touchpoints.
-With the upper prior touchpoint being at $\ez$ coordinate ${\eta_0^u}\uz$,
-the touchpoint movement to the right means that the upper posterior touchpoint $\ez$ coordinate ${\eta_0^u}\un$
-is larger than the updated prior touchpoint coordinate,
+With the upper prior touchpoint being at ${\eta_0^u}\uz$,
+the touchpoint movement to the right means that the upper posterior touchpoint ${\eta_0^u}\un$
+is larger than the updated prior touchpoint,
 so we need to show that ${\eta_0^u}\un > {\eta_0^u}\uz + n$.
 
+The upper contour for the posterior boatshape,
+updated with $s = \frac{n}{2}$, %has its `prow' now at $(\ezl + n, 0)$,
+is $\czu$ from \eqref{eq:basiccontours} shifted to the right by $n$,
+\begin{align*}
+\cnu(\eta_0) &= a \left( 1 - e^{-b(\eta_0 - n -\ezl)} \right)\,.
+%\frac{d}{d\eta_0} \ol{c}(\eta_0) &= ab e^{-b(\eta_0 - n - \ezl)} \,.
+\end{align*}
+The equation to identify the posterior upper touchpoint is then
+\begin{align}
+%a - a \big(1 + b({\eta_0^u}\un + 2)\big) e^{-b({\eta_0^u}\un - n - \ezl)} &\stackrel{!}{=} 0 \nonumber\\
+1 + b({\eta_0^u}\un + 2) &\stackrel{!}{=} e^{b({\eta_0^u}\un - n - \ezl)} \,.
+\label{eq:eta0uposterior}
+\end{align}
+We compare now \eqref{eq:eta0uposterior} to \eqref{eq:eta0uprior} and conclude
+that indeed ${\eta_0^u}\un > {\eta_0^u}\uz + n$:
 
 
 %\footnote{We will treat $s$ as a a real-valued observation in $[0,n]$
