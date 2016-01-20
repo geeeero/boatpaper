@@ -114,6 +114,9 @@
 \def\EZ{\mathrm{H}\uz}
 \def\EN{\mathrm{H}\un}
 
+\newcommand{\ez}{\eta_0}
+\newcommand{\eo}{\eta_1}
+
 \def\ezl{\ul{\eta}_0}
 \def\ezu{\ol{\eta}_0}
 
@@ -714,21 +717,23 @@ It is curved along its length in the direction of its constant rays of expectati
 this leads to smaller $\Delta_y(\PN)$ as compared to a rectangular $\PZ$ with the same prior range $\Delta_y(\PZ)$,
 as illustrated in Figure~\ref{fig:boatshape-posterior-normal}.
 
-The strong prior-data agreement effect is further enhanced
-due to the touchpoints determining $\ynl$ and $\ynu$
-being attained at higher values of $\eta_0$ for larger $n$,
-as will be demonstrated in Section~\ref{***}.
+The strong prior-data agreement effect is realized
+through the touchpoints determining $\ynl$ and $\ynu$
+moving along the shape during updating,
+%being attained at higher values of $\eta_0$ for larger $n$,
+as will be demonstrated in Section~\ref{sec:spda-property}.
 This is advantageous when considering that the spread of the Beta posteriors is determined by $\eta_0 = \nz - 2$.
 In case of strong prior-data agreement, variances in the `critical' distributions
-at the boundary of the posterior expectation interval $[\ynl,\ynu]$ will be lower.
-As an example, credible intervals for these `critical' distributions will be shorter, 
-such that also unions of credible intervals,
+at the boundary of the posterior expectation interval $[\ynl,\ynu]$ will thus be lower.
+In particular, credible intervals for these `critical' distributions will be shorter, 
+such that the union of all credible intervals for Beta distributions with $(\ezn, \eon) \in \EN$,
 taken as a posterior inference reflecting uncertainty due to both vague prior knowledge and stochasticity, will be shorter.
 
 In the remainder of this section, 
 we will suggest a parametrisation for a curved shape in the $(\eta_0, \eta_1)$ space.
 The definition, along with some graphical examples, is given in Section~\ref{sec:basicdefboat},
-and we discuss a number of technical results for this shape in Sections~\ref{sec:touchpoints} -- \ref{sec:generalupdate}.
+and we discuss a number of technical results for this shape in subsequent Sections.
+%Sections~\ref{sec:touchpoints} -- \ref{sec:generalupdate}.
 
 
 \subsection{Basic Definition}
@@ -739,7 +744,7 @@ To keep things simple, we will consider at first only prior sets
 that are symmetric around the $\eta_0$ axis, i.e., centered around $y_c = 0.5$,
 expressing the prior information that we deem a fraction of successes of $\frac{s}{n} = \frac{1}{2}$
 as the most probable. Sets $\EZ$ with central ray $y_c \neq 0.5$
-will be discussed in Section~\ref{sec:boatshape-outlook}.****
+will be discussed in Section~\ref{}.****
 
 For the contours of $\EZ$, we suggest an exponential function as the functional form,
 where the `prow' of the set is located at $(\ezl, 0)$.
@@ -794,8 +799,8 @@ While the posterior sets for $\frac{s}{n}=0.5$ move along the ray for $y_c=0.5$,
 the posterior sets for $\frac{s}{n}=1$ are shifted away from the ray for $y_c=0.5$,
 resulting in increased posterior imprecision.
 Note that lower and upper touchpoints are in the middle of the contour
-for the prior set and the posterior set resulting for data $\frac{s}{n}=\frac{4}{8}$,
-while at least one touchpoint is at the end for all other sets.}
+for the prior set and the posterior sets resulting for data $\frac{s}{n}=0.5$,
+while the lower touchpoint is at the end for the posterior sets for data $\frac{s}{n}=1$.}
 %(See also Figure~\ref{fig:boatshape-posterior-normal}).}
 \label{fig:boatshape-posterior-mik}
 \end{figure}
@@ -836,8 +841,8 @@ With $\EZ$ being symmetric to the $\eta_0$ axis, we have $\eta_0^u = \eta_0^l$,
 we will determine $\eta_0^u$ only by considering the upper contour tangent.
 We get
 \begin{align}
-a - a \big(1 + b(\eta_0^u + 2)\big) e^{-b(\eta_0^u - \ezl)} &\stackrel{!}{=} 0
-& &\Longleftrightarrow &
+%a - a \big(1 + b(\eta_0^u + 2)\big) e^{-b(\eta_0^u - \ezl)} &\stackrel{!}{=} 0
+%& &\Longleftrightarrow &
 1 + b(\eta_0^u + 2) &\stackrel{!}{=} e^{b(\eta_0^u - \ezl)}\,.
 \label{eq:eta0u}
 \end{align}
@@ -848,10 +853,22 @@ such that $\yzu$ %the upper expected value for the prior set
 is further away from $\frac{1}{2}$.
 Here, this means that the larger $\eta_0^u$, the more imprecise the prior parameter set.
 
+
 \subsection{Strong Prior-Data Agreement Property}
 \label{sec:spda-property}
 
-Nevertheless
+We will now derive the essential property that sets \eqref{eq:basicset}
+will lead to especially precise inferences when data are strongly supporting prior information
+since the touchpoint moves further to the right when updating with strong-agreement data.
+The basic shape is symmetric around the $\ez$ axis ($\EZ$ has central ray $y_c = 0.5$),
+and update with strong-agreement data $s/n = 0.5$ means that $\EZ$ is shifted along the $\ez$ axis by $n$,
+such that also $\EN$ is symmetric around the $\ez$ axis.
+We thus need to consider only one of the two touchpoints.
+With the upper prior touchpoint being at $\ez$ coordinate ${\eta_0^u}\uz$,
+the touchpoint movement to the right means that the upper posterior touchpoint $\ez$ coordinate ${\eta_0^u}\un$
+is larger than the updated prior touchpoint coordinate,
+so we need to show that ${\eta_0^u}\un > {\eta_0^u}\uz + n$.
+
 
 
 %\footnote{We will treat $s$ as a a real-valued observation in $[0,n]$
