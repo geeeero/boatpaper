@@ -745,9 +745,11 @@ and we discuss a number of technical results for this shape in subsequent sectio
 We will now present a parametrisation for such a boat-shaped parameter set $\EZ$.
 To keep things simple, we will consider at first only prior sets
 that are symmetric around the $\eta_0$ axis, i.e., centered around $y_c = 0.5$,
-expressing the prior information that we deem a fraction of successes of $\frac{s}{n} = \frac{1}{2}$
-as the most probable. Sets $\EZ$ with central ray $y_c \neq 0.5$
-will be discussed in Section~\ref{}.****
+expressing the prior information that we deem a fraction of successes of $\frac{s}{n} = \frac{1}{2}$ as the most probable.
+Sets $\EZ$ with central ray $y_c \neq 0.5$ can be obtained
+by rotating the set around $(\eta_0, \eta_1) = (-2,0)$ such that $y_c$ forms the axis of symmetry.
+All results for sets with $y_c = 0.5$ thus generalize straight-forwardly to the case $y_c \neq 0.5$;
+a numerical example is given in Figure~\ref{fig:ppp2}.
 
 For the contours of $\EZ$, we suggest an exponential function as the functional form,
 where the `prow' of the set is located at $(\ezl, 0)$.
@@ -901,10 +903,10 @@ shifted exponential function.
 Since $b > 0$, ${\eta_0^u}\un$ is necessarily larger than ${\eta_0^u}\uz + n$.
 \begin{figure}  %trim=l b r t
 \centering
-\fbox{
+%\fbox{
 %\includegraphics[trim = 48mm 35mm 49mm 47mm, clip, width=0.8\textwidth]{R/prior-vs-posterior-eta0u.eps}%
 \includegraphics[trim = 1mm 5mm 10mm 20mm, clip, width=0.8\textwidth]{R/prior-vs-posterior-eta0u.eps}%
-}
+%}
 \caption{Illustration for the argument that ${\eta_0^u}\un > {\eta_0^u}\uz + n$.}
 \label{fig:spda1}
 \end{figure}
@@ -995,10 +997,24 @@ Again, this linear increase is due to the $\eta_1$ coordinate being incremented
 according to \eqref{eq:eta-update},
 and from \eqref{eq:trafotony} we see that $\ynl$ is linear in $\eta_1$.
 
-To summarize, for $s > \frac{n}{2}$, both $\ynu$ and $\ynl$ will at first increase gradually with $s$,
+
+\subsection{Posterior Imprecision}
+\label{sec:posteriorimprecision}
+
+We now summarize the results from Section~\ref{sec:generalupdate}
+and give two numerical examples.
+
+For $s > \frac{n}{2}$, both $\ynu$ and $\ynl$ will at first increase gradually with $s$,
 as ${\eta_0^u}\un$ moves to the left, and ${\eta_0^l}\un$ moves to the right.
 We will call such updating of the prior parameter set
 where both lower and upper posterior touchpoint are in the middle of the set as \emph{happy learning}.
+\begin{figure}
+\includegraphics[width=\textwidth]{R/pppboat-ipmu1.eps}
+\caption{Boatshape set with $y_c = 0.5$ together with rectangle set, $1 \times [\yzl, \yzu]$ and $2 \times [\yzl, \yzu]$
+with same prior imprecision (left),
+and the corresponding lower and upper bounds for $\yn$ as functions of $s$ (right).}
+\label{fig:ppp1}
+\end{figure}
 %
 At some $s^u$, ${\eta_0^u}\un$ will reach $\ezl + n$,
 and at some $s^l$, ${\eta_0^l}\un$ will reach $\ezu + n$.
@@ -1012,13 +1028,33 @@ both $\ynu$ and $\ynl$ will increase linearly in $s$, but with different slopes.
 $\ynu$ will increase with slope $\frac{1}{\ezl + n + 2}$,
 whereas $\ynl$ will increase with the lower slope $\frac{1}{\ezu + n + 2}$.
 
-***PPPlots
+These findings are illustrated in Figure~\ref{fig:ppp1}
+for a boatshape set with $y_c = 0.5$, $\ezl = -1$, $\ezu = 20$, $a=1$ and $b=0.4$. 
+These are compared to a rectangular set and two line segment sets with the same $\yz$ range.
+Here we see a linear increase of $\ynu$ for $s < 4$ and a superlinear increase for $s \ge 4$.
+%and analogously for $\ynl$
+We have thus happy learning for $s \in [4,6]$, and unhappy learning for $s \neq [4,6]$.
+For $s \approx 5$, $\Delta_y$ for the boatshape set is about half of $\Delta_y$ for the rectangle set.
+The line segment sets lead to very short $\yn$ ranges, but do not reflect \pdc.
 
-***discuss $y_c \neq 0.5$
+In Figure~\ref{fig:ppp2}, a numerical example for the case $y_c = 0.75$ is depicted.
+Notice that the rotated boatshape parameter set is not symmetric in the $(\nz, \yz)$ space.
+We see that $[\ynl, \ynu]$ for the boatshape set is nearly as short as for the line segments sets
+when $s \approx 0.75$, but that unlike those, the boatshape offers \pdc\ sensitivity.
+Interestingly, all four sets lead to a similar $\ynl$ for $s < 5$.
+\begin{figure}
+\includegraphics[width=\textwidth]{R/pppboat-ipmu2.eps}
+\caption{Boatshape set with $y_c = 0.75$ together with rectangle set, $1 \times [\yzl, \yzu]$ and $2 \times [\yzl, \yzu]$
+with same prior imprecision (left),
+and the corresponding lower and upper bounds for $\yn$ as functions of $s$ (right).}
+\label{fig:ppp2}
+\end{figure}
 
 
 \section{Discussion and Concluding Remarks}
 \label{sec:concluding}
+
+$y_c \neq 0.5$ not by turning but by shifting?
 
 ***it's worth to study more shapes to cater for other objectives in inference behaviour
 

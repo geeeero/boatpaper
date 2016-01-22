@@ -212,6 +212,31 @@ postscript("pppboat8.eps", width=12, height=6)
 pppmaker(pppboat8, pppn8)
 dev.off()
 
+pppn1a <- 10
+pppboat1a <- list(xp = c(-1.5, 3.5), a = 0.8, b = 1.2, yc = 0.5, data = list(tau = 0, n = pppn1))
+boatplotter(pppboat1a)
+normalplotter(pppboat1a)
+
+pppn1b <- 10
+pppboat1b <- list(xp = c(-1.5, 3.5), a = 1, b = 0.4, yc = 0.5, data = list(tau = 0, n = pppn1))
+boatplotter(pppboat1b)
+normalplotter(pppboat1b)
+
+postscript("pppboat-ipmu1.eps", width=12, height=6)
+ipmu1 <- pppmaker(pppboat1, pppn1, rtrn=TRUE)
+dev.off()
+
+plot(ipmu1$boat$s[-1], diff(ipmu1$boat$boatu)*10e4, type="l")
+plot(ipmu1$boat$s[-1], diff(ipmu1$boat$boatl)*10e4, type="l")
+
+pppn9 <- 10
+pppboat9 <- list(xp = c(-1,9), a = 0.5, b = 2, yc = 0.75, data = list(tau = 0, n = pppn8))
+boatplotter(pppboat9)
+normalplotter(pppboat9)
+postscript("pppboat-ipmu2.eps", width=12, height=6)
+ipmu2 <- pppmaker(pppboat9, pppn9, rtrn=TRUE)
+dev.off()
+
 
 # --------------------- mode ------------------------------
 
