@@ -11,4 +11,9 @@
 *.pdf
 ba/*
 R.zip
+*.zip
+R/.RData
+R/.Rhistory
 .Rproj.user
+*-blx.bib
+*.run.xml
