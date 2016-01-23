@@ -254,7 +254,7 @@ it is easily extensible to the general exponential family case.
 The Bayesian approach to inference (see, e.g., \cite{2007:robert,2005:ruggeri}) %\cite[see, e.g.,][]{2007:robert,2005:ruggeri} 
 offers the advantage to combine data and prior knowledge in a unified reasoning process.
 The prior knowledge, i.e., information extraneous to data, is usually provided in the form of expert knowledge.
-
+%
 Bayesian inference usually starts with defining a parametric \emph{sample model},
 denoted by $f(\vec{x} \mid \vartheta)$,
 a conditional distribution of data $\vec{x} = (x_1, \ldots, x_n)$ given the value for a parameter $\vartheta$.
@@ -264,14 +264,15 @@ In light of the sample $\vec{x}$, the prior distribution is updated by Bayes' Ru
 to obtain the so-called \emph{posterior distribution}
 \begin{align}
 \label{eq:bayesrule}
-p(\vartheta\mid\vec{x}) &= \frac{f(\vec{x}\mid\vartheta) f(\vartheta)}{\int f(\vec{x}\mid\vartheta) f(\vartheta) \dd \vartheta}
+p(\vartheta\mid\vec{x}) &= \frac{f(\vec{x}\mid\vartheta) p(\vartheta)}{\int f(\vec{x}\mid\vartheta) p(\vartheta) \dd \vartheta}
                          \propto f(\vec{x}\mid\vartheta) \cdot p(\vartheta)\,.
 \end{align}
 The posterior distribution is understood to comprise all information from the sample and the prior knowledge.
 It therefore underlies all further inferences on the parameter $\vartheta$,
 like point estimators, interval estimators,
-or the \emph{posterior predictive distribution},
-giving the distribution of further observations based on the posterior.
+or predictions.
+%or the \emph{posterior predictive distribution},
+%giving the distribution of further observations based on the posterior.
 
 However, the choice for the prior distribution to encode the given expert knowledge is often debatable,
 and a specific choice of prior is difficult to justify.
@@ -293,7 +294,7 @@ the smaller the set of posteriors, the more precise the probability statements.
 A central idea in imprecise probability is that the magnitude of a set of distributions,
 and, in turn, the width of probability ranges based on it,
 should reflect the precision of probabilistic knowledge.
-A situation where this relation should especially hold is that of \emph{\pdc}:
+A situation for which this relation should hold in particular is \emph{\pdc}:
 % from abstract esrelpaper
 %A problem that can arise in Bayesian inference is called prior-data conflict:
 From the viewpoint of the prior $p(\vartheta)$, the observed data $\vec{x}$ seem very surprising,
@@ -301,7 +302,7 @@ i.e., information from data is in conflict with prior assumptions (see, e.g., \c
 This is most relevant when there is not enough data to overrule the prior;
 as it is then unclear whether to put more trust to prior assumptions or to the observations,
 posterior inferences should clearly reflect this state of uncertainty.
-It was pointed out by Walter \& Augustin \cite{Walter2009a} that
+\cite{Walter2009a} pointed out that
 both precise and imprecise models based on conjugate priors can be insensitive to prior-data conflict.
 
 For Bayesian inference based on a single, precise conjugate prior,
@@ -326,13 +327,13 @@ and conditions for the shape of these parameter sets were derived that ensure \p
 that balances tractability and ease of elicitation
 with desired inference properties.
 The approach has since been successfully applied in common-cause failure modelling \cite{Troffaes2014a}
-and system reliability estimation \cite{2015:walter}.
+and system reliability \cite{2015:walter}.
 
 In the present paper, we want to further refine this approach
 by complementing the increased imprecision reaction to \pdc\
 with a `bonus' in precision for the case when prior and data coincide especially well,
 a situation that we will call \emph{strong prior-data agreement}.
-In the vein of the discussion at the end of \cite[\S~3.1.4]{2013:diss-gw},
+In terms of the discussion at the end of \cite[\S~3.1.4]{2013:diss-gw},
 we thus sacrifice a bit of tractability through employing a more complex parameter set shape
 in order to obtain improved model behaviour.%
 %\footnote{Some first results in this direction were already presented in \cite[\S~A.2]{2013:diss-gw}.}
@@ -571,7 +572,7 @@ at the cost of more complex handling.
 \section{A Third Parametrization for Beta Priors}
 \label{sec:miksworld}
 
-In the parametrization in terms of $\nz$ and $\yz$ as described in Section~\ref{sec:beta-binom},
+In the parametrization in terms of $\nz$ and $\yz$ as described in Sect.~\ref{sec:beta-binom},
 a conjugate Beta prior is updated to its respective posterior by a shift in the parameter space,
 given by rewriting \eqref{eq:nyupdate}:
 \begin{align*}
@@ -651,7 +652,7 @@ i.e., coordinates satifying
 \end{align}
 will have a constant expectation of $y_c$.
 The domain $\Eta$, and these \emph{rays of constant expectation} emanating from the coordinate $(-2,0)$,
-can be seen in Figure~\ref{fig:boatshape-vertical}.
+can be seen in Fig.~\ref{fig:boatshape-vertical}.
 
 In the parametrisation in terms of $(\nz,\yz)$,
 posterior inferences based on $\yn$ become more precise with increasing $n$
@@ -684,7 +685,7 @@ Defining $\eonl$ and $\eonu$ as the updated versions of $\eozl$ and $\eozu$, res
 we see that $\eonu-\eonl = \eozu-\eozl$;
 therefore, imprecision decreases here because a line segment of fixed size
 will cast a smaller shadow when further to the right,
-as illustrated in Figure~\ref{fig:boatshape-vertical}.
+as illustrated in Fig.~\ref{fig:boatshape-vertical}.
 \begin{figure}  %trim=l b r t
 \centering
 %\fbox{%
@@ -704,12 +705,12 @@ Note that all sets have the same size, imprecision decreasing only through their
 For \pdc\ sensitivity, we need shapes that cover a range of $\eta_0$ values,
 just like we needed sets with a range of $\nz$ values to ensure this property.
 Sets that are elongated along a certain ray of constant expectation
-will behave here similar to the rectangular shapes of Section~\ref{sec:setsofbetapriors}.
+will behave here similar to the rectangular shapes of Sect.~\ref{sec:setsofbetapriors}.
 When shifted along its ray of constant expectation,
 imprecision will be reduced as the shadow of the set will become smaller just as described above for line segments.
 When such a shape is instead shifted away from its ray of constant expectation,
 imprecision will increase, as a prolonged shape that is now turned away from its ray 
-will cast a larger shadow (see Figure~\ref{fig:boatshape-posterior-mik} below).%
+will cast a larger shadow (see Fig.~\ref{fig:boatshape-posterior-mik} below).%
 %\footnote{This will become clear from the depiction of boatshape sets in Figure~\ref{fig:boatshape-posterior-mik}.} 
 %A set $\EZ$ allowing for more precison in case of strong prior-data agreement
 %must thus be able to cast a smaller shadow if the update shift is along the direction of its ray.
@@ -721,41 +722,40 @@ will cast a larger shadow (see Figure~\ref{fig:boatshape-posterior-mik} below).%
 
 The shape for $\EZ$ that we suggest to obtain both \pdc\ sensitivity and increased precision
 in case of strong prior-data agreement looks like a bullett, or like a boat with a transom stern
-(see, e.g., Figure~\ref{fig:boatshape-posterior-mik} below), hence its name.
+(see, e.g., Fig.~\ref{fig:boatshape-posterior-mik} below), hence its name.
 The curvature along its length in the direction of its constant rays of expectation
 leads to smaller $\Delta_y(\PN)$ as compared to a rectangular $\PZ$ with the same prior range $\Delta_y(\PZ)$,
-as illustrated in Figure~\ref{fig:boatshape-posterior-normal}.
+as illustrated in Fig.~\ref{fig:boatshape-posterior-normal}.
 
 The strong prior-data agreement effect is realized
 through the touchpoints determining $\ynl$ and $\ynu$
 moving along the shape during updating,
 %being attained at higher values of $\eta_0$ for larger $n$,
-as will be demonstrated in Section~\ref{sec:spda-property}.
+as will be demonstrated in Sect.~\ref{sec:spda-property}.
 This is advantageous when considering that the spread of the Beta posteriors is determined by $\eta_0 = \nz - 2$.
 In case of strong prior-data agreement, variances in the `critical' distributions
 at the boundary of the posterior expectation interval $[\ynl,\ynu]$ will thus be lower.
 In particular, credible intervals for these `critical' distributions will be shorter, 
 such that the union of all credible intervals for Beta distributions with $(\ezn, \eon) \in \EN$,
 taken as a posterior inference reflecting uncertainty due to both vague prior knowledge and stochasticity, will be shorter.
-
-In the remainder of this section, 
-we will suggest a parametrisation for a curved shape in the $(\eta_0, \eta_1)$ space.
-The definition, along with some graphical examples, is given in Section~\ref{sec:basicdefboat},
-and we discuss a number of technical results for this shape in subsequent sections.
-%Sections~\ref{sec:touchpoints} -- \ref{sec:generalupdate}.
+%
+%In the remainder of this section, 
+%we will suggest a parametrisation for a curved shape in the $(\eta_0, \eta_1)$ space.
+%The definition, along with some graphical examples, is given in Sect.~\ref{sec:basicdefboat},
+%and we discuss a number of technical results for this shape in subsequent sections.
 
 
 \subsection{Basic Definition}
 \label{sec:basicdefboat}
 
 We will now present a parametrisation for such a boat-shaped parameter set $\EZ$.
-To keep things simple, we will consider at first only prior sets
+To keep things simple, we will consider here only prior sets
 that are symmetric around the $\eta_0$ axis, i.e., centered around $y_c = 0.5$,
 expressing the prior information that we deem a fraction of successes of $\frac{s}{n} = \frac{1}{2}$ as the most probable.
 Sets $\EZ$ with central ray $y_c \neq 0.5$ can be obtained
 by rotating the set around $(\eta_0, \eta_1) = (-2,0)$ such that $y_c$ forms the axis of symmetry.
-All results for sets with $y_c = 0.5$ thus generalize straight-forwardly to the case $y_c \neq 0.5$;
-a numerical example is given in Figure~\ref{fig:ppp2}.
+All results for sets with $y_c = 0.5$ generalize straight-forwardly to the case $y_c \neq 0.5$;
+a numerical example is given in Fig.~\ref{fig:ppp2}.
 
 For the contours of $\EZ$, we suggest an exponential function as the functional form,
 where the `prow' of the set is located at $(\ezl, 0)$.
@@ -785,7 +785,7 @@ Given parameters $\ezl$, $\ezu$, $a$, and $b$, $\EZ$ is thus defined as
 \end{align}
 A prior boatshape set with $\ezl=1$, $\ezu=6$, $a=1.5$, and $b=0.9$,
 together with corresponding posterior sets for different observations,
-is depicted in Figure~\ref{fig:boatshape-posterior-mik}.
+is depicted in Fig.~\ref{fig:boatshape-posterior-mik}.
 The same prior and posterior sets in terms of $(\nz, \yz)$ are depicted in Fig.~\ref{fig:boatshape-posterior-normal}.
 %shown in terms of $(\eta_0,\eta_1)$ (left) and in terms of $(\nz, \yz)$ (right).
 %\begin{figure}  %trim=l b r t
@@ -823,34 +823,34 @@ Informally, $a$ determines the half-width of the set;
 the width, i.e., the size in the $\eta_1$ dimension, would be $a$ if $\ezu \to \infty$.
 $b$ instead determines the `bulkyness' of the shape.
 Together with $\ezl$, $a$ and $b$ determine the prior interval for the expected success probability $[\yzl, \yzu]$.
-Increasing each of $\ezl$, $a$ and $b$ while keeping the other two fixed leads to a wider prior interval $[\yzl, \yzu]$.
+Increasing each of $\ezl$, $a$ and $b$ while keeping the other two fixed leads to a wider $[\yzl, \yzu]$.
 %For fixed $\ezl$ and $a$, increasing $b$ leads to a wider prior expectation interval.
 %For $[\yzl, \yzu]$, the choice of $\ezu$ is irrelevant.%
 $\ezu$ plays only a role in determining when the `unhappy learning' phase starts
-(see end of Section~\ref{sec:generalupdate}).
+(see end of Sect.~\ref{sec:generalupdate}).
 \begin{figure}  %trim=l b r t
 \centering
 %\fbox{%
 %\includegraphics[trim = 15mm 45mm 25mm 60mm, clip, width=\textwidth]{R/boatshape-posterior-normal}%
 \includegraphics[width=\textwidth]{R/boatshape-posterior-normal}%
 %}
-\caption[Boatshape prior and posterior sets from Figure~\ref{fig:boatshape-posterior-mik} in the $(\nz,\yz)$ parametrisation.]%
-{Boatshape prior and posterior sets from Figure~\ref{fig:boatshape-posterior-mik} in the $(\nz,\yz)$ parametrisation.
+\caption[Boatshape prior and posterior sets from Fig.~\ref{fig:boatshape-posterior-mik} in the $(\nz,\yz)$ parametrisation.]%
+{Boatshape prior and posterior sets from Fig.~\ref{fig:boatshape-posterior-mik} in the $(\nz,\yz)$ parametrisation.
 The rectangular prior set with the same range for $\yz$ as the prior boatshape set
 and the corresponding posterior sets are drawn with dashed lines. 
 Note that all posterior boatshape sets have shorter $\yn$ ranges than their corresponding posterior rectangle sets.}
 \label{fig:boatshape-posterior-normal}
 \end{figure}
 
-We see from the prior set in Figure~\ref{fig:boatshape-posterior-normal}
+We see from the prior set in Fig.~\ref{fig:boatshape-posterior-normal}
 that the lower and the upper bound for $\yz$
 is attained in the middle of the set contour.
-To determine $\yzl$ and $\yzu$, we thus need to find the corresponding
-touchpoints ${\eta_0^l}\uz$ and ${\eta_0^u}\uz$.
-This can be done by identifying the rays of constant expectation \eqref{eq:raysofconstantexpectation}
+To determine $\yzl$ and $\yzu$, we need to find the corresponding
+touchpoints $\eta_0^{l(0)}$ and $\eta_0^{u(0)}$
+by identifying the rays of constant expectation \eqref{eq:raysofconstantexpectation}
 that are tangents to $\EZ$ and then solving for $\eta_0$.
-With $\EZ$ being symmetric to the $\eta_0$ axis, we have ${\eta_0^u}\uz = {\eta_0^l}\uz$,
-so we will determine ${\eta_0^u}\uz$ only by considering the upper contour tangent.
+Since $\EZ$ is symmetric to the $\eta_0$ axis, we have $\eta_0^{u(0)} = \eta_0^{l(0)}$,
+and we will determine ${\eta_0^u}\uz$ by considering the upper contour tangent.
 We get
 \begin{align}
 %a - a \big(1 + b(\eta_0^u + 2)\big) e^{-b(\eta_0^u - \ezl)} &\stackrel{!}{=} 0
@@ -863,50 +863,56 @@ that is, however, not available in closed form.
 Generally, the nearer ${\eta_0^u}\uz$ is to $\ezl$, the larger $\frac{d}{d\eta_0} \czu({\eta_0^u}\uz)$,
 such that $\yzu$ %the upper expected value for the prior set
 is further away from $\frac{1}{2}$.
-This means that, for fixed $\ezl$, the smaller ${\eta_0^u}\uz$, the more imprecise the prior parameter set.
+This means that, for fixed $\ezl$ and $b$, the smaller ${\eta_0^u}\uz$, the more imprecise the prior parameter set.
 
 
 \subsection{Strong Prior-Data Agreement Property}
 \label{sec:spda-property}
 
-We will now derive the essential property that sets \eqref{eq:basicset}
-will lead to especially precise inferences when data are strongly supporting prior information,
-since the touchpoint moves further to the right in that case. %when updating with strong-agreement data.
+We now derive the property that sets \eqref{eq:basicset}
+lead to especially precise inferences when data are strongly supporting prior information
+as the touchpoint moves further to the right in that case. %when updating with strong-agreement data.
 The basic shape is symmetric around the $\ez$ axis ($\EZ$ has central ray $y_c = 0.5$),
 and update with strong-agreement data $s/n = 0.5$ means that $\EZ$ is shifted along the $\ez$ axis by $n$,
 such that also $\EN$ is symmetric around the $\ez$ axis.
-We thus need to consider only one of the two touchpoints.
-With the upper prior touchpoint being at ${\eta_0^u}\uz$,
+We thus need to consider only one touchpoint.
+With the upper prior touchpoint at ${\eta_0^u}\uz$,
 the touchpoint movement to the right means that the upper posterior touchpoint ${\eta_0^u}\un$
 is larger than the updated prior touchpoint,
 so we need to show that ${\eta_0^u}\un > {\eta_0^u}\uz + n$.
 
 The upper contour for the posterior boatshape,
 updated with $s = \frac{n}{2}$, %has its `prow' now at $(\ezl + n, 0)$,
-is $\czu$ from \eqref{eq:basiccontours} shifted to the right by $n$,
-\begin{align*}
-\cnu(\eta_0) &= a \left( 1 - e^{-b(\eta_0 - n -\ezl)} \right)\,.
+is $\czu$ from \eqref{eq:basiccontours} shifted to the right by $n$, i.e.,
+%\begin{align*}
+$\cnu(\eta_0) = a - a e^{-b(\eta_0 - n -\ezl)}$.
 %\frac{d}{d\eta_0} \ol{c}(\eta_0) &= ab e^{-b(\eta_0 - n - \ezl)} \,.
-\end{align*}
+%\end{align*}
 The equation to identify the posterior upper touchpoint is then
 \begin{align}
 %a - a \big(1 + b({\eta_0^u}\un + 2)\big) e^{-b({\eta_0^u}\un - n - \ezl)} &\stackrel{!}{=} 0 \nonumber\\
 1 + b({\eta_0^u}\un + 2) &\stackrel{!}{=} e^{b({\eta_0^u}\un - n - \ezl)} \,.
 \label{eq:eta0uposterior}
 \end{align}
-We compare now \eqref{eq:eta0uposterior} to \eqref{eq:eta0uprior} and conclude
+Comparing \eqref{eq:eta0uposterior} to \eqref{eq:eta0uprior}, we can conclude
 that indeed ${\eta_0^u}\un > {\eta_0^u}\uz + n$.
-
+%
 The left hand side of both \eqref{eq:eta0uprior} and \eqref{eq:eta0uposterior}
 gives the identical linear function with slope $b$ and intercept $1+2b$. %of ${\eta_0^u}\uz$ or ${\eta_0^u}\un$, respectively.
-The exponential funcion on the right hand side of \eqref{eq:eta0uposterior} is instead the function 
+The exponential function on the right hand side of \eqref{eq:eta0uposterior} is instead the function 
 on the right hand side of \eqref{eq:eta0uprior} shifted to the right by $n$.
-We can picture this situation as in Figure~\ref{fig:spda1}:
+We can picture this situation as in Fig.~\ref{fig:spda1}:
 ${\eta_0^u}\uz$ is identified by the intersection of the linear function with the left,
-non-shifted exponential function,
-whereas ${\eta_0^u}\un$ is at the intersection of the linear fuction with the right,
-shifted exponential function.
+non-shifted exponential, %function,
+whereas ${\eta_0^u}\un$ is at the intersection of the linear function with the right,
+shifted exponential. %function.
 Since $b > 0$, ${\eta_0^u}\un$ is necessarily larger than ${\eta_0^u}\uz + n$.
+%
+We can also conclude that the larger $b$, the steeper the linear function
+and thus the larger the distance of ${\eta_0^u}\un$ to ${\eta_0^u}\uz + n$,
+that is, the stronger the prior-data agreement effect of the shape.
+%Can see this also from normalworld***: a bulkyer the shape has more ueberhang
+%which gets reduced by updating as it is located towards the left side of the set***
 \begin{figure}  %trim=l b r t
 \centering
 %\fbox{
@@ -917,14 +923,8 @@ Since $b > 0$, ${\eta_0^u}\un$ is necessarily larger than ${\eta_0^u}\uz + n$.
 \label{fig:spda1}
 \end{figure}
 
-We can also conclude that the larger $b$, the steeper the linear function
-and thus the larger the distance of ${\eta_0^u}\un$ to ${\eta_0^u}\uz + n$,
-that is, the stronger the prior-data agreement effect of the shape.
-%Can see this also from normalworld***: a bulkyer the shape has more ueberhang
-%which gets reduced by updating as it is located towards the left side of the set***
-
 %\subsection{Touchpoints for Update with \texorpdfstring{$s > \frac{n}{2}$}{s > n/2}}
-\subsection{Touchpoints for Arbitrary Update}
+\subsection{Touchpoints for Arbitrary Updates}
 \label{sec:generalupdate}
 
 Let us now consider the update of the basic boatshape \eqref{eq:basicset} %symmetric around the $\eta_0$ axis,
@@ -953,7 +953,7 @@ leading to
 \label{eq:eta0l-general}
 \frac{a}{\frac{n}{2} -s  + a} \big(1 + b({\eta_0^l}\un + 2)\big) &\stackrel{!}{=} e^{b({\eta_0^l}\un - n - \ezl)} \,.
 \end{align}
-We see thus that the graph from Figure~\ref{fig:spda1} holds here as well,
+We see thus that the graph from Fig.~\ref{fig:spda1} holds here as well,
 except that the linear function on the left hand side of 
 \eqref{eq:eta0u-general} and \eqref{eq:eta0l-general} is changed in slope and intercept by a factor.
 (Equivalently, we can consider it to be rotated around the root $-2-\frac{1}{b}$.)
@@ -991,9 +991,9 @@ Therefore, the intersection of the linear function with the exponential function
 will move to the right, such that ${\eta_0^l}\un(s)$ becomes larger, and $\ynl$ increases.
 In the second case, the factor is undefined (for $s = \frac{n}{2} + a$)
 or negative (for $s > \frac{n}{2} + a$).
-Either way, there will be no intersection of the linear function with the exponential function
-for any $\eta_0 > \ezl + n$, and for $s \downarrow \frac{n}{2} + a$, the slope $\to \infty$.
-In fact, for $s \ge \frac{n}{2} + a$, the whole set is above the $\eta_0$ axis,
+Either way, there is no intersection of the linear function with the exponential function
+for any $\eta_0 > \ezl + n$, and %for $s \downarrow \frac{n}{2} + a$, the slope $\to \infty$.
+in fact, for $s \ge \frac{n}{2} + a$, the whole set is above the $\eta_0$ axis,
 and the touchpoint must be thus at $\ezu + n$.
 Actually, ${\eta_0^l}\un(s) = \ezu + n$ already for some $\frac{n}{2} \le s < \frac{n}{2} + a$,
 when the intersection point reaches $\ezu + n$.
@@ -1007,7 +1007,7 @@ and from \eqref{eq:trafotony} we see that $\ynl$ is linear in $\eta_1$.
 \subsection{Posterior Imprecision}
 \label{sec:posteriorimprecision}
 
-We now summarize the results from Section~\ref{sec:generalupdate}
+We now summarize the results from Sect.~\ref{sec:generalupdate}
 and give two numerical examples.
 
 For $s > \frac{n}{2}$, both $\ynu$ and $\ynl$ will at first increase gradually with $s$,
@@ -1034,7 +1034,7 @@ both $\ynu$ and $\ynl$ will increase linearly in $s$, but with different slopes.
 $\ynu$ will increase with slope $\frac{1}{\ezl + n + 2}$,
 whereas $\ynl$ will increase with the lower slope $\frac{1}{\ezu + n + 2}$.
 
-These findings are illustrated in Figure~\ref{fig:ppp1}
+These findings are illustrated in Fig.~\ref{fig:ppp1}
 for a boatshape set with $y_c = 0.5$, $\ezl = -1$, $\ezu = 20$, $a=1$ and $b=0.4$. 
 These are compared to a rectangular set and two line segment sets with the same $\yz$ range.
 Here we see a linear increase of $\ynu$ for $s < 4$ and a superlinear increase for $s \ge 4$.
@@ -1043,7 +1043,7 @@ We have thus happy learning for $s \in [4,6]$, and unhappy learning for $s \neq 
 For $s \approx 5$, $\Delta_y$ for the boatshape set is about half of $\Delta_y$ for the rectangle set.
 The line segment sets lead to very short $\yn$ ranges, but do not reflect \pdc.
 
-In Figure~\ref{fig:ppp2}, a numerical example for the case $y_c = 0.75$ is depicted.
+Figure~\ref{fig:ppp2} depicts a numerical example for the case $y_c = 0.75$.
 Notice that the rotated boatshape parameter set is not symmetric in the $(\nz, \yz)$ space.
 We see that $[\ynl, \ynu]$ for the boatshape set is nearly as short as for the line segments sets
 when $s \approx 0.75$, but that unlike those, the boatshape offers \pdc\ sensitivity.
@@ -1071,13 +1071,13 @@ pre-posterior analysis seems the most promising avenue for this.
 We did not discuss the case of $y_c \neq 0.5$ in detail,
 but suggested to rotate the basic set \eqref{eq:basicset} around $(-2,0)$
 such that the ray of constant expectation $y_c$ forms the axis of symmetry of $\EZ$,
-and gave a numerical example for this approach in Figure~\ref{fig:ppp2}.
+and gave a numerical example for this approach in Fig.~\ref{fig:ppp2}.
 It would be however interesting to investigate whether another way of defining a set aligned to a certain ray could be useful,
 namely by shifting $\EZ$ from \eqref{eq:basicset} in the $\eo$ dimension according to \eqref{eq:raysofconstantexpectation}.
 Furthermore, alternatives to the functional form of the contour functions \eqref{eq:basiccontours} could also be worth of study,
 like, e.g., the second and third quadrant's part of an ellipse $a\ez^2 + b\eo^2 = c$.
 
-In the parameter space described in Section~\ref{sec:miksworld},
+In the parameter space described in Sect.~\ref{sec:miksworld},
 the update from prior parameter set to posterior parameter set
 amounts to a purely data-dependent translation, leaving the set shape unchanged.
 This allowed us to design a set shape according to certain desired inference properties.
