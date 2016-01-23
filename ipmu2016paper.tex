@@ -11,8 +11,11 @@
 \usepackage{amssymb}
 \usepackage{bm}
 
-\usepackage{biblatex}
-\addbibresource{boatpaper}
+%\usepackage{natbib}
+%\usepackage[style=numeric]{biblatex}
+%\addbibresource{boatpaper}
+%\renewcommand{\bibfont}{\small}
+%\renewcommand{\finentrypunct}{}
 
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage{booktabs}
@@ -221,10 +224,11 @@ Durham University, Durham, UK\\
 
 
 \begin{abstract}
-Bayesian inference allows to combine observations with (possibly subjective) prior knowledge in the reasoning process.
+Bayesian inference allows to combine observations with %(possibly subjective)
+prior knowledge in the reasoning process.
 The choice of a particular prior distribution to represent the available prior knowledge is, however,
 often debatable, especially when prior knowledge is limited or data are scarce,
-as then posterior inferences are higly dependent on the choice of prior.
+as then posterior inferences are highly dependent on the choice of prior.
 Robust Bayesian analysis accounts for this issue by
 inquiring whether posterior inferences change substantially
 when the prior distribution is varied within a set of distributions that contains all `reasonable' priors.
@@ -232,11 +236,12 @@ Similar, but slightly different in scope, is the imprecise probability approach,
 formalising the idea that sets of probability distributions
 %(or, equivalently, interval-valued previsions or sets of desirable gambles)
 should be taken to model prior knowledge more acurrately.
-With imprecise probability, modeling prior-data conflict sensitivity is possible:
-Models have been proposed where the ranges of posterior inferences
-are substantially larger when prior and data are in conflict.
+Imprecise probability allows to model prior-data conflict sensitivity:
+%Models have been proposed where the ranges of posterior inferences
+%are substantially larger when prior and data are in conflict.
+Ranges of posterior inferences should be substantially larger when prior and data are in conflict.
 Here we propose a new method for generating parameter prior sets in a conjugate setting
-that, in addition to prior-data conflict sensitivity, allow to mirror \emph{strong prior-data agreement},
+that, in addition to prior-data conflict sensitivity, allow to reflect \emph{strong prior-data agreement},
 i.e., the case when prior and data coincide especially well, by increased posterior precision.
 Although presented here for the case of binary data only,
 it is easily extensible to the general exponential family case.
@@ -246,7 +251,7 @@ it is easily extensible to the general exponential family case.
 
 \section{Introduction}
 
-The Bayesian approach to inference \cite[see, e.g.,][]{2007:robert,2005:ruggeri} 
+The Bayesian approach to inference (see, e.g., \cite{2007:robert,2005:ruggeri}) %\cite[see, e.g.,][]{2007:robert,2005:ruggeri} 
 offers the advantage to combine data and prior knowledge in a unified reasoning process.
 The prior knowledge, i.e., information extraneous to data, is usually provided in the form of expert knowledge.
 
@@ -292,7 +297,7 @@ A situation where this relation should especially hold is that of \emph{\pdc}:
 % from abstract esrelpaper
 %A problem that can arise in Bayesian inference is called prior-data conflict:
 From the viewpoint of the prior $p(\vartheta)$, the observed data $\vec{x}$ seem very surprising,
-i.e., information from data is in conflict with prior assumptions \cite[see, e.g.,][]{2006:evans}.
+i.e., information from data is in conflict with prior assumptions (see, e.g., \cite{2006:evans}). %\cite[see, e.g.,][]{2006:evans}.
 This is most relevant when there is not enough data to overrule the prior;
 as it is then unclear whether to put more trust to prior assumptions or to the observations,
 posterior inferences should clearly reflect this state of uncertainty.
@@ -301,7 +306,7 @@ both precise and imprecise models based on conjugate priors can be insensitive t
 
 For Bayesian inference based on a single, precise conjugate prior,
 learning from data amounts to averaging between prior and data
-\cite[see, e.g.,][\S~1.2.3.1]{2013:diss-gw}.
+(see, e.g., \cite[\S~1.2.3.1]{2013:diss-gw}).
 %as will be illustrated in Sect.~\ref{sec:beta-binom}.
 While this averaging property allows for great tractability,
 it is also at the root of prior-data conflict insensitivity: 
@@ -1055,20 +1060,45 @@ and the corresponding lower and upper bounds for $\yn$ as functions of $s$ (righ
 \section{Discussion and Concluding Remarks}
 \label{sec:concluding}
 
-$y_c \neq 0.5$ not by turning but by shifting?
+We have described a new method for generating prior parameter sets in a conjugate setting
+that, in addition to prior-data conflict sensitivity, reflect strong prior-data agreement.
+%The parameter set was defined in terms of a novel parametrization \cite{2015:mik-isipta}.
 
-***it's worth to study more shapes to cater for other objectives in inference behaviour
+Our first results decribed in this paper are encouraging,
+and future studies should consider elicitation of the boatshape set parameters $\ezl, \ezu, a$ and $b$ in more detail;
+pre-posterior analysis seems the most promising avenue for this.
 
-***more detailed study in elicitation of the boatshape set parameters necessary,
-which should be done by pre-posterior analysis
+We did not discuss the case of $y_c \neq 0.5$ in detail,
+but suggested to rotate the basic set \eqref{eq:basicset} around $(-2,0)$
+such that the ray of constant expectation $y_c$ forms the axis of symmetry of $\EZ$,
+and gave a numerical example for this approach in Figure~\ref{fig:ppp2}.
+It would be however interesting to investigate whether another way of defining a set aligned to a certain ray could be useful,
+namely by shifting $\EZ$ from \eqref{eq:basicset} in the $\eo$ dimension according to \eqref{eq:raysofconstantexpectation}.
+Furthermore, alternatives to the functional form of the contour functions \eqref{eq:basiccontours} could also be worth of study,
+like, e.g., the second and third quadrant's part of an ellipse $a\ez^2 + b\eo^2 = c$.
 
-***with the boatshape, we have a more flexible model for prior information
-while remaining within the generalized Bayesian paradigm,
-opening up a wide field for research
+In the parameter space described in Section~\ref{sec:miksworld},
+the update from prior parameter set to posterior parameter set
+amounts to a purely data-dependent translation, leaving the set shape unchanged.
+This allowed us to design a set shape according to certain desired inference properties.
+The boatshape is thus just a prototypical attempt in a framework that allows
+for flexible modeling of prior information and tailored posterior inference proerties,
+while remaining within the generalized Bayesian paradigm.
+The framework opens a wide field of research on set shapes for catering to other objectives in inference behaviour.
+
+The method was presented here for the case of Binomial observations,
+but it can be easily generalized to cover all sample distributions that belong to the exponential family,
+since for all of them, a parametrization of the conjugate prior in terms of $(\ez, \eo)$ can be constructed
+which again has a purely data-dependent translation as update step \cite[p.~56]{2015:mik-isipta}.
+
 
 % ------------ bibliography -------------
 
-\printbibliography
+%\section*{References}
+%\printbibliography[heading=none]
+\bibliographystyle{splncs03}
+\bibliography{boatpaper}
+
 
 
 \end{document}
