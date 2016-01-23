@@ -14,7 +14,7 @@ postscript("boatshape-domain.ps", width=5, height=5)
 domainplotter(xlims=c(-2,8), ylims=c(-5,5))
 dev.off()
 
-postscript("boatshape-vertical.ps", width=10.5, height=5)
+postscript("boatshape-vertical2.eps", width=8, height=4)
 par(mfrow=c(1,2))
 domainplotter(xlims=c(-2,8), ylims=c(-5,5))
 lines(c(1,1),c(-0.6,0.6),lwd=2)
