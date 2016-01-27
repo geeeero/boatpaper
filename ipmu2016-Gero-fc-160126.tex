@@ -300,7 +300,7 @@ From the viewpoint of the prior $p(\vartheta)$, the observed data $\vec{x}$ seem
 i.e., information from data is in conflict with prior assumptions \cite{2006:evans}. %\cite[see, e.g.,][]{2006:evans}.
 This is most relevant when there is not enough data to largely reduce the influence of the prior on the posterior;
 it is then unclear whether to put more trust to prior assumptions or to the observations,
-and posterior inferences should clearly reflect this state of uncertainty.
+posterior inferences should clearly reflect this state of uncertainty.
 \cite{Walter2009a} pointed out that
 both precise and imprecise models based on conjugate priors can be insensitive to prior-data conflict.
 
@@ -342,14 +342,14 @@ sets of priors such that the corresponding sets of posteriors
 show both \pdc\ sensitivity and a reaction to strong prior-data agreement.
 %***motivation: clever choice of prior sets
 %***emphazise that this is basically an idea for defining sets of priors***
-To keep things simple, we restrict ourselves here to the case of the Beta-Binomial model, %(see Sect.~\ref{sec:beta-binom}),
+To keep things simple, we restrict ourselves here to the case of the Beta-Binomial model (see Sect.~\ref{sec:beta-binom}),
 but the approach is generalizable to arbitrary canonical conjugate priors,
 and we will comment on this in the concluding remarks (Sect.~\ref{sec:concluding}).
 
 \cite{Walter2009a} used a parametrization 
 that allows for an intuitive interpretation of the parameters of the Beta distribution
 and clearly shows that the update step from prior to posterior
-amounts to a weighted average in the conjugate setting (Sect.~\ref{sec:genbayes}).
+amounts to a weighted average in the conjugate setting (Sect.~\ref{sec:beta-binom}).
 The new shape is instead defined in terms of another parametrization
 which was recently suggested by Bickis \cite{2015:mik-isipta}.
 We will therefore briefly characterise this novel parametrisation of canonical conjugate priors (Sect.~\ref{sec:miksworld}),
@@ -361,33 +361,12 @@ and show that it indeed leads to the desired properties (Sect.~\ref{sec:boatshap
 Section~\ref{sec:concluding} concludes the paper by discussing generalizations and potential applications. 
 
 
-\section{Generalized Bayesian Inference for Binary Data}
-\label{sec:genbayes}
 
-\iffalse
-\subsection{The Beta-Binomial Model}
+
+
+
+\section{The Beta-Binomial Model in Two Parametrizations}
 \label{sec:beta-binom}
-
-%which is usually parametrized with parameters $\alpha > 0$ and $\beta > 0$,
-\begin{align}
-f(p\mid\alpha,\beta) &= \frac{1}{B(\alpha,\beta)}\, p^{\alpha-1}\, (1-p)^{\beta-1}\,,
-\label{eq:betadensab}
-\end{align}
-where $B(\cdot,\cdot)$ is the Beta function.
-In short, we write $p \sim \be(\alpha,\beta)$.
-%$\alpha$ and $\beta$ can be interpreted as pseudocounts,
-%giving the number of virtual successes and failures, respectively.
-The combination of a Binomial sampling model with this conjugate Beta prior is called \emph{Beta-Binomial model},
-and $\alpha$ and $\beta$ are called \emph{hyperparameters}.
-With $S\mid p \sim \bin(n,p)$ and $p \sim \be(\az,\bz)$, the posterior based on $s$ successes is $p \mid s \sim \be(\an,\bn)$,
-with
-%\begin{align}
-$\an = \az + s$ and $\bn= \bz + n - s$.
-%\label{eq:betapostab}
-%\end{align}
-Note that $\az$ and $\bz$ can be interpreted as pseudocounts,
-forming a hypothetical sample with $\az$ sucesses and $\bz$ failures.
-\fi
 
 Consider an experiment with two possible outcomes,
 \emph{success} and \emph{failure}, and success arising with probability $p$.
@@ -398,32 +377,76 @@ known $n$: $S\mid p \sim \bin(n,p)$, which means
 f(s\mid p) &= P(S = s \mid p) = {n \choose s} p^s (1-p)^{n-s},\quad s \in \{0, 1, \ldots, n\}\,.
 \label{eq:binompmf}
 \end{align}
-In a Bayesian setting, information about $p$ is expressed by a prior distribution $f(p)$.
+In a Bayesian setting, information about $p$ is expressed by prior distribution $f(p)$.
 The posterior distribution may be hard to obtain due to the integral in the denominator of \eqref{eq:bayesrule}.
-%
+
 However, computations are straightforward if one uses a parametric family for the prior distribution such that
 the posterior distribution belongs to the same family as the prior, just with updated parameters.
 Such prior distributions are called \emph{conjugate} priors.
 The conjugate prior for the Binomial distribution \eqref{eq:binompmf} is the Beta distribution,
+which is usually parametrized with parameters $\alpha > 0$ and $\beta > 0$,
 \begin{align}
-%$f(p\mid\nz,\yz) = \frac{p^{\nz\yz-1}\, (1-p)^{\nz(1-\yz)-1}}{B(\nz\yz,\nz(1-\yz))}$.
-f(p) &\propto p^{\nz\yz-1}\, (1-p)^{\nz(1-\yz)-1}\,.
-\label{eq:betadensny}
+f(p\mid\alpha,\beta) &= \frac{1}{B(\alpha,\beta)}\, p^{\alpha-1}\, (1-p)^{\beta-1}\,,
+\label{eq:betadensab}
 \end{align}
-We use the parametrisation in terms of the \emph{canonical}%
-\footnote{\emph{Canonical} parameters are identified from rewriting the density in canonical form;
-see for example \cite[pp.~202 and 272f]{2000:bernardosmith}, or \cite[\S 1.2.3.1]{2013:diss-gw}.
-The canonical form gives a common structure to all conjugacy results in exponential families.}
-parameters $\nz > 0$ and $\yz \in (0,1)$,
-these are related to the usual parameters $\az > 0$ and $\bz > 0$ through
-$\nz = \az + \bz$ and $\yz = \az / (\az+\bz)$,
-so $\yz$ is is the prior expectation for $p$,
-and $\nz$ is a pseudocount or prior strength parameter.%
-\footnote{Since $\V(p) = \frac{\yz (1-\yz)}{\nz + 1}$,
-larger $\nz$ values lead to greater concentration of probability mass around $\yz$.}
+where $B(\cdot,\cdot)$ is the Beta function.
+In short, we write $p \sim \be(\alpha,\beta)$.
+%$\alpha$ and $\beta$ can be interpreted as pseudocounts,
+%giving the number of virtual successes and failures, respectively.
+The combination of a Binomial sampling model with this conjugate Beta prior is called \emph{Beta-Binomial model},
+and $\alpha$ and $\beta$ are called \emph{hyperparameters}.
 We denote prior parameter values by upper index~${}\uz$ and posterior parameter values, after $n$ observations,
 by upper index~${}\un$.
-The posterior given that $s$ out of $n$ components function is a Beta distribution with updated parameters
+With $S\mid p \sim \bin(n,p)$ and $p \sim \be(\az,\bz)$, the posterior based on $s$ successes is $p \mid s \sim \be(\an,\bn)$,
+with
+%\begin{align}
+$\an = \az + s$ and $\bn= \bz + n - s$.
+%\label{eq:betapostab}
+%\end{align}
+Note that $\az$ and $\bz$ can be interpreted as pseudocounts,
+forming a hypothetical sample with $\az$ sucesses and $\bz$ failures.
+
+We will use an alternative parametrisation of the Beta distribution with hyperparameters
+%\begin{align}
+$\nz = \az + \bz$ and $\yz = \frac{\az}{\az+\bz}$.
+%\label{eq:betareparam}
+%\end{align}
+Writing $p \sim \be(\nz,\yz)$ thus corresponds to
+%\begin{align}
+%$f(p\mid\nz,\yz) = \frac{p^{\nz\yz-1}\, (1-p)^{\nz(1-\yz)-1}}{B(\nz\yz,\nz(1-\yz))}$.
+$f(p) \propto p^{\nz\yz-1}\, (1-p)^{\nz(1-\yz)-1}$.
+%\label{eq:betadensny}
+%\end{align}
+$\nz > 0$ and $\yz \in (0,1)$ are sometimes called \emph{canonical} parameters,
+identified from rewriting the density in canonical form;
+see for example \cite[pp.~202 and 272f]{2000:bernardosmith}, or \cite[\S 1.2.3.1]{2013:diss-gw}.
+(This canonical form gives a common structure to all conjugacy results in exponential families.)
+%In this parametrisation, the updated, posterior parameters are given by
+%\begin{align}
+%\nn &= \nz + n\,, &
+%\yn &= \frac{\nz}{\nz + n} \cdot \yz + \frac{n}{\nz + n} \cdot \frac{s}{n}\,.
+%\label{eq:betapostny}
+%\end{align}
+%and we write $p\mid s \sim \be(\nn,\yn)$.
+From the properties of the Beta distribution,
+it follows that $\yz = \E[p]$ is the prior expectation for the functioning probability $p$,
+and that larger $\nz$ values lead to greater concentration of probability mass around $\yz$,
+since $\V(p) = \frac{\yz (1-\yz)}{\nz + 1}$.
+Consequently, $\nz$ represents the prior strength
+and moreover can be directly interpreted as a (total) pseudocount due to the relation $\nz = \az + \bz$.
+
+
+
+{\bf NOTE: I think the above introduction if unnecessarily tedious; we can just briefly introduce the form with n,y as hyperparameters
+as this is the one used. Center the corresponding pdf, same for text just below. Parametrisation is spelled inconsistently.
+Actually, I think Sections 2 and 3 can be merged, come to think of it, it can perhaps be mostly deleted as you then go on using
+the boatshape in Mik's parametrisation..}
+
+
+
+The posterior given that $s$ out of $n$ components function,
+written in terms of $\nz$ and $\yz$,
+is a Beta distribution with updated parameters
 \begin{align}
 \nn &= \nz + n\,, &
 \yn &= \frac{\nz}{\nz + n} \cdot \yz + \frac{n}{\nz + n} \cdot \frac{s}{n}\,.
@@ -431,24 +454,30 @@ The posterior given that $s$ out of $n$ components function is a Beta distributi
 \end{align}
 Thus, after observing $s$ successes in $n$ trials,
 the posterior mean $\yn$ for $p$ is a weighted average of
-the prior mean $\yz$ and the observed fraction of successes $s/n$,
-with weights proportional to $\nz$ and $n$, respectively.
-%So $\nz$ takes on the same role for the prior mean $\yz$
-%as the sample size $n$ does for the observed mean $s/n$.
-%Consequently, $\nz$ represents the prior strength
-%and moreover can be directly interpreted as a (total) pseudocount due to the relation $\nz = \az + \bz$.
+the prior mean $\yz$ and $s/n$ (the observed fraction of successes),
+with weights $\nz$ and $n$, respectively.
+So $\nz$ takes on the same role for the prior mean $\yz$
+as the sample size $n$ does for the observed mean $s/n$,
+confirming its interpretation as a pseudocount.
 
-%The parametrisation in terms of prior mean and prior strength (or pseudocount)
-In a conjugate setting, learning from data thus corresponds to averaging between prior and data.
-Conjugacy is attractive because it makes Bayesian inference easily tractable
-and enhances the interpretability of the model and prior specification.
+The parametrization in terms of prior mean and prior strength (or pseudocount)
+makes clear that in this conjugate setting,
+learning from data corresponds to averaging between prior and data.
+This form is attractive because it enhances the interpretability of the model and prior specification,
+and makes Bayesian inference easily tractable.
 However, it also makes clear what should be a serious concern in any Bayesian analysis:
 when observed data differ greatly from what is expressed in the prior,
 this conflict is simply averaged out
 and is not reflected in the posterior or posterior predictive distributions.
 
-%\section{Generalized Bayesian Inference with Sets of Beta Priors}
-%\label{sec:setsofbetapriors}
+
+
+
+
+
+
+\section{Generalized Bayesian Inference with Sets of Beta Priors}
+\label{sec:setsofbetapriors}
 
 As was shown by \cite{Walter2009a}, %Walter \& Augustin (2009),
 it is possible obtain a meaningful reaction to prior-data conflict while retaining tractability
@@ -470,8 +499,9 @@ that are \emph{linear functions} of $\nz$ and $\yz$,
 as the linearity ensures that bounds must correspond to the extreme points of the convex set of priors,
 which are the Beta priors with $(\nz, \yz) \in \PZ$.
 For inferences not linear in $\nz$ and $\yz$, meaningful bounds might not exist.%
-\footnote{For example, $\V(p)$, the prior variance for $p$, is nonlinear in $\nz$ and $\yz$,
-and it is intuitively clear that $\V(p)$ can be larger for mixture distributions than for `pure' Beta distributions.}
+\footnote{Consider for example the prior variance for $p$, $\V(p) = \frac{\yz (1-\yz)}{\nz + 1}$,
+being nonlinear in $\nz$ and $\yz$.
+It is intuitively clear that $\V(p)$ can be larger for mixture distributions than for `pure' Beta distributions.}
 
 In both cases, the set of posteriors $\MN$ is obtained by updating each prior in $\MZ$ according to Bayes' Rule.
 This element-by-element updating can be rigorously justified
@@ -540,10 +570,10 @@ In contrast, more complex shades may allow for more sophisticated model behaviou
 at the cost of more complex handling.
 
 
-\section{A Novel Parametrisation for Beta Priors}
+\section{A Third Parametrization for Beta Priors}
 \label{sec:miksworld}
 
-In the parametrization in terms of $\nz$ and $\yz$, % as described in Sect.~\ref{sec:beta-binom},
+In the parametrization in terms of $\nz$ and $\yz$ as described in Sect.~\ref{sec:beta-binom},
 a conjugate Beta prior is updated to its respective posterior by a shift in the parameter space,
 given by rewriting \eqref{eq:nyupdate}:
 \begin{align*}
@@ -661,7 +691,7 @@ as illustrated in Fig.~\ref{fig:boatshape-vertical}.
 \centering
 %\fbox{%
 %\includegraphics[trim = 16mm 48mm 25mm 62mm, clip, width=\textwidth]{R/boatshape-vertical2}%
-\includegraphics[trim = 2mm 6mm 10mm 20mm, clip, width=0.8\textwidth]{R/boatshape-vertical2}%
+\includegraphics[trim = 2mm 6mm 10mm 20mm, clip, width=0.8\textwidth]{boatshape-vertical2}%
 %}
 \caption[Line segment parameter set $\EZ$ %
 and respective posterior sets for $s/n=0.5$ and $s/n=0.9$.]%
@@ -677,7 +707,7 @@ Note that all sets have the same size, imprecision decreasing only through their
 For \pdc\ sensitivity, we need shapes that cover a range of $\eta_0$ values,
 just like we needed sets with a range of $\nz$ values to ensure this property.
 Sets that are elongated along a certain ray of constant expectation
-will behave here similar to the rectangular shapes of Sect.~\ref{sec:genbayes}.
+will behave here similar to the rectangular shapes of Sect.~\ref{sec:setsofbetapriors}.
 When shifted along its ray of constant expectation,
 imprecision will be reduced as the shadow of the set will become smaller just as described above for line segments.
 When such a shape is instead shifted away from its ray of constant expectation,
@@ -774,7 +804,7 @@ The same prior and posterior sets in terms of $(\nz, \yz)$ are depicted in Fig.~
 \centering
 %\fbox{%
 %\includegraphics[trim = 20mm 35mm 30mm 45mm, clip, width=\textwidth]{R/boatshape-posterior-mik}%
-\includegraphics[width=\textwidth]{R/boatshape-posterior-mik}%
+\includegraphics[width=\textwidth]{boatshape-posterior-mik}%
 %}
 \caption[Boatshape prior and posterior sets for data in accordance and in conflict with the prior set.]%
 {Boatshape prior and posterior sets for data in accordance and in conflict with the prior set.
@@ -804,7 +834,7 @@ $\ezu$ plays only a role in determining when the `unhappy learning' phase starts
 \centering
 %\fbox{%
 %\includegraphics[trim = 15mm 45mm 25mm 60mm, clip, width=\textwidth]{R/boatshape-posterior-normal}%
-\includegraphics[width=\textwidth]{R/boatshape-posterior-normal}%
+\includegraphics[width=\textwidth]{boatshape-posterior-normal}%
 %}
 \caption[Boatshape prior and posterior sets from Fig.~\ref{fig:boatshape-posterior-mik} in the $(\nz,\yz)$ parametrisation.]%
 {Boatshape prior and posterior sets from Fig.~\ref{fig:boatshape-posterior-mik} in the $(\nz,\yz)$ parametrisation.
@@ -889,7 +919,7 @@ that is, the stronger the prior-data agreement effect of the shape.
 \centering
 %\fbox{
 %\includegraphics[trim = 48mm 35mm 49mm 47mm, clip, width=0.8\textwidth]{R/prior-vs-posterior-eta0u.eps}%
-\includegraphics[trim = 1mm 5mm 10mm 20mm, clip, width=0.8\textwidth]{R/prior-vs-posterior-eta0u.eps}%
+\includegraphics[trim = 1mm 5mm 10mm 20mm, clip, width=0.8\textwidth]{prior-vs-posterior-eta0u.eps}%
 %}
 \caption{Illustration for the argument that ${\eta_0^u}\un > {\eta_0^u}\uz + n$.}
 \label{fig:spda1}
@@ -987,7 +1017,7 @@ as ${\eta_0^u}\un$ moves to the left, and ${\eta_0^l}\un$ moves to the right.
 We will call such updating of the prior parameter set
 where both lower and upper posterior touchpoint are in the middle of the set as \emph{happy learning}.
 \begin{figure}
-\includegraphics[width=\textwidth]{R/pppboat-ipmu1.eps}
+\includegraphics[width=\textwidth]{pppboat-ipmu1.eps}
 \caption{Boatshape set with $y_c = 0.5$ together with rectangle set, $1 \times [\yzl, \yzu]$ and $2 \times [\yzl, \yzu]$
 with same prior imprecision (left),
 and the corresponding lower and upper bounds for $\yn$ as functions of $s$ (right).}
@@ -1021,7 +1051,7 @@ We see that $[\ynl, \ynu]$ for the boatshape set is nearly as short as for the l
 when $s \approx 0.75$, but that unlike those, the boatshape offers \pdc\ sensitivity.
 Interestingly, all four sets lead to a similar $\ynl$ for $s < 5$.
 \begin{figure}
-\includegraphics[width=\textwidth]{R/pppboat-ipmu2.eps}
+\includegraphics[width=\textwidth]{pppboat-ipmu2.eps}
 \caption{Boatshape set with $y_c = 0.75$ together with rectangle set, $1 \times [\yzl, \yzu]$ and $2 \times [\yzl, \yzu]$
 with same prior imprecision (left),
 and the corresponding lower and upper bounds for $\yn$ as functions of $s$ (right).}
@@ -1054,7 +1084,7 @@ the update from prior parameter set to posterior parameter set
 amounts to a purely data-dependent translation, leaving the set shape unchanged.
 This allowed us to design a set shape according to certain desired inference properties.
 The boatshape is thus just a prototypical attempt in a framework that allows
-for flexible modeling of prior information and tailored posterior inference properties,
+for flexible modeling of prior information and tailored posterior inference proerties,
 while remaining within the generalized Bayesian paradigm.
 The framework opens a wide field of research on set shapes for catering to other objectives in inference behaviour.
 
