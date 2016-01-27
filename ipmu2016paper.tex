@@ -343,8 +343,8 @@ show both \pdc\ sensitivity and a reaction to strong prior-data agreement.
 %***motivation: clever choice of prior sets
 %***emphazise that this is basically an idea for defining sets of priors***
 To keep things simple, we restrict ourselves here to the case of the Beta-Binomial model, %(see Sect.~\ref{sec:beta-binom}),
-but the approach is generalizable to arbitrary canonical conjugate priors,
-and we will comment on this in the concluding remarks (Sect.~\ref{sec:concluding}).
+but the approach is generalizable to arbitrary canonical conjugate priors.
+%and we will comment on this in the concluding remarks (Sect.~\ref{sec:concluding}).
 
 \cite{Walter2009a} used a parametrization 
 that allows for an intuitive interpretation of the parameters of the Beta distribution
@@ -389,15 +389,19 @@ Note that $\az$ and $\bz$ can be interpreted as pseudocounts,
 forming a hypothetical sample with $\az$ sucesses and $\bz$ failures.
 \fi
 
-Consider an experiment with two possible outcomes,
-\emph{success} and \emph{failure}, and success arising with probability $p$.
-The number of successes $S$ in a series of $n$ independent trials
-has a Binomial distribution with unknown parameter $p\in [0,1]$, for 
-known $n$: $S\mid p \sim \bin(n,p)$, which means
+%Consider an experiment with two possible outcomes,
+%\emph{success} and \emph{failure}, and success arising with probability $p$.
+%The number of successes $S$ in a series of $n$ independent trials
+%has a Binomial distribution with unknown parameter $p\in [0,1]$, for 
+%known $n$: $S\mid p \sim \bin(n,p)$, which means
+Consider the Binomial sample model
 \begin{align}
-f(s\mid p) &= P(S = s \mid p) = {n \choose s} p^s (1-p)^{n-s},\quad s \in \{0, 1, \ldots, n\}\,.
+f(s\mid p) &= P(S = s \mid p) = {n \choose s} p^s (1-p)^{n-s},\quad s \in \{0, 1, \ldots, n\}\,,
 \label{eq:binompmf}
 \end{align}
+giving the probability to observe $s$ successes in a series of $n$ independent trials
+when the success probability in each trial is $p$.
+%
 In a Bayesian setting, information about $p$ is expressed by a prior distribution $f(p)$.
 The posterior distribution may be hard to obtain due to the integral in the denominator of \eqref{eq:bayesrule}.
 %
@@ -407,10 +411,10 @@ Such prior distributions are called \emph{conjugate} priors.
 The conjugate prior for the Binomial distribution \eqref{eq:binompmf} is the Beta distribution,
 \begin{align}
 %$f(p\mid\nz,\yz) = \frac{p^{\nz\yz-1}\, (1-p)^{\nz(1-\yz)-1}}{B(\nz\yz,\nz(1-\yz))}$.
-f(p) &\propto p^{\nz\yz-1}\, (1-p)^{\nz(1-\yz)-1}\,.
+f(p) &\propto p^{\nz\yz-1}\, (1-p)^{\nz(1-\yz)-1}\,,
 \label{eq:betadensny}
 \end{align}
-We use the parametrisation in terms of the \emph{canonical}%
+written here in terms of the \emph{canonical}%
 \footnote{\emph{Canonical} parameters are identified from rewriting the density in canonical form;
 see for example \cite[pp.~202 and 272f]{2000:bernardosmith}, or \cite[\S 1.2.3.1]{2013:diss-gw}.
 The canonical form gives a common structure to all conjugacy results in exponential families.}
@@ -445,7 +449,7 @@ and enhances the interpretability of the model and prior specification.
 However, it also makes clear what should be a serious concern in any Bayesian analysis:
 when observed data differ greatly from what is expressed in the prior,
 this conflict is simply averaged out
-and is not reflected in the posterior or posterior predictive distributions.
+and is not reflected in the posterior distribution.
 
 %\section{Generalized Bayesian Inference with Sets of Beta Priors}
 %\label{sec:setsofbetapriors}
@@ -470,7 +474,7 @@ that are \emph{linear functions} of $\nz$ and $\yz$,
 as the linearity ensures that bounds must correspond to the extreme points of the convex set of priors,
 which are the Beta priors with $(\nz, \yz) \in \PZ$.
 For inferences not linear in $\nz$ and $\yz$, meaningful bounds might not exist.%
-\footnote{For example, $\V(p)$, the prior variance for $p$, is nonlinear in $\nz$ and $\yz$,
+\footnote{For example, $\V(p)$ is nonlinear in $\nz$ and $\yz$,
 and it is intuitively clear that $\V(p)$ can be larger for mixture distributions than for `pure' Beta distributions.}
 
 In both cases, the set of posteriors $\MN$ is obtained by updating each prior in $\MZ$ according to Bayes' Rule.
