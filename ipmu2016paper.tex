@@ -429,7 +429,7 @@ and $\nz$ is a pseudocount or prior strength parameter.%
 larger $\nz$ values lead to greater concentration of probability mass around $\yz$.}
 We denote prior parameter values by upper index~${}\uz$ and posterior parameter values, after $n$ observations,
 by upper index~${}\un$.
-The posterior given that $s$ successes in $n$ trials is a Beta distribution with updated parameters
+The posterior given $s$ successes in $n$ trials is a Beta distribution with updated parameters
 \begin{align}
 \nn &= \nz + n\,, &
 \yn &= \frac{\nz}{\nz + n} \cdot \yz + \frac{n}{\nz + n} \cdot \frac{s}{n}\,.
@@ -444,7 +444,7 @@ with weights proportional to $\nz$ and $n$, respectively.
 %Consequently, $\nz$ represents the prior strength
 %and moreover can be directly interpreted as a (total) pseudocount due to the relation $\nz = \az + \bz$.
 
-%The parametrisation in terms of prior mean and prior strength (or pseudocount)
+%The parametrization in terms of prior mean and prior strength (or pseudocount)
 In a conjugate setting, learning from data thus corresponds to averaging between prior and data.
 Conjugacy is attractive because it makes Bayesian inference easily tractable
 and enhances the interpretability of the model and prior specification.
@@ -546,7 +546,7 @@ In contrast, more complex shades may allow for more sophisticated model behaviou
 at the cost of more complex handling.
 
 
-\section{A Novel Parametrisation for Beta Priors}
+\section{A Novel Parametrization for Beta Priors}
 \label{sec:miksworld}
 
 In the parametrization in terms of $\nz$ and $\yz$, % as described in Sect.~\ref{sec:beta-binom},
@@ -565,7 +565,7 @@ This shape change from $\PZ$ to $\PN$ is problematic for understanding of the up
 as its effects on posterior inferences are difficult to grasp.
 
 Therefore, to isolate the influence of a set shape,
-we now consider a different parametrisation of the prior
+we now consider a different parametrization of the prior
 where each coordinate has the same shift in updating.
 The updating of a parameter set
 then corresponds to a shift of the entire set within the parameter space.
@@ -631,7 +631,7 @@ will have a constant expectation of $y_c$.
 The domain $\Eta$, and these \emph{rays of constant expectation} emanating from the coordinate $(-2,0)$,
 can be seen in Fig.~\ref{fig:boatshape-vertical}.
 
-In the parametrisation in terms of $(\nz,\yz)$,
+In the parametrization in terms of $(\nz,\yz)$,
 posterior inferences based on $\yn$ become more precise with increasing $n$
 because $\Delta_y(\PN) \to 0$ for $n \to \infty$.
 In the domain $\Eta$, %as depicted in Figure~\ref{fig:boatshape-domain},
@@ -718,7 +718,7 @@ such that the union of all credible intervals for Beta distributions with $(\ezn
 taken as a posterior inference reflecting uncertainty due to both vague prior knowledge and stochasticity, will be shorter.
 %
 %In the remainder of this section, 
-%we will suggest a parametrisation for a curved shape in the $(\eta_0, \eta_1)$ space.
+%we will suggest a parametrization for a curved shape in the $(\eta_0, \eta_1)$ space.
 %The definition, along with some graphical examples, is given in Sect.~\ref{sec:basicdefboat},
 %and we discuss a number of technical results for this shape in subsequent sections.
 
@@ -726,7 +726,7 @@ taken as a posterior inference reflecting uncertainty due to both vague prior kn
 \subsection{Basic Definition}
 \label{sec:basicdefboat}
 
-We will now present a parametrisation for such a boat-shaped parameter set $\EZ$.
+We will now present a parametrization for such a boat-shaped parameter set $\EZ$.
 To keep things simple, we will consider here only prior sets
 that are symmetric around the $\eta_0$ axis, i.e., centered around $y_c = 0.5$,
 expressing the prior information that we deem a fraction of successes of $\frac{s}{n} = \frac{1}{2}$ as the most probable.
@@ -771,8 +771,8 @@ The same prior and posterior sets in terms of $(\nz, \yz)$ are depicted in Fig.~
 %\fbox{%
 %\includegraphics[trim = 15mm 45mm 25mm 60mm, clip, width=\textwidth]{R/boatshape-prior}%
 %}
-%\caption[Boatshape prior set in the parametrisation via $(\eta_0,\eta_1)$ and via $(\nz,\yz)$.]%
-%{Boatshape prior set in the parametrisation via $(\eta_0,\eta_1)$ (left) and via $(\nz,\yz)$ (right),
+%\caption[Boatshape prior set in the parametrization via $(\eta_0,\eta_1)$ and via $(\nz,\yz)$.]%
+%{Boatshape prior set in the parametrization via $(\eta_0,\eta_1)$ (left) and via $(\nz,\yz)$ (right),
 %with parameters $\ezl=1$, $\ezu=6$, $a=2$, and $b=0.8$.}
 %\label{fig:boatshape-prior}
 %\end{figure}
@@ -812,8 +812,8 @@ $\ezu$ plays only a role in determining when the `unhappy learning' phase starts
 %\includegraphics[trim = 15mm 45mm 25mm 60mm, clip, width=\textwidth]{R/boatshape-posterior-normal}%
 \includegraphics[width=\textwidth]{R/boatshape-posterior-normal}%
 %}
-\caption[Boatshape prior and posterior sets from Fig.~\ref{fig:boatshape-posterior-mik} in the $(\nz,\yz)$ parametrisation.]%
-{Boatshape prior and posterior sets from Fig.~\ref{fig:boatshape-posterior-mik} in the $(\nz,\yz)$ parametrisation.
+\caption[Boatshape prior and posterior sets from Fig.~\ref{fig:boatshape-posterior-mik} in the $(\nz,\yz)$ parametrization.]%
+{Boatshape prior and posterior sets from Fig.~\ref{fig:boatshape-posterior-mik} in the $(\nz,\yz)$ parametrization.
 The rectangular prior set with the same range for $\yz$ as the prior boatshape set
 and the corresponding posterior sets are drawn with dashed lines. 
 Note that all posterior boatshape sets have shorter $\yn$ ranges than their corresponding posterior rectangle sets.}
