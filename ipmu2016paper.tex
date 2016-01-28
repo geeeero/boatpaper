@@ -332,14 +332,15 @@ In the present paper, we want to further refine this approach
 by complementing the increased imprecision reaction to \pdc\
 with a `bonus' in precision for the case when prior and data coincide especially well,
 a situation that we will call \emph{strong prior-data agreement}.
+These desired inference properties are achieved through a novel, more complex parameter set shape.
 In terms of the discussion at the end of \cite[\S~3.1.4]{2013:diss-gw},
-we thus sacrifice a bit of tractability through employing a more complex parameter set shape
-in order to obtain improved model behaviour.%
+we thus sacrifice tractability to some extent %through employing a more complex parameter set shape
+in order to obtain improved model behaviour.
 %\footnote{Some first results in this direction were already presented in \cite[\S~A.2]{2013:diss-gw}.}
-
-The present work presents an idea how to define, through a novel parameter set shape,
-sets of priors such that the corresponding sets of posteriors
-show both \pdc\ sensitivity and a reaction to strong prior-data agreement.
+%
+%We present an idea how to define, through a novel parameter set shape,
+%sets of priors such that the corresponding sets of posteriors
+%show both \pdc\ sensitivity and a reaction to strong prior-data agreement.
 %***motivation: clever choice of prior sets
 %***emphazise that this is basically an idea for defining sets of priors***
 To keep things simple, we restrict ourselves here to the case of the Beta-Binomial model, %(see Sect.~\ref{sec:beta-binom}),
@@ -365,43 +366,22 @@ Section~\ref{sec:concluding} concludes the paper by discussing generalizations a
 \section{Generalized Bayesian Inference for Binary Data}
 \label{sec:genbayes}
 
-\iffalse
-\subsection{The Beta-Binomial Model}
-\label{sec:beta-binom}
-
-%which is usually parametrized with parameters $\alpha > 0$ and $\beta > 0$,
-\begin{align}
-f(p\mid\alpha,\beta) &= \frac{1}{B(\alpha,\beta)}\, p^{\alpha-1}\, (1-p)^{\beta-1}\,,
-\label{eq:betadensab}
-\end{align}
-where $B(\cdot,\cdot)$ is the Beta function.
-In short, we write $p \sim \be(\alpha,\beta)$.
-%$\alpha$ and $\beta$ can be interpreted as pseudocounts,
-%giving the number of virtual successes and failures, respectively.
-The combination of a Binomial sampling model with this conjugate Beta prior is called \emph{Beta-Binomial model},
-and $\alpha$ and $\beta$ are called \emph{hyperparameters}.
-With $S\mid p \sim \bin(n,p)$ and $p \sim \be(\az,\bz)$, the posterior based on $s$ successes is $p \mid s \sim \be(\an,\bn)$,
-with
-%\begin{align}
-$\an = \az + s$ and $\bn= \bz + n - s$.
-%\label{eq:betapostab}
-%\end{align}
-Note that $\az$ and $\bz$ can be interpreted as pseudocounts,
-forming a hypothetical sample with $\az$ sucesses and $\bz$ failures.
-\fi
-
 %Consider an experiment with two possible outcomes,
 %\emph{success} and \emph{failure}, and success arising with probability $p$.
 %The number of successes $S$ in a series of $n$ independent trials
 %has a Binomial distribution with unknown parameter $p\in [0,1]$, for 
 %known $n$: $S\mid p \sim \bin(n,p)$, which means
-Consider the Binomial sample model
-\begin{align}
-f(s\mid p) &= P(S = s \mid p) = {n \choose s} p^s (1-p)^{n-s},\quad s \in \{0, 1, \ldots, n\}\,,
-\label{eq:binompmf}
-\end{align}
-giving the probability to observe $s$ successes in a series of $n$ independent trials
-where the success probability in each trial is $p$.
+%
+%Consider the Binomial sample model
+%\begin{align}
+%f(s\mid p) &= P(S = s \mid p) = {n \choose s} p^s (1-p)^{n-s},\quad s \in \{0, 1, \ldots, n\}\,,
+%\label{eq:binompmf}
+%\end{align}
+%giving the probability to observe $s$ successes in a series of $n$ independent trials
+%where the success probability in each trial is $p$.
+%
+The Binomial distribution models the probability to observe $s$ successes in a series of $n$ independent trials
+given $p$, the success probability in each trial.
 %
 In a Bayesian setting, information about $p$ is expressed by a prior distribution $f(p)$.
 The posterior distribution may be hard to obtain due to the integral in the denominator of \eqref{eq:bayesrule}.
@@ -409,8 +389,10 @@ The posterior distribution may be hard to obtain due to the integral in the deno
 However, computations are straightforward if one uses a parametric family for the prior distribution such that
 the posterior distribution belongs to the same family as the prior, just with updated parameters.
 Such prior distributions are called \emph{conjugate} priors.
-%The conjugate prior for the Binomial distribution \eqref{eq:binompmf} is the Beta distribution,
-The conjugate prior for \eqref{eq:binompmf} is the Beta distribution,
+The conjugate prior for the Binomial distribution is the Beta distribution,%
+%The conjugate prior for \eqref{eq:binompmf} is the Beta distribution,%
+\footnote{We denote prior parameter values by upper index~${}\uz$ and posterior parameter values, after $n$ observations,
+by upper index~${}\un$.}
 \begin{align}
 %$f(p\mid\nz,\yz) = \frac{p^{\nz\yz-1}\, (1-p)^{\nz(1-\yz)-1}}{B(\nz\yz,\nz(1-\yz))}$.
 f(p) &\propto p^{\nz\yz-1}\, (1-p)^{\nz(1-\yz)-1}\,,
@@ -425,10 +407,8 @@ these are related to the usual parameters $\az > 0$ and $\bz > 0$ through
 $\nz = \az + \bz$ and $\yz = \az / (\az+\bz)$,
 so $\yz$ is the prior expectation for $p$,
 and $\nz$ is a pseudocount or prior strength parameter.%
-\footnote{Since $\V(p) = \frac{\yz (1-\yz)}{\nz + 1}$,
+\footnote{Since $\V(p) = \frac{\yz (1-\yz)}{\nz + 1}$ is decreasing in $\nz$,
 larger $\nz$ values lead to greater concentration of probability mass around $\yz$.}
-We denote prior parameter values by upper index~${}\uz$ and posterior parameter values, after $n$ observations,
-by upper index~${}\un$.
 The posterior given $s$ successes in $n$ trials is a Beta distribution with updated parameters
 \begin{align}
 \nn &= \nz + n\,, &
@@ -463,19 +443,20 @@ by using sets of priors $\MZ$ produced through parameter sets $\PZ = [\nzl, \nzu
 More generally, \cite[\S 3.1]{2013:diss-gw} describes a framework for
 Bayesian inference using sets of conjugate priors based on arbitrary parameter sets $\PZ$.
 %This sets of priors approach also allows to model vague and incomplete expert knowledge.
-Applying this framework to the Beta-Binomial model described above,
+%Applying this framework to the Beta-Binomial model described above,
+Here,
 each prior parameter pair $(\nz, \yz) \in \PZ$ corresponds to a Beta prior,
-so one may take $\MZ$ directly as a set of Beta priors.
-Alternatively, one may take the convex hull of all Beta priors with $(\nz, \yz) \in \PZ$ as $\MZ$,
-i.e., $\MZ$ consists of all finite mixtures of Beta priors with $(\nz, \yz) \in \PZ$.
+so $\MZ$ can be taken directly as a set of Beta priors.
+Alternatively, one may take the convex hull of all Beta priors with $(\nz, \yz) \in \PZ$ as $\MZ$;
+$\MZ$ then consists of all finite mixtures of Beta distributions with $(\nz, \yz) \in \PZ$.
 
 It is a modeling decision whether to take $\MZ$ as containing only Beta priors or also the mixtures.
-In the first case, bounds for any inferences can be obtained by optimizing over $\PZ$.
+In the first case, bounds for all inferences can be obtained by optimizing over $\PZ$.
 In the second case, optimizing over $\PZ$ will only yield bounds for all inferences
 that are \emph{linear functions} of $\nz$ and $\yz$,
 as the linearity ensures that bounds must correspond to the extreme points of the convex set of priors,
 which are the Beta priors with $(\nz, \yz) \in \PZ$.
-For inferences not linear in $\nz$ and $\yz$, meaningful bounds might not exist.%
+For inferences not linear in $\nz$ and $\yz$, only trivial bounds might exist.%
 \footnote{For example, $\V(p)$ is nonlinear in $\nz$ and $\yz$,
 and it is intuitively clear that $\V(p)$ can be larger for mixture distributions than for `pure' Beta distributions.}
 
@@ -491,21 +472,21 @@ leading to the set of updated parameters
 \end{align}
 In the second case, the set of Beta distributions corresponding to $(\nn, \yn) \in \PN$
 forms the extreme points of the convex set of posteriors $\MN$,
-such that, just like $\MZ$, $\MN$ can be described as a set of all finite mixtures of Beta distributions,
-but now with $(\nn, \yn) \in \PN$, see \cite[pp.~56f]{2013:diss-gw}.
+such that, just like $\MZ$, $\MN$ can be described as a set of all finite mixtures of Beta distributions
+with $(\nn, \yn) \in \PN$, see \cite[pp.~56f]{2013:diss-gw}.
 
-The set of posteriors $\MN$ forms the basis for all inferences,
-leading to probability \emph{ranges} obtained by optimizing over $\MN$.
-As a running example, in the Beta-Binomial model %as discussed in Section~\ref{sec:beta-binom},
+$\MN$ forms the basis for all inferences,
+leading to probability \emph{ranges} obtained by minimizing and maximizing over $\MN$.
+For example, %in the Beta-Binomial model %as discussed in Section~\ref{sec:beta-binom},
 the posterior predictive probability %$[\lpr,\upr]$
-for the event that a future single draw is a success is equal to $\yn$, and so we get,
+for the event that a future single draw is a success is equal to $\yn$;
 for an imprecise model $\MZ$ based on $\PZ$,
-the lower and upper probability
+the lower and upper probability are
 \begin{align*}
 \inf_{\PN} \yn &= \inf_{\PZ} \frac{\nz\yz + s}{\nz +n} & &\text{and} &
 \sup_{\PN} \yn &= \sup_{\PZ} \frac{\nz\yz + s}{\nz +n}\,.
 \end{align*}
-
+%
 The relation between $\PZ$ and $\MZ$, as well as between $\PN$ and $\MN$,
 allows to characterize model properties through properties of $\PZ$ and $\PN$,
 as is done in \cite[\S 3.1.2 -- 3.1.4]{2013:diss-gw}.
@@ -515,14 +496,15 @@ corresponds to a choice of $\PZ = \nz \times (\yzl, \yzu)$ where $(\yzl, \yzu) =
 The model proposed by \cite{2005:quaeghebeurcooman} generally assumes $\PZ = \nz \times [\yzl, \yzu]$,
 and was shown to be insensitive to prior-data conflict by \cite{Walter2009a},
 who proposed parameter sets $\PZ = [\nzl, \nzu] \times [\yzl, \yzu]$ instead.
-
-%*** lower, upper $\yn$ \& range for QdC, rectangle, discuss some inference properties.
-Indeed, with $\PZ = \nz \times [\yzl, \yzu]$, we have $\PN = \nn \times [\ynl, \ynu]$, where
-\begin{align*}
-\ynl &= \frac{\nz\yzl + s}{\nz + n} & &\text{and} &
-\ynu &= \frac{\nz\yzu + s}{\nz + n}\,.
-\end{align*}
-The posterior imprecision in the $y$ dimension, denoted by $\Delta_y(\PN)$, is 
+%
+Indeed, for $\PZ = \nz \times [\yzl, \yzu]$, we get $\PN = \nn \times [\ynl, \ynu]$, where
+%\begin{align*}
+%\ynl &= \frac{\nz\yzl + s}{\nz + n} & &\text{and} &
+%\ynu &= \frac{\nz\yzu + s}{\nz + n}\,.
+%\end{align*}
+%$\ynl = \frac{\nz\yzl + s}{\nz + n}$ and $\ynu = \frac{\nz\yzu + s}{\nz + n}$.
+$\ynl = (\nz\yzl + s)/(\nz + n)$ and $\ynu = (\nz\yzu + s)/(\nz + n)$.
+The posterior imprecision in the $y$ dimension, denoted by $\Delta_y(\PN)$, is then
 \begin{align*}
 %\label{eq:deltay}
 \Delta_y(\PN) &= \ynu - \ynl = \frac{\nz (\yzu - \yzl)}{\nz +n}\,,
@@ -536,20 +518,20 @@ provide prior-data conflict sensitivity, since
 \Delta_y(\PN) &= \frac{\nzu (\yzu - \yzl)}{\nzu + n} %\nonumber\\
                + \inf_{\yz \in [\yzl,\yzu]} |s/n - \yz| \frac{n (\nzu - \nzl)}{(\nzl + n)(\nzu + n)}\,.
 \end{align*}
-
+%
 As discussed at the end of \cite[\S 3.1.4]{2013:diss-gw},
 the shape of $\PZ$ thus poses a trade-off:
 Less complex shapes are easy to handle and lead to tractable models,
 but will offer less flexibility in expressing prior information
 and may have undesired inference properties.
-In contrast, more complex shades may allow for more sophisticated model behaviour
-at the cost of more complex handling.
+In contrast, more complex shapes may allow for more sophisticated model behaviour
+at the cost of more involved handling.
 
 
 \section{A Novel Parametrization for Beta Priors}
 \label{sec:miksworld}
 
-In the parametrization in terms of $\nz$ and $\yz$, % as described in Sect.~\ref{sec:beta-binom},
+In terms of $\nz$ and $\yz$, % as described in Sect.~\ref{sec:beta-binom},
 a conjugate Beta prior is updated to its respective posterior by a shift in the parameter space,
 given by rewriting \eqref{eq:nyupdate}:
 \begin{align*}
@@ -557,24 +539,27 @@ given by rewriting \eqref{eq:nyupdate}:
 \yz &\mapsto %\frac{\nz}{\nz + n} \cdot \yz + \frac{n}{\nz + n} \cdot \frac{s}{n} = 
              \yz + \frac{s - n \yz}{\nz+n}\,.
 \end{align*}
-We see thus that, while the shift for the $n$ coordinate is the same for all elements $(\nz,\yz)$ of $\PZ$,
-the shift in the $y$ coordinate depends on $\nz$, $n$, $s$, and the location of $\yz$ itself
-(namely, how far $\yz$ is from $s/n$).
+The shift for the $n$ coordinate is the same for all elements $(\nz,\yz)$ of $\PZ$,
+while the shift in the $y$ coordinate instead depends on $\nz$, $n$, $s$, and the location of $\yz$ itself
+(in fact, how far $\yz$ is from $s/n$).
 Due to this, the shape of $\PZ$ changes during the update step.
 This shape change from $\PZ$ to $\PN$ is problematic for understanding of the update step in generalized Bayesian inference,
 as its effects on posterior inferences are difficult to grasp.
 
 Therefore, to isolate the influence of a set shape,
-we now consider a different parametrization of the prior
-where each coordinate has the same shift in updating.
-The updating of a parameter set
-then corresponds to a shift of the entire set within the parameter space.
-This parametrization has recently been developed by Bickis \cite{2015:mik-isipta}. %Mi\c{k}elis Bickis
-In this novel parametrization, a prior is represented by a coordinate $(\ezz,\eoz)$,
-where $\eoz$ replaces $\yz$, while $\ezz$ is just a shifted version of $\nz$.
+%we now consider a different parametrization of the prior
+%where each coordinate has the same shift in updating.
+%The updating of a parameter set
+%then corresponds to a shift of the entire set within the parameter space.
+%This parametrization has recently been developed by Bickis \cite{2015:mik-isipta}. %Mi\c{k}elis Bickis
+we consider a parametrization recently developed by Bickis \cite{2015:mik-isipta}.
+In this parametrization, each coordinate has the same shift in updating,
+such that updating of a parameter set corresponds to a shift of the entire set within the parameter space.
+In this novel parametrization, a conjugate prior is represented by a coordinate $(\ezz,\eoz)$,
+related to $(\nz, \yz)$ by
+%where $\eoz$ replaces $\yz$, while $\ezz$ is just a shifted version of $\nz$.
 %there, update step for $\nz$ is the same, and shift for parameter replacing $\yz$ is the same for all. 
-To keep things simple, we will not describe its derivation here (this is described in detail in \cite{2015:mik-isipta}),
-and present it in relation to $(\nz, \yz)$:
+%(its derivation is described in detail in \cite{2015:mik-isipta}):
 %\begin{equation}
 \begin{align}
 \label{eq:trafotony}
@@ -616,9 +601,9 @@ leads to a step of $1$ in the $\eta_0$ direction and of $-\frac{1}{2}$ in the $\
 %with rays of constant expectation for $y_c = \{0.1,0.2,\ldots,0.9\}$ (grey).}
 %\label{fig:boatshape-domain}
 %\end{figure}
-
+%
 While $\yz$ had the convenient property of being equal to
-the prior expectation of the mean sample statistic $s/n$,
+the prior expectation for $p$, %of the mean sample statistic $s/n$,
 $\eta_1$ is only slightly more difficult to interpret.
 From \eqref{eq:trafotony} we can derive that points $(\eta_0,\eta_1) \in \Eta$
 on rays emanating from the coordinate $(-2,0)$,
@@ -636,31 +621,33 @@ posterior inferences based on $\yn$ become more precise with increasing $n$
 because $\Delta_y(\PN) \to 0$ for $n \to \infty$.
 In the domain $\Eta$, %as depicted in Figure~\ref{fig:boatshape-domain},
 instead the rays of constant expectation fan out for growing $n$,
-while a parameter set will retain its size in updating.
-Increased precision in a posterior parameter set $\EN$, which is just
-its prior counterpart $\EZ$ shifted to the right,
-is given by the fact that the more $\EN$ is located to the right,
-the fewer rays of constant expectation $\EN$ it will intercept.
+while a parameter set will retain its size after updating.
+%Increased precision in a posterior parameter set $\EN$,
+%which is just its prior counterpart $\EZ$ shifted to the right,
+However, the more $\EN$ is located to the right,
+the fewer rays of constant expectation $\EN$ it will intercept,
+and so precision increases.
 Imprecision in terms of $\yn$
 can thus be imagined as the size of the `shadow' that a set $\EN$ casts
-when considering a light source in $(-2,0)$. %(the point from which the rays of constant expectation emanate).
+given a light source in $(-2,0)$. %(the point from which the rays of constant expectation emanate).
 The smaller this shadow, the more precise the inferences.
-In terms of the $(\nz, \yz)$ parametrization, we will denote the bounds of this shadow by $\ynl$ and $\ynu$:
+%In terms of the $(\nz, \yz)$ parametrization, we will denote the bounds of this shadow by $\ynl$ and $\ynu$:
+We denote the bounds of this shadow by $\ynl$ and $\ynu$,
 \begin{align*}
 \ynl &:= \min_{(\ezn,\eon) \in \EN} \frac{\eon}{\ezn+2} + \frac{1}{2}\,, &
-\ynu &:= \max_{(\ezn,\eon) \in \EN} \frac{\eon}{\ezn+2} + \frac{1}{2}\,.
+\ynu &:= \max_{(\ezn,\eon) \in \EN} \frac{\eon}{\ezn+2} + \frac{1}{2}\,,
 \end{align*}
-We call the $\ez$ coordinate of $\arg\min_{(\eta_0,\eta_1) \in \EN} \yn$ and $\arg\max_{(\eta_0,\eta_1) \in \EN} \yn$
+and call the $\ez$ coordinate of $\arg\min_{(\eta_0,\eta_1) \in \EN} \yn$ and $\arg\max_{(\eta_0,\eta_1) \in \EN} \yn$
 the \emph{lower} and \emph{upper touchpoint} of $\EN$ responsible for the shadow $[\ynl, \ynu]$.
 Mutatis mutandis, the same definitions can be made for the prior set $\EZ$.
 
 Due to the fanning out of rays, most shapes for $\EZ$ will lead to decreasing imprecision for increasing $n$.
-Indeed, models with $\PZ = \nz \times [\yzl, \yzu]$
-are represented here again by a line segment $\EZ = \ezz \times [\eozl,\eozu]$.
+For example, models with $\PZ = \nz \times [\yzl, \yzu]$
+are represented here again by a line segment $\EZ = \ezz \times [\eozl,\eozu]$,
 %such that the lower and upper posterior touchpoint is at $\ezn$, for any $s$ and $n$.
-Defining $\eonl$ and $\eonu$ as the updated versions of $\eozl$ and $\eozu$, respectively,
-we get $\eonu-\eonl = \eozu-\eozl$,
-so imprecision decreases here because a line segment of fixed size
+%Defining $\eonl$ and $\eonu$ as the updated versions of $\eozl$ and $\eozu$, respectively,
+%we get $\eonu-\eonl = \eozu-\eozl$,
+and imprecision decreases because a line segment of fixed size
 will cast a smaller shadow when further to the right,
 as illustrated in Fig.~\ref{fig:boatshape-vertical}.
 \begin{figure}  %trim=l b r t
@@ -680,15 +667,16 @@ Note that all sets have the same size, imprecision decreasing only through their
 \label{fig:boatshape-vertical}
 \end{figure}
 
-For \pdc\ sensitivity, we need shapes that cover a range of $\eta_0$ values,
-just like we needed sets with a range of $\nz$ values to ensure this property.
-Sets that are elongated along a certain ray of constant expectation
-will behave here similar to the rectangular shapes of Sect.~\ref{sec:genbayes}.
+For \pdc\ sensitivity, we need sets $\EZ$ that cover a range of $\eta_0$ values,
+just like sets $\PZ$ with a range of $\nz$ values are necessary to ensure this property.
+A set $\EZ$ that is elongated along a certain ray of constant expectation
+will behave similar to a rectangular $\PZ$. %Sect.~\ref{sec:genbayes}.
 When shifted along its ray of constant expectation,
-imprecision will be reduced as the shadow of the set will become smaller just as described above for line segments.
-When such a shape is instead shifted away from its ray of constant expectation,
+imprecision will be reduced as the shadow of $\EZ$ will become smaller just as described above for line segments.
+When $\EZ$ is instead shifted away from its ray of constant expectation,
 imprecision will increase, as a prolonged shape that is now turned away from its ray 
-will cast a larger shadow (see Fig.~\ref{fig:boatshape-posterior-mik} below).%
+will cast a larger shadow.
+% (see Fig.~\ref{fig:boatshape-posterior-mik} below).%
 %\footnote{This will become clear from the depiction of boatshape sets in Figure~\ref{fig:boatshape-posterior-mik}.} 
 %A set $\EZ$ allowing for more precison in case of strong prior-data agreement
 %must thus be able to cast a smaller shadow if the update shift is along the direction of its ray.
