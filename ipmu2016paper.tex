@@ -562,10 +562,7 @@ we consider a parametrization recently developed by Bickis \cite{2015:mik-isipta
 where each coordinate has the same shift in updating,
 such that updating of a parameter set corresponds to a shift of the entire set within the parameter space.
 In this novel parametrization, a conjugate prior is represented by a coordinate $(\ezz,\eoz)$,
-related to $(\nz, \yz)$ by
-%where $\eoz$ replaces $\yz$, while $\ezz$ is just a shifted version of $\nz$.
-%there, update step for $\nz$ is the same, and shift for parameter replacing $\yz$ is the same for all. 
-%(its derivation is described in detail in \cite{2015:mik-isipta}):
+related to $(\nz, \yz)$ by\vspace*{-0.5ex}
 %\begin{equation}
 \begin{align}
 \label{eq:trafotony}
@@ -640,7 +637,7 @@ can thus be imagined as the size of the `shadow' that a set $\EN$ casts
 given a light source in $(-2,0)$. %(the point from which the rays of constant expectation emanate).
 The smaller this shadow, the more precise the inferences.
 %In terms of the $(\nz, \yz)$ parametrization, we will denote the bounds of this shadow by $\ynl$ and $\ynu$:
-Denoting the bounds of this shadow by\vspace*{-1ex}
+Denoting the bounds of this shadow by\vspace*{-0.5ex}
 \begin{align*}
 \ynl_\Eta &:= \min_{(\ezn,\eon) \in \EN} \frac{\eon}{\ezn+2} + \frac{1}{2}\,, &
 \ynu_\Eta &:= \max_{(\ezn,\eon) \in \EN} \frac{\eon}{\ezn+2} + \frac{1}{2}\,,
@@ -855,7 +852,7 @@ and update with strong-agreement data $s/n = 0.5$ means that $\EZ$ is shifted al
 such that also $\EN$ is symmetric around the $\ez$ axis.
 We thus need to consider only one touchpoint.
 %With the upper prior touchpoint at $\ezuz$,
-The touchpoint movement to the right means that the upper posterior touchpoint $\ezun$
+Movement to the right means that the upper posterior touchpoint $\ezun$
 is larger than the updated prior touchpoint $\ezuz$,
 so we need to show that $\ezun > \ezuz + n$.
 
@@ -1068,7 +1065,7 @@ The framework opens a wide field of research on set shapes for catering to other
 The method was presented here for the case of binary data,
 but it can be easily generalized to cover all sample distributions that belong to the exponential family,
 since for those a conjugate prior in the $(\ez, \eo)$ parametrization can be constructed
-that has a purely data-dependent translation as update step \cite[p.~56]{2015:mik-isipta}.
+having a purely data-dependent translation as update step \cite[p.~56]{2015:mik-isipta}.
 
 
 % ------------ bibliography -------------
