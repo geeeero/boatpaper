@@ -113,7 +113,8 @@ normaltomik <- function(xylist){
 # plot the transformed set in "normal world"
 normalplotter <- function(boatobj, prior = TRUE, xlims = NULL, ylims = c(0,1), minmax = FALSE,
                           xlabs = bquote(n^(0)), ylabs = bquote(y^(0)), seqx = 100,
-                          fillcol = "gray", add = FALSE, col = 1, addluck = FALSE, ...){
+                          fillcol = "gray", add = FALSE, col = 1, addluck = FALSE, 
+                          usymmcred = NA, usymmcredoffset = 0, ...){
   if(!prior) {
     data <- boatobj$data
     if(is.null(data$tau) | is.null(data$n)) stop(paste("No data specified in ", quote(boatobj)))
@@ -141,20 +142,47 @@ normalplotter <- function(boatobj, prior = TRUE, xlims = NULL, ylims = c(0,1), m
   }
   if(addluck){
     if(prior){
-      luck1 <- LuckModel(n0=boatobj$xp+2, y0=c(nymm$ymin$y, nymm$ymax$y))
+      luck1 <- BinomialLuckModel(n0=boatobj$xp+2, y0=c(nymm$ymin$y, nymm$ymax$y))
     } else {
       uppermik2 <- boatfu(boatobj = boatobj, wh =  1, xlen = seqx, fw = TRUE,  prior = TRUE)
       lowermik2 <- boatfu(boatobj = boatobj, wh = -1, xlen = seqx, fw = FALSE, prior = TRUE)
       upper2 <- miktonormal(uppermik2)
       lower2 <- miktonormal(lowermik2)
       nymm2 <- nyminmax(lower=lower2, upper=upper2, ...)
-      luck1 <- LuckModel(n0=boatobj$xp+2, y0=c(nymm2$ymin$y, nymm2$ymax$y))
-      data(luck1) <- boatobj$data
+      luck1 <- BinomialLuckModel(n0=boatobj$xp+2, y0=c(nymm2$ymin$y, nymm2$ymax$y))
+      data(luck1) <- BinomialData(s=boatobj$data$tau, n=boatobj$data$n)
     }
     plot(luck1, control=controlList(posterior=!prior, polygonCol=NA, annotate=FALSE), add = TRUE, lty = 2)
+    if(!is.na(usymmcred)){
+      borders <- unionHdi(luck1, posterior=!prior)$borders
+      npos <- n0(luck1)[2] + diff(boatobj$xp)/15 + usymmcredoffset
+      if(!prior)
+        npos <- npos + n(data(luck1))
+      lines(rep(npos, 2), borders, lty=2, lwd=2, lend=2)
+    }
+  }
+  if(!is.na(usymmcred)){
+    gamma <- usymmcred
+    borders <- usymmcredboat(boatobj, prior, gamma, seqx)
+    npos <- boatobj$xp[2] + data$n + 2 + diff(boatobj$xp)/30 + usymmcredoffset
+    lines(rep(npos, 2), borders, lty=1, lwd=2, lend=2)
   }
 }
 
+# calculates lower and upper bound for the union of symmetric credibility intervals for boatshape sets
+usymmcredboat <- function(boatobj, prior = TRUE, gamma = 0.95, seqx = 100){
+  uppermik <- boatfu(boatobj = boatobj, wh =  1, xlen = seqx, fw = TRUE,  prior = prior)
+  lowermik <- boatfu(boatobj = boatobj, wh = -1, xlen = seqx, fw = FALSE, prior = prior)
+  upper <- miktonormal(uppermik)
+  lower <- miktonormal(lowermik)
+  uppera <- upper$x*upper$y
+  upperb <- upper$x*(1-upper$y)
+  lowera <- lower$x*lower$y
+  lowerb <- lower$x*(1-lower$y)
+  credu <- qbeta(p=(1+gamma)/2, shape1=uppera, shape2=upperb)
+  credl <- qbeta(p=(1-gamma)/2, shape1=lowera, shape2=lowerb)
+  return(c(min(credl), max(credu)))
+}
 
 # gives points on ny contour corresponding to min and max y
 nyminmax <- function(lower, upper, minmaxtol = 1e-6){
