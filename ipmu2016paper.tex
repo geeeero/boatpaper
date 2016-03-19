@@ -20,6 +20,7 @@
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage{booktabs}
 \usepackage{graphicx}
+\usepackage{xcolor}
 \usepackage{epsfig}
 \usepackage{etoolbox}
 \usepackage{url}
@@ -177,6 +178,7 @@
 \newcommand{\be}{\operatorname{Beta}}   % Beta Distribution
 \newcommand{\B}{\operatorname{B}}   % Beta Function
 
+\newcommand{\blue}[1]{{\color{blue} #1}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -292,11 +294,12 @@ in case he was able to conclude that quantities of interest are not `too sensiti
 In contrast, our viewpoint is rooted in the theory of imprecise probability \cite{itip,1991:walley},
 where sets of distributions are used to express the precision of probability statements themselves:
 the smaller the set of posteriors, the more precise the probability statements.
-
-A central idea in imprecise probability is that the magnitude of a set of distributions,
+\blue{(pars linked up here)}
+A central idea in imprecise probability is thus that the magnitude of a set of distributions,
 and, in turn, the width of probability ranges based on it,
 should reflect the precision of probabilistic knowledge.
-A situation for which this relation should hold in particular is \emph{\pdc}:
+%A situation for which this relation should hold in particular is \emph{\pdc}:
+This relation should hold in particular in case of \emph{\pdc}:
 % from abstract esrelpaper
 %A problem that can arise in Bayesian inference is called prior-data conflict:
 From the viewpoint of the prior $p(\vartheta)$, the observed data $\vec{x}$ seem very surprising,
@@ -426,7 +429,7 @@ with weights proportional to $\nz$ and $n$, respectively.
 %as the sample size $n$ does for the observed mean $s/n$.
 %Consequently, $\nz$ represents the prior strength
 %and moreover can be directly interpreted as a (total) pseudocount due to the relation $\nz = \az + \bz$.
-
+%
 %The parametrization in terms of prior mean and prior strength (or pseudocount)
 In a conjugate setting, learning from data thus corresponds to averaging between prior and data.
 Conjugacy is attractive because it makes Bayesian inference easily tractable
@@ -574,7 +577,7 @@ The domain of $\eta_0$ and $\eta_1$ in case of the Beta-Binomial model is
 \label{eq:eta-domain}
 \Eta &= \Big\{ (\eta_0,\eta_1) \Big| \eta_0 > -2,\ |\eta_1| < \frac{1}{2}(\eta_0 + 2) \Big.\Big\}\,,
 \end{align}
-and the update step in terms of $\eta_0$ and $\eta_1$ is given by
+and the \blue{Bayes' Rule} update step in terms of $\eta_0$ and $\eta_1$ is given by
 \begin{equation}
 \label{eq:eta-update}
 \begin{aligned}
@@ -715,8 +718,10 @@ taken as a posterior inference reflecting uncertainty due to both vague prior kn
 \subsection{Basic Definition}
 \label{sec:basicdefboat}
 
-We now present a parametrization for such a boat-shaped parameter set $\EZ$.
-To keep things simple, we restrict the discussion on prior sets
+%We now present a parametrization for such a boat-shaped parameter set $\EZ$.
+We suggest an exponential function for the contours of such a boat-shaped parameter set $\EZ$.%
+\footnote{\blue{Other functional forms would lead to similar results.***}}
+To keep things simple, we restrict discussion on prior sets
 that are symmetric to the $\eta_0$ axis, i.e., centered around $y_c = 0.5$,
 expressing the prior information that we deem $p=0.5$ as the most probable value. 
 %a fraction of successes of $\frac{s}{n} = \frac{1}{2}$ as the most probable.
@@ -724,9 +729,9 @@ Sets $\EZ$ with central ray $y_c \neq 0.5$ can be obtained
 by rotating the set around $(\eta_0, \eta_1) = (-2,0)$ such that $y_c$ forms the axis of symmetry.
 All results for sets with $y_c = 0.5$ generalize straight-forwardly to the case $y_c \neq 0.5$;
 a numerical example is given in Fig.~\ref{fig:ppp2}.
-
-For the contours of $\EZ$, we suggest an exponential function as the functional form,
-where the `prow' of the set is located at $(\ezl, 0)$.
+%
+%For the contours of $\EZ$, we suggest an exponential function as the functional form,
+%where the `prow' of the set is located at $(\ezl, 0)$.
 The lower and the upper contour functions are defined as
 %\begin{align*}
 %\czl(\eta_0) &= -a \left( 1 - e^{-b(\eta_0 - \ezl)} \right)\,, \\
