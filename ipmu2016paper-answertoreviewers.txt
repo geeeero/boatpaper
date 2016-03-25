@@ -1,0 +1,32 @@
+## answer to reviewers for paper 97 ##
+
+## Review 1 ##
+
+We thank reviewer 1 for his very kind comments. 
+
+We think the reviewer's remark on the parametrization we consider in section 3 is based on a misunderstanding.
+This is a parametrization of Beta priors with the characteristic that the update step according to Bayes' Rule
+is a shift in parameter space which only data-dependent, and thus the same for all priors (points) in the parameter space.
+This property is convenient indeed as it preserves parameter set shapes, nevertheless the update of each prior
+still is according to Bayes' Rule, so we do not incur any incoherences as was suspected by the reviewer.
+We have added the words "according to Bayes' Rule" to the description of the parametrization (above equation 7)
+in the hope to make this more clear.
+
+On the remark about the contour function choice, the exponential contour function delivers a shape
+that we motivate at the beginning of section 4. We chose it because it leads to simple expressions
+for the contour derivatives and thus for the touchpoints of the boatset, and added a short note on this
+at the start of section 4.1. We indeed remark in the conclusions section that other functional forms could be considered as well,
+but we think a detailed discussion of the alternative mentioned there is out of scope for this paper.
+
+
+## Review 2 ##
+
+We thank reviewer 2 for his very kind comments. 
+
+
+## Review 3 ##
+
+We thank reviewer 3 for his very kind comments.
+
+We had indeed submitted a paper with 14 pages as noted by the reviewer,
+but were now able to trim it down to 12 pages*** 

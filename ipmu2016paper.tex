@@ -264,14 +264,14 @@ The prior knowledge, i.e., information extraneous to data, is usually provided i
 Bayesian inference starts with defining a parametric \emph{sample model},
 denoted by $f(\vec{x} \mid \vartheta)$,
 a conditional distribution of data $\vec{x} = (x_1, \ldots, x_n)$ given the value of a parameter $\vartheta$.
-Prior information is then encoded by a \emph{prior distribution} $p(\vartheta)$,
+Prior information is then encoded by a \emph{prior distribution} $f(\vartheta)$,
 expressing the expert's opinion on probable values of $\vartheta$.
 Given $\vec{x}$, the prior distribution is updated by Bayes' Rule
 to obtain the \emph{posterior distribution}
 \begin{align}
 \label{eq:bayesrule}
-p(\vartheta\mid\vec{x}) &= \frac{f(\vec{x}\mid\vartheta) p(\vartheta)}{\int f(\vec{x}\mid\vartheta) p(\vartheta) \dd \vartheta}
-                         \propto f(\vec{x}\mid\vartheta) \cdot p(\vartheta)\,.
+f(\vartheta\mid\vec{x}) &= \frac{f(\vec{x}\mid\vartheta) f(\vartheta)}{\int f(\vec{x}\mid\vartheta) f(\vartheta) \dd \vartheta}
+                         \propto f(\vec{x}\mid\vartheta) \cdot f(\vartheta)\,.
 \end{align}
 The posterior distribution is understood to comprise all information from the sample and the prior knowledge.
 It therefore underlies all further inferences on the parameter $\vartheta$,
@@ -302,7 +302,7 @@ the smaller the set of posteriors, the more precise the probability statements.
 This relation should hold in particular in case of \emph{\pdc}:
 % from abstract esrelpaper
 %A problem that can arise in Bayesian inference is called prior-data conflict:
-From the viewpoint of the prior $p(\vartheta)$, the observed data $\vec{x}$ seem very surprising,
+From the viewpoint of the prior $f(\vartheta)$, the observed data $\vec{x}$ seem very surprising,
 i.e., information from data is in conflict with prior assumptions \cite{2006:evans}. %\cite[see, e.g.,][]{2006:evans}.
 This is most relevant when there is not enough data to largely reduce the influence of the prior on the posterior;
 it is then unclear whether to put more trust to prior assumptions or to the observations,
@@ -589,32 +589,17 @@ and the update step according to Bayes' Rule in terms of $\eta_0$ and $\eta_1$ i
 Each success thus
 leads to a step of $1$ in the $\eta_0$ direction and of $+\frac{1}{2}$ in the $\eta_1$ direction,
 while each failure
-leads to a step of $1$ in the $\eta_0$ direction and of $-\frac{1}{2}$ in the $\eta_1$ direction. %
-%\footnote{We will treat $s$ as a a real-valued observation in $[0,n]$
-%because the continuous representation is convenient for our discussions,
-%keeping in mind that in reality it can only take integer values.}
-%\begin{figure}  %trim=l b r t
-%\centering
-%\fbox{%
-%\includegraphics[trim = 86mm 48mm 94mm 62mm, clip, width=0.5\textwidth]{R/boatshape-domain}%
-%}
-%\caption[Bounds for the domain of $\eta_0$ and $\eta_1$ for the Beta-Binomial model,
-%with rays of constant expectation for $y_c = \{0.1,0.2,\ldots,0.9\}$.]%
-%{Bounds for the domain of $\eta_0$ and $\eta_1$ for the Beta-Binomial model (black),
-%with rays of constant expectation for $y_c = \{0.1,0.2,\ldots,0.9\}$ (grey).}
-%\label{fig:boatshape-domain}
-%\end{figure}
-%
+leads to a step of $1$ in the $\eta_0$ direction and of $-\frac{1}{2}$ in the $\eta_1$ direction. 
 While $\yz$ had the convenient property of being equal to
 the prior expectation for $p$, %of the mean sample statistic $s/n$,
 $\eta_1$ is only slightly more difficult to interpret.
 From \eqref{eq:trafotony} we can derive that points $(\eta_0,\eta_1) \in \Eta$
 on rays emanating from the coordinate $(-2,0)$,
 i.e., coordinates satifying
-\begin{align}
-\label{eq:raysofconstantexpectation}
-\eta_1 &= (\eta_0 + 2)(y_c - 1/2) 
-\end{align}
+%\begin{align}
+%\label{eq:raysofconstantexpectation}
+$\eta_1 = (\eta_0 + 2)(y_c - 1/2)$,
+%\end{align}
 will have a constant expectation of $y_c$.
 The domain $\Eta$, and these \emph{rays of constant expectation} emanating from the coordinate $(-2,0)$,
 can be seen in Fig.~\ref{fig:boatshape-vertical}.
@@ -719,9 +704,10 @@ taken as a posterior inference reflecting uncertainty due to both vague prior kn
 \label{sec:basicdefboat}
 
 %We now present a parametrization for such a boat-shaped parameter set $\EZ$.
-We suggest an exponential function for the contours of such a boat-shaped parameter set $\EZ$.%
+We suggest an exponential function for the contours of such a boat-shaped parameter set $\EZ$,
+this keeps expressions simple. %
 %\footnote{\blue{Other functional forms would lead to similar results.***}}
-To keep things simple, we first restrict discussion on prior sets
+We first restrict discussion on prior sets
 that are symmetric to the $\eta_0$ axis, i.e., centered around $y_c = 0.5$,
 expressing the prior information that we deem $p=0.5$ as the most probable value. 
 %a fraction of successes of $\frac{s}{n} = \frac{1}{2}$ as the most probable.
@@ -758,20 +744,21 @@ Given parameters $\ezl$, $\ezu$, $a$, and $b$, $\EZ$ is thus defined as
 \end{align}
 A prior boatshape set,
 together with corresponding posterior sets for different observations,
-%Prior and posterior boatshape sets (for different observations) %with corresponding posterior sets for different observations
 is shown in Fig.~\ref{fig:boatshape-posterior-mik}.
 The same prior and posterior sets in terms of $(\nz, \yz)$ are depicted in Fig.~\ref{fig:boatshape-posterior-normal}.
-%shown in terms of $(\eta_0,\eta_1)$ (left) and in terms of $(\nz, \yz)$ (right).
-%\begin{figure}  %trim=l b r t
-%\centering
-%\fbox{%
-%\includegraphics[trim = 15mm 45mm 25mm 60mm, clip, width=\textwidth]{R/boatshape-prior}%
-%}
-%\caption[Boatshape prior set in the parametrization via $(\eta_0,\eta_1)$ and via $(\nz,\yz)$.]%
-%{Boatshape prior set in the parametrization via $(\eta_0,\eta_1)$ (left) and via $(\nz,\yz)$ (right),
-%with parameters $\ezl=1$, $\ezu=6$, $a=2$, and $b=0.8$.}
-%\label{fig:boatshape-prior}
-%\end{figure}
+
+We have as yet no appealing formal description for the role of the parameters $a$ and $b$. %that,
+%togeher with $\ezl$ and $\ezu$, define the boat-set (see Section~\ref{sec:basicdefboat} below).
+Informally, $a$ determines the half-width of the set;
+the width, i.e., the size in the $\eta_1$ dimension, would be $2a$ if $\ezu \to \infty$.
+$b$ instead determines the `bulkyness' of the shape.
+Together with $\ezl$, $a$ and $b$ determine %the prior interval for the expected success probability
+$[\yzl_\Eta, \yzu_\Eta]$.
+Decreasing $\ezl$, or increasing $a$ or $b$, leads ceteris paribus to a wider $[\yzl_\Eta, \yzu_\Eta]$.
+%For fixed $\ezl$ and $a$, increasing $b$ leads to a wider prior expectation interval.
+%For $[\yzl, \yzu]$, the choice of $\ezu$ is irrelevant.%
+$\ezu$ plays only a role in determining when the `unhappy learning' phase starts
+(see end of Sect.~\ref{sec:generalupdate}).
 \begin{figure}  %trim=l b r t
 \centering
 %\fbox{%
@@ -790,19 +777,6 @@ while the lower touchpoint is at the end for the posterior sets for data $\frac{
 %(See also Figure~\ref{fig:boatshape-posterior-normal}).}
 \label{fig:boatshape-posterior-mik}
 \end{figure}
-
-We have as yet no appealing formal description for the role of the parameters $a$ and $b$. %that,
-%togeher with $\ezl$ and $\ezu$, define the boat-set (see Section~\ref{sec:basicdefboat} below).
-Informally, $a$ determines the half-width of the set;
-the width, i.e., the size in the $\eta_1$ dimension, would be $2a$ if $\ezu \to \infty$.
-$b$ instead determines the `bulkyness' of the shape.
-Together with $\ezl$, $a$ and $b$ determine %the prior interval for the expected success probability
-$[\yzl_\Eta, \yzu_\Eta]$.
-Decreasing $\ezl$, or increasing $a$ or $b$, leads ceteris paribus to a wider $[\yzl_\Eta, \yzu_\Eta]$.
-%For fixed $\ezl$ and $a$, increasing $b$ leads to a wider prior expectation interval.
-%For $[\yzl, \yzu]$, the choice of $\ezu$ is irrelevant.%
-$\ezu$ plays only a role in determining when the `unhappy learning' phase starts
-(see end of Sect.~\ref{sec:generalupdate}).
 \begin{figure}  %trim=l b r t
 \centering
 %\fbox{%
@@ -824,7 +798,7 @@ that the lower and the upper bound for $\yz$
 is attained in the middle of the set contour.
 To determine $\yzl_\Eta$ and $\yzu_\Eta$, we need to find the corresponding
 touchpoints $\ezlz$ and $\ezuz$ %$\eta_0^{l(0)}$ and $\eta_0^{u(0)}$
-by identifying the rays of constant expectation \eqref{eq:raysofconstantexpectation}
+by identifying the rays of constant expectation %\eqref{eq:raysofconstantexpectation}
 that are tangents to $\EZ$ and then solving for $\eta_0$.
 Since $\EZ$ is symmetric to the $\eta_0$ axis, we have $\ezlz = \ezuz$ 
 and we will determine $\ezuz$ by considering the upper contour tangent.
@@ -1051,7 +1025,8 @@ but suggested to rotate the basic set \eqref{eq:basicset} around $(-2,0)$
 such that the ray of constant expectation $y_c$ forms the axis of symmetry of $\EZ$,
 and gave a numerical example for this approach in Fig.~\ref{fig:ppp2}.
 It would be however interesting to investigate whether another way of defining a set aligned to a certain ray could be useful,
-namely by shifting $\EZ$ from \eqref{eq:basicset} in the $\eo$ dimension according to \eqref{eq:raysofconstantexpectation}.
+namely by shifting each part of $\EZ$ from \eqref{eq:basicset} in the $\eo$ dimension
+onto the desired ray (similar to turning a right prism into an oblique prism). %according to \eqref{eq:raysofconstantexpectation}.
 Furthermore, alternatives to the functional form of the contour functions \eqref{eq:basiccontours} could also be worth of study,
 like, e.g., the second and third quadrant's part of an ellipse $a\ez^2 + b\eo^2 = c$.
 
