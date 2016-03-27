@@ -561,7 +561,7 @@ The domain $\Eta$, and these \emph{rays of constant expectation} emanating from 
 can be seen in Fig.~\ref{fig:boatshape-vertical}.
 
 In the parametrization in terms of $(\nz,\yz)$,
-posterior inferences based on $\yn$ become more precise with increasing $n$
+posterior inferences based on $\yn$ become less imprecise with increasing $n$
 because $\Delta_y(\PN) \to 0$ for $n \to \infty$.
 %In the domain $\Eta$, %as depicted in Figure~\ref{fig:boatshape-domain},
 %instead the rays of constant expectation fan out for growing $n$,
@@ -572,11 +572,11 @@ but the rays of constant expectation fan out for increasing $n$.
 %which is just its prior counterpart $\EZ$ shifted to the right,
 The more $\EN$ is located to the right,
 the fewer rays of constant expectation it intercepts,
-and so precision increases.
+and so imprecision decreases.
 Imprecision in terms of $\yn$
 can thus be imagined as the size of the `shadow' that a set $\EN$ casts
 given a light source in $(-2,0)$. %(the point from which the rays of constant expectation emanate).
-The smaller this shadow, the more precise the inferences.
+The smaller this shadow, the less imprecise the inferences.
 %In terms of the $(\nz, \yz)$ parametrization, we will denote the bounds of this shadow by $\ynl$ and $\ynu$:
 Denoting the bounds of this shadow by\vspace*{-0.5ex}
 \begin{align*}
@@ -702,19 +702,6 @@ A prior boatshape set,
 together with corresponding posterior sets for different observations,
 is shown in Fig.~\ref{fig:boatshape-posterior-mik}.
 The same prior and posterior sets in terms of $(\nz, \yz)$ are depicted in Fig.~\ref{fig:boatshape-posterior-normal}.
-
-%We have as yet no appealing formal description for the role of the parameters $a$ and $b$. %that,
-%togeher with $\ezl$ and $\ezu$, define the boat-set (see Section~\ref{sec:basicdefboat} below).
-The parameter $a$ determines the half-width of the set;
-the size in the $\eta_1$ dimension, would be $2a$ if $\ezu \to \infty$.
-Parameter $b$ determines the `bulkyness' of the shape.
-Together with $\ezl$, $a$ and $b$ determine %the prior interval for the expected success probability
-$[\yzl_\Eta, \yzu_\Eta]$.
-Decreasing $\ezl$, or increasing $a$ or $b$, leads to a wider $[\yzl_\Eta, \yzu_\Eta]$.
-%For fixed $\ezl$ and $a$, increasing $b$ leads to a wider prior expectation interval.
-%For $[\yzl, \yzu]$, the choice of $\ezu$ is irrelevant.%
-$\ezu$ plays only a role in determining when the `unhappy learning' phase starts
-(see end of Sect.~\ref{sec:generalupdate}).
 \begin{figure}  %trim=l b r t
 \centering
 %\fbox{%
@@ -733,6 +720,19 @@ while the lower touchpoint is at the end for the posterior sets for data $\frac{
 %(See also Figure~\ref{fig:boatshape-posterior-normal}).}
 \label{fig:boatshape-posterior-mik}
 \end{figure}
+
+%We have as yet no appealing formal description for the role of the parameters $a$ and $b$. %that,
+%togeher with $\ezl$ and $\ezu$, define the boat-set (see Section~\ref{sec:basicdefboat} below).
+The parameter $a$ determines the half-width of the set;
+the size in the $\eta_1$ dimension would be $2a$ if $\ezu \to \infty$.
+Parameter $b$ determines the `bulkyness' of the shape.
+Together with $\ezl$, $a$ and $b$ determine %the prior interval for the expected success probability
+$[\yzl_\Eta, \yzu_\Eta]$.
+Decreasing $\ezl$, or increasing $a$ or $b$, leads to a wider $[\yzl_\Eta, \yzu_\Eta]$.
+%For fixed $\ezl$ and $a$, increasing $b$ leads to a wider prior expectation interval.
+%For $[\yzl, \yzu]$, the choice of $\ezu$ is irrelevant.%
+$\ezu$ plays only a role in determining when the `unhappy learning' phase starts
+(see end of Sect.~\ref{sec:generalupdate}).
 \begin{figure}  %trim=l b r t
 \centering
 %\fbox{%
