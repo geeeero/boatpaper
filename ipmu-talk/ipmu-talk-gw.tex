@@ -1,0 +1,364 @@
+\documentclass{beamer}
+
+% opacity bugfix: see http://tug.org/pipermail/pdftex/2007-December/007480.html
+\pdfpageattr {/Group << /S /Transparency /I true /CS /DeviceRGB>>}
+
+\usepackage[utf8]{inputenc}
+\usepackage[OT1]{fontenc}
+
+\usepackage{tikz}
+\usetikzlibrary{%
+   arrows,%
+   calc,%
+   fit,%
+   patterns,%
+   plotmarks,%
+   shapes.geometric,%
+   shapes.misc,%
+   shapes.symbols,%
+   shapes.arrows,%
+   shapes.callouts,%
+   shapes.multipart,%
+   shapes.gates.logic.US,%
+   shapes.gates.logic.IEC,%
+   er,%
+   automata,%
+   backgrounds,%
+   chains,%
+   topaths,%
+   trees,%
+   petri,%
+   mindmap,%
+   matrix,%
+   calendar,%
+   folding,%
+   fadings,%
+   through,%
+   patterns,%
+   positioning,%
+   scopes,%
+   decorations.fractals,%
+   decorations.shapes,%
+   decorations.text,%
+   decorations.pathmorphing,%
+   decorations.pathreplacing,%
+   decorations.footprints,%
+   decorations.markings,%
+   shadows}
+\usepackage{animate}
+\usepackage{amssymb, amsmath, amsfonts, enumerate}
+\usepackage{pifont}
+%\usepackage{bbold}
+\newcommand\hmmax{0}
+\usepackage{bm}
+%\usepackage{dsfont}
+\usepackage{pxfonts}
+\usepackage{xcolor}
+\usepackage{url}
+
+\usepackage[backend=bibtex,style=authoryear,dashed=false]{biblatex}
+\addbibresource{refs.bib}
+%\renewcommand{\bibfont}{\normalfont\scriptsize}
+\setlength{\bibhang}{3ex}
+
+\usepackage{hyperref}
+
+\usetheme[official=false,department=none]{tue2008}
+%\usefonttheme{default}
+
+
+%\usetheme[secheader]{Boadilla}
+%\setbeamercovered{transparent}
+%\setbeamercovered{invisible}
+%\setbeamertemplate{navigation symbols}{}
+%\setbeamertemplate{bibliography item}[text] % numbered references
+%\useoutertheme{infolines}
+%\setbeamertemplate{headline}{}
+%\setbeamertemplate{footline}{\hspace*{5mm}\hfill\insertframenumber\hspace*{5mm}\vspace{3mm}}
+%\setbeamercolor{alerted text}{fg=orange!80!black}
+
+% ------------------------------------------------------------------------------
+
+\newcommand{\vcenterbox}[1]{\ensuremath{\vcenter{\hbox{#1}}}}
+%
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\posreals}{\reals_{>0}}
+\newcommand{\posrealszero}{\reals_{\ge 0}}
+\newcommand{\naturals}{\mathbb{N}}
+
+\newcommand{\dd}{\,\mathrm{d}}
+
+\newcommand{\mbf}[1]{\mathbf{#1}}
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+\renewcommand{\vec}[1]{{\bm#1}}
+
+\newcommand{\uz}{^{(0)}} % upper zero
+\newcommand{\un}{^{(n)}} % upper n
+\newcommand{\ui}{^{(i)}} % upper i
+\newcommand{\uell}{^{(\ell)}} % upper ell
+
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\ol}[1]{\overline{#1}}
+
+\newcommand{\Rsys}{R_\text{sys}}
+\newcommand{\lRsys}{\ul{R}_\text{sys}}
+\newcommand{\uRsys}{\ol{R}_\text{sys}}
+
+\newcommand{\Fsys}{F_\text{sys}}
+\newcommand{\lFsys}{\ul{F}_\text{sys}}
+\newcommand{\uFsys}{\ol{F}_\text{sys}}
+
+\def\Tsys{T_\text{sys}}
+
+\def\tmax{t_\text{max}}
+\def\tnow{t_\text{now}}
+\def\tpnow{t^+_\text{now}}
+
+\newcommand{\ptk}{p^k_t}
+
+\newcommand{\E}{\operatorname{E}}
+\newcommand{\V}{\operatorname{Var}}
+\newcommand{\sd}{\operatorname{sd}}
+
+\newcommand{\wei}{\operatorname{Wei}} % Weibull Distribution
+\newcommand{\ig}{\operatorname{IG}}   % Inverse Gamma Distribution
+\newcommand{\ber}{\operatorname{Bernoulli}} 
+\newcommand{\bin}{\operatorname{Binomial}}
+\newcommand{\be}{\operatorname{Beta}} 
+\newcommand{\bebin}{\operatorname{Beta-binomial}}
+\newcommand{\norm}{\operatorname{N}}
+
+\def\then{{\structure{$\rule[0.35ex]{2ex}{0.5ex}\!\!\!\blacktriangleright$}}}
+\def\play{{\structure{$\blacktriangleright$}}}
+\def\gplus{{\structure{\rule[0.45ex]{1.4ex}{0.4ex}\hspace{-0.9ex}\rule[0.0ex]{0.4ex}{1.3ex}\hspace{0.5ex}}}}
+\def\gminus{{\structure{\rule[0.45ex]{1.4ex}{0.4ex}}}}
+
+\input{nydefs.tex}
+\input{nycoldefs.tex}
+
+%%\def\blau#1{{\color{lmugreen2}#1}}
+%\def\rot#1{{\color{red}#1}}
+%\def\gruen#1{{\color{blue}#1}}
+
+\newcommand{\x}{\vec{x}}
+
+\def\tnow{t_\text{now}}
+\def\tpnow{t^+_\text{now}}
+
+\newcommand{\cmark}{{\color{tuegreen}\ding{51}}}
+\newcommand{\xmark}{{\color{tuered}\ding{55}}}
+
+\newcommand{\comp}[1]{\raisebox{-1mm}{\tikz{\node[%type1
+rectangle,rounded corners=0mm,draw,fill=tuepmsgreen!70,thick,inner sep=0pt,minimum size=4mm]{#1};}}}
+
+\newcommand{\cyansec}[1]{\textcolor{tuecyan}{\large\bf #1}}
+\newcommand{\cyanalert}[1]{\textcolor{tuecyan}{#1}}
+\newcommand{\bluesec}[1]{\textcolor{tueblue}{\large\bf #1}}
+\newcommand{\bluealert}[1]{\textcolor{tueblue}{#1}}
+
+\setbeamertemplate{itemize item}{\tiny\raise1.5pt\hbox{\color{tueblue}$\blacktriangleright$}}
+
+% ------------------------------------------------------------------------------
+
+
+\title{Sets of Priors\\ Reflecting Prior-Data Conflict and Agreement}
+
+\author{\ul{Gero Walter}\inst{1}, Frank Coolen\inst{2}}
+\institute{ \inst{1} Eindhoven University of Technology, Eindhoven, NL\\ 
+            \inst{2} Durham University, Durham, UK \\[2ex]
+            \url{g.m.walter@tue.nl} \\[2ex]
+            \includegraphics[height=9mm]{logos/tuelogo} \quad 
+            \includegraphics[height=9mm]{logos/logounidurham-large} \quad
+            \includegraphics[height=9mm]{logos/dinalog-hp} }
+\date{IPMU Eindhoven 2016-06-21}
+
+\begin{document}
+
+\frame{
+\titlepage
+}
+
+\addtocounter{framenumber}{-1} 
+
+
+\begin{frame}{Bayesian Inference}
+\vspace*{-2ex}
+\begin{align*}
+\begin{array}{ccccl}
+\uncover<1->{\text{expert info}        & + & \text{data}                & \to & \text{complete picture} \\[1.5ex]}
+\uncover<2->{\text{prior distribution} & + & \text{sample distribution} & \to & \text{posterior distribution} \\[1.5ex]
+ f(p) & \times & f(s \mid p) & \propto & f(p \mid s) \\
+ & & & & \qquad\text{\bluealert{\play\ Bayes' Rule}} \\}
+%\uncover<3->{\downarrow & & \downarrow & & \hspace*{3ex} \downarrow \\
+\uncover<4->{\text{Beta prior}}   & & \uncover<3->{\text{Binomial}}         & & \uncover<5->{\text{Beta posterior}} \\
+\uncover<4->{}                    & & \uncover<3->{\text{distribution}}     & & \uncover<5->{\qquad \text{\bluealert{\play\ conjugacy}}}\\[1ex]
+\uncover<4->{p \sim \be(\az,\bz)} & & \uncover<3->{s \mid p \sim \bin(n,p)} & & \uncover<5->{p \mid s \sim \be(\an,\bn)}
+\end{array}
+\end{align*}
+\vspace*{-3ex}
+\begin{tikzpicture}
+\uncover<6->{%
+\node at (0,0) {\parbox{0.99\textwidth}{%
+\begin{itemize}
+\item conjugate prior makes learning about parameter tractable,\\  %posterior distribution
+      just update hyperparameters:\quad $\az \to \an$, $\bz \to \bn$
+\item closed form for some inferences: $\E[p\mid s] = \frac{\an}{\an+\bn}$
+\end{itemize}}};}
+\uncover<3-5>{%
+\node at (-0.5,0) {\includegraphics[width=0.25\textwidth]{figs/smallfig-binom}};}
+\uncover<4-5>{%
+\node at (-4.5,0) {\includegraphics[width=0.25\textwidth]{figs/smallfig-prior}};}
+\uncover<5>{%
+\node at ( 3.5,0) {\includegraphics[width=0.25\textwidth]{figs/smallfig-posterior}};}
+\end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}{Prior-Data Conflict}
+
+What if expert information and data tell different stories?\\
+\begin{tikzpicture}
+[pfeil/.style={-latex', line width=1mm, color=tuered, shorten <=1mm},
+ cyanrand/.style={rounded corners, text centered, draw=tuecyan!50, inner sep=1mm, line width=0.7mm},
+ redbrace/.style={draw=tuered, decoration=brace, decorate, line width=0.8mm},
+ redbox/.style={text centered, draw=tuered, inner sep=1.5mm, line width=1mm, minimum width=0.75\textwidth}]
+\uncover<2>{%
+\node at (0,0) %
+{\parbox{\textwidth}{%
+\begin{block}{Prior-Data Conflict}
+\begin{itemize}
+\item \emph{informative prior beliefs} and \emph{trusted data}\\ %\rule{0ex}{3ex}\\
+(sampling model correct, no outliers, etc.) are in conflict%\\%[2ex]
+\item ``[\ldots] the prior [places] its mass primarily on distributions
+in the sampling model for which the observed data is surprising''\\
+\parencite{2006:evans}
+\item there are not enough data to overrule the prior
+\end{itemize}
+\end{block}%
+}};}
+\uncover<3->{%
+\node at (0,1.7) %
+{\parbox{\textwidth}{%
+\play\ reparametrisation helps to understand effect of prior-data conflict:
+}};}
+\uncover<4->{%
+\node at (0,0.2) {\parbox[c]{\textwidth}{%
+\begin{align*}
+\nzg &= \az + \bz\,,
+&
+\yzr &= \frac{\az}{\az + \bz}\,, \quad \text{which are updated as}\\%[1.5ex]
+\nng &= \nzg + n\,, 
+&
+\ynr &=  \frac{\nzg}{\nzg + n} \, \yzr + \frac{n}{\nzg + n} \cdot \frac{s}{n}
+\end{align*}
+}};}
+\uncover<5->{%
+\node[cyanrand] (yz) at (-0.9,-1.9) {$\yzr = \E[p]$};
+\draw [pfeil] (yz.north east) to [out= 30,in=260] ( 0.9,-0.65);
+\draw [pfeil] (yz.north west) to [out=130,in=240] (-1.7,0.4);}
+\uncover<6->{%
+\node[cyanrand] (yn) at ( 1.4,-1.9) {$\ynr = \E[p \mid s]$};
+\draw [pfeil] (yn.north)      to [out=130,in=280] (-1.4,-0.65);}
+\uncover<7->{%
+\node[cyanrand] (ml) at ( 4.3,-1.9) {ML estimator $\hat{p}$};
+\draw [pfeil] (ml.north)      to [out=100,in=330] (3.6,-0.65);}
+\uncover<8->{%
+\node[cyanrand] (nz) at (-4  ,-1.9) {$\nzg =$ pseudocounts};
+\draw [pfeil] (nz.north)      to [out=90,in=270] (-4.0,-0.65);
+\draw [pfeil] (nz.north west) to [out=95,in=240] (-5.2, 0.5);}
+\uncover<9->{%
+\node[redbox] at (0,-2.8) {$\E[p \mid s] = \ynr$ is a weighted average of $\E[p]$ and $\hat{p}$!};}
+\uncover<10>{%
+\node[redbox] at (0,-4.0) {$\V[p \mid s] = \dfrac{\ynr (1-\ynr)}{\nng + 1}$ decreases with $n$!};}
+\end{tikzpicture}
+
+\end{frame}
+
+\begin{frame}{Sets of Priors}
+
+***change this***
+%\item[\play] 
+\textbf{Add \alert{imprecision} as new modelling dimension:\\
+\alert{Sets of priors}\ldots}
+\begin{tikzpicture}
+\node at (0,0) %
+{\parbox{\textwidth}{%
+\begin{itemize}%[<+->]
+% \begin{itemize}
+ \item[] \ldots\ model uncertainty in probability statements %***show lottery A, B box
+         % How is uncertainty about $\Rsys(t)$ expressed?
+ \item<3->[] \ldots\ allow for partial or vague information on $\ptk$'s
+         % Choosing all these Beta parameters is hard \ldots\\
+ \item<4->[] \ldots\ highlight prior-data conflict.
+         % see later
+\end{itemize} %
+\begin{itemize}
+\item<5-> Separate uncertainty \emph{whithin the model} (reliability statements)\\
+% ie what do we expect to see if components follow a Weibull(3.5,2) 
+from uncertainty \emph{about the model} (which parameters).
+\item<6-> Systematic sensitivity analysis / robust Bayesian approach
+\item<7-> \textcite{2009:WalterAugustin}, \textcite{2013:diss-gw}:\\
+vary $(\nzg, \yzr)$ in a set $\PZc = [\nzlg, \nzug] \times [\yzlr, \yzur]$\\
+\quad\play\ easy elicitation, tractability \& prior-data conflict sensitivity
+\item<8-> Bounds for inferences (point estimate, prediction, \ldots)\\
+by min/max over $\PZc$ %or $\PNc$
+\end{itemize}
+}};
+\uncover<2>{%
+\node at (0,0.7) %
+{\parbox{\textwidth}{%
+\begin{block}{Uncertainty about probability statements}
+\centerline{smaller sets $=$ more precise probability statements}
+\vspace*{1ex}
+\parbox[t]{0.45\textwidth}{\centering \textbf{Lottery A}\\
+                          Number of winning tickets:\\
+                          exactly known as 5 out of 100\\
+                          \play\ $P(\text{win}) = 5/100$}
+\qquad
+\parbox[t]{0.45\textwidth}{\centering \textbf{Lottery B}\\
+                          Number of winning tickets:\\
+                          not exactly known, supposedly\\
+                          between 1 and 7 out of 100\\
+                          \play\ $P(\text{win}) = [1/100,\, 7/100]$}
+\end{block} %
+}};}
+\end{tikzpicture}
+
+%***or slide 9 from talk-lund???
+%\uncover<7->{\quad\play\ min and max $\Rsys(t)$ over $\PZ$ analytical in most cases!}
+%$\min_{\PZ} P\left(\Tsys > t \mid \{\nz_{k,t},\yz_{k,t},\vec{t}^k\}^{1:K}\right)$
+
+\end{frame}
+
+
+
+\begin{frame}{Summary \& Outlook}
+
+\uncover<1->{%
+\textbf{Summary:}
+\begin{itemize}
+\item[\play] Nonparametric modeling of component reliability curves
+\item[\play] Bayesian model combining expert knowledge and test data
+\item[\play] Set of system reliability functions %appropriately
+reflects uncertainties from limited data, vague expert information, and prior-data conflict
+\item[\play] Easy-to-use implementation in \textbf{R} package \texttt{ReliabilityTheory} \parencite{2016:aslett-RT}
+\end{itemize}}
+\uncover<2->{%
+\textbf{Next steps:}
+\begin{itemize}
+\item[\play] Allow right-censored observations (RUL estimation)
+\item[\play] Allow dependence between components\\ (common-cause failure, \ldots) %or more explicit dependence
+\item[\play] Use for system design (where to put extra redundancy?)
+\item[\play] Use for maintenance planning
+\end{itemize}}
+\end{frame}
+
+%\nocite{2015:bayessurvsign}
+
+\begin{frame}{References}
+\renewcommand*{\bibfont}{\footnotesize}
+%\begin{frame}[allowframebreaks]{References}
+\printbibliography[heading=none,fontsize=\scriptsize]
+\end{frame}
+
+\end{document}
