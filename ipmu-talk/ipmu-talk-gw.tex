@@ -274,9 +274,41 @@ in the sampling model for which the observed data is surprising''\\
 
 \end{frame}
 
+
+\begin{frame}{Prior-Data Conflict}
+\tikz{\draw[fill,gray!20!white] (0,0) rectangle (0.5,0.3); \draw[tuegreen,very thick] (0,0.15) -- (0.5,0.15);} Prior $\yzr = 0.75$, $\nzg=8$
+\qquad \uncover<2->{%
+\tikz{\draw[fill,gray!20!white] (0,0) rectangle (0.5,0.3); \draw[tuedarkblue,very thick] (0,0.15) -- (0.5,0.15);} Posterior}
+\begin{tikzpicture}
+\uncover<1>{\node at (0,0) {\includegraphics[width=0.9\textwidth]{figs/betasgdens0.pdf}};}
+\uncover<2>{\node at (0,0) {\includegraphics[width=0.9\textwidth]{figs/betasgdens.pdf}};}
+\uncover<3>{\node at (0,0) {\includegraphics[width=0.9\textwidth]{figs/betasgpdf.pdf}};}
+\uncover<2->{%
+\node[fill=white] at (-2.8,1.4) {$\frac{s}{n}=\frac{12}{16}$};
+\node[fill=white] at ( 3.5,1.4) {$\frac{s}{n}=\frac{0}{16}$};
+}
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Sets of Priors}
+\tikz{\draw[fill,gray!20!white] (0,0) rectangle (0.5,0.3); \draw[tuegreen,very thick] (0,0.15) -- (0.5,0.15);}
+Prior $\yzr \in [0.7, 0.8]$, $\nzg \in [1,8]$
+\qquad \uncover<2->{%
+\tikz{\draw[fill,gray!20!white] (0,0) rectangle (0.5,0.3); \draw[tuedarkblue,very thick] (0,0.15) -- (0.5,0.15);} Posterior}
+\begin{tikzpicture}
+\uncover<1>{\node at (0,0) {\includegraphics[width=0.9\textwidth]{figs/betaset0.pdf}};}
+\uncover<2>{\node at (0,0) {\includegraphics[width=0.9\textwidth]{figs/betaset1.pdf}};}
+\uncover<1->{%
+\node[fill=white] at (-2.8,1.4) {$\frac{s}{n}=\frac{12}{16}$};
+\node[fill=white] at ( 3.5,1.4) {$\frac{s}{n}=\frac{0}{16}$};
+}
+\end{tikzpicture}
+\end{frame}
+
+
 \begin{frame}{Sets of Priors}
 
-***change this***
+%***change this***
 %\item[\play] 
 \textbf{Add \alert{imprecision} as new modelling dimension:\\
 \alert{Sets of priors}\ldots}
