@@ -72,6 +72,10 @@ domainplotter <- function(xlims, ylims = NULL, seqx = 100, ...){
     lines(ax, (1 + 0.5*ax)*2*(i-0.5), col = "grey")
 }
 
+polygonxylist <- function(lower, upper, fillcol = "gray", col = 1, ...){
+  polygon(c(upper$x, lower$x), c(upper$y, lower$y), col = fillcol, border = col, ...)
+}
+
 boatplotter <- function(boatobj, prior = TRUE, xlims = NULL, ylims = NULL, minmax = FALSE,
                         seqx = 100, fillcol = "gray", add = FALSE, col = 1, ...){
   if(!prior) {
