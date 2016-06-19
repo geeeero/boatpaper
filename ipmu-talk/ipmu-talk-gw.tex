@@ -136,6 +136,8 @@
 \input{nydefs.tex}
 \input{nycoldefs.tex}
 
+\input{etadefs.tex}
+\input{etacoldefs.tex}
 %%\def\blau#1{{\color{lmugreen2}#1}}
 %\def\rot#1{{\color{red}#1}}
 %\def\gruen#1{{\color{blue}#1}}
@@ -305,9 +307,8 @@ Prior $\yzr \in [0.7, 0.8]$, $\nzg \in [1,8]$
 \end{tikzpicture}
 \end{frame}
 
-
+\iffalse
 \begin{frame}{Sets of Priors}
-
 %***change this***
 %\item[\play] 
 \textbf{Add \alert{imprecision} as new modelling dimension:\\
@@ -355,13 +356,78 @@ by min/max over $\PZc$ %or $\PNc$
 \end{block} %
 }};}
 \end{tikzpicture}
-
 %***or slide 9 from talk-lund???
 %\uncover<7->{\quad\play\ min and max $\Rsys(t)$ over $\PZ$ analytical in most cases!}
 %$\min_{\PZ} P\left(\Tsys > t \mid \{\nz_{k,t},\yz_{k,t},\vec{t}^k\}^{1:K}\right)$
+\end{frame}
+\fi
 
+\begin{frame}{Rectangular Prior Parameter Set}
+\tikz{\draw[fill,gray!20!white] (0,0) rectangle (0.5,0.3); \draw[tuegreen,very thick] (0,0.15) -- (0.5,0.15);}
+Prior $\yzr \in [0.7, 0.8]$, $\nzg \in [1,8]$
+\qquad
+\tikz{\draw[fill,gray!20!white] (0,0) rectangle (0.5,0.3); \draw[tuedarkblue,very thick] (0,0.15) -- (0.5,0.15);} Posterior
+\begin{tikzpicture}
+\node at (0,0) {\includegraphics[width=0.9\textwidth]{figs/paramsets1.pdf}};
+\node[fill=white] at (-3.0,0.5) {$\frac{s}{n}=\frac{12}{16}$};
+\node[fill=white] at ( 1.8,0.5) {$\frac{s}{n}=\frac{0}{16}$};
+\end{tikzpicture}
 \end{frame}
 
+
+\begin{frame}{Vague Prior Information}
+\tikz{\draw[fill,gray!20!white] (0,0) rectangle (0.5,0.3); \draw[tuegreen,very thick] (0,0.15) -- (0.5,0.15);}
+Prior $\yzr \in [0.25, 0.75]$, $\nzg \in [3,8]$
+\qquad \uncover<2->{%
+\tikz{\draw[fill,gray!20!white] (0,0) rectangle (0.5,0.3); \draw[tuedarkblue,very thick] (0,0.15) -- (0.5,0.15);} Posterior}
+\begin{tikzpicture}
+\uncover<1>{\node at (0,0) {\includegraphics[width=0.9\textwidth]{figs/betaset0-ipmu.pdf}};}
+\uncover<2>{\node at (0,0) {\includegraphics[width=0.9\textwidth]{figs/betaset1-ipmu.pdf}};}
+\uncover<2->{%
+\node[fill=white] at (-3.3,1.65) {$\frac{s}{n}=\frac{4}{8}$};
+\node[fill=white] at ( 1.5,1.65) {$\frac{s}{n}=\frac{8}{8}$};
+}
+\end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}{Vague Prior Information}
+\tikz{\draw[fill,gray!20!white] (0,0) rectangle (0.5,0.3); \draw[tuegreen,very thick] (0,0.15) -- (0.5,0.15);}
+Prior $\yzr \in [0.25, 0.75]$, $\nzg \in [3,8]$
+\qquad
+\tikz{\draw[fill,gray!20!white] (0,0) rectangle (0.5,0.3); \draw[tuedarkblue,very thick] (0,0.15) -- (0.5,0.15);} Posterior
+\begin{tikzpicture}
+\node at (0,0) {\includegraphics[width=0.9\textwidth]{figs/paramsets1-ipmu.pdf}};
+\node[fill=white] at (-3.3,1.65) {$\frac{s}{n}=\frac{4}{8}$};
+\node[fill=white] at ( 1.5,1.65) {$\frac{s}{n}=\frac{8}{8}$};
+\end{tikzpicture}
+%\begin{align*}
+%\nzg &\mapsto \nzg + n\,, &
+%\yzr &\mapsto \yzr + \frac{s - n \yzr}{\nzg+n}
+%\end{align*}
+\pause%
+\hspace*{8ex}%
+$\nzg \mapsto \nzg + n$,
+\qquad
+$\yzr \mapsto \yzr + \dfrac{s - n \yzr}{\nzg+n}$
+\end{frame}
+
+\begin{frame}{New Parametrisation}
+
+\textcite{2015:mik-isipta}: use parameters $(\ezzg,\eozr)$ defined as
+\begin{align*}
+\ezzg &= \nzg - 2\,, &
+\eozr &= \nzg (\yzr - \frac{1}{2})
+%\yz &= \frac{\eoz}{\ezz + 2} + \frac{1}{2}\,.
+\end{align*}
+Then the Bayesian update corresponds to
+\begin{align*}
+%\ezng &= \ezzg + n\,, &
+%\eonr &= \eozr + s - \frac{n}{2}\,.
+\ezzg &\mapsto \ezzg + n\,, &
+\eozr &\mapsto \eozr + s - \frac{n}{2}\,.
+\end{align*}
+\end{frame}
 
 
 \begin{frame}{Summary \& Outlook}
@@ -369,19 +435,12 @@ by min/max over $\PZc$ %or $\PNc$
 \uncover<1->{%
 \textbf{Summary:}
 \begin{itemize}
-\item[\play] Nonparametric modeling of component reliability curves
-\item[\play] Bayesian model combining expert knowledge and test data
-\item[\play] Set of system reliability functions %appropriately
-reflects uncertainties from limited data, vague expert information, and prior-data conflict
-\item[\play] Easy-to-use implementation in \textbf{R} package \texttt{ReliabilityTheory} \parencite{2016:aslett-RT}
+\item[\play] 
 \end{itemize}}
 \uncover<2->{%
-\textbf{Next steps:}
+\textbf{Outlook:}
 \begin{itemize}
-\item[\play] Allow right-censored observations (RUL estimation)
-\item[\play] Allow dependence between components\\ (common-cause failure, \ldots) %or more explicit dependence
-\item[\play] Use for system design (where to put extra redundancy?)
-\item[\play] Use for maintenance planning
+\item[\play] ***here for Beta-Binomial, but can be constructed for all distributions from exponential family
 \end{itemize}}
 \end{frame}
 
