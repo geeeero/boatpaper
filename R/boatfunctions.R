@@ -72,6 +72,15 @@ domainplotter <- function(xlims, ylims = NULL, seqx = 100, ...){
     lines(ax, (1 + 0.5*ax)*2*(i-0.5), col = "grey")
 }
 
+normaldomain <- function(xlims, ylims = c(0,1), seqx = 100, xlabs = bquote(n^(0)), ylabs = bquote(y^(0)), ...){
+  ax <- seq(xlims[1], xlims[2], length = seqx)
+  plot(ax, rep(0, seqx), xlim = xlims, ylim = ylims, type = "l",
+       xlab = xlabs, ylab = ylabs, ...)
+  lines(ax,  rep(1, seqx))     
+  for(i in seq(0.1, 0.9, by = 0.1))
+    lines(ax, rep(i, seqx), col = "grey")
+}
+
 polygonxylist <- function(lower, upper, fillcol = "gray", col = 1, ...){
   polygon(c(upper$x, lower$x), c(upper$y, lower$y), col = fillcol, border = col, ...)
 }

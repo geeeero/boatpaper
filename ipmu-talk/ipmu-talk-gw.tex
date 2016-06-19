@@ -412,8 +412,8 @@ $\nzg \mapsto \nzg + n$,
 $\yzr \mapsto \yzr + \dfrac{s - n \yzr}{\nzg+n}$
 \end{frame}
 
-\begin{frame}{New Parametrisation}
 
+\begin{frame}{New Parametrisation}
 \textcite{2015:mik-isipta}: use parameters $(\ezzg,\eozr)$ defined as
 \begin{align*}
 \ezzg &= \nzg - 2\,, &
@@ -427,6 +427,28 @@ Then the Bayesian update corresponds to
 \ezzg &\mapsto \ezzg + n\,, &
 \eozr &\mapsto \eozr + s - \frac{n}{2}\,.
 \end{align*}
+\uncover<2->{\includegraphics[width=0.9\textwidth]{figs/mikdomain.pdf}}
+\end{frame}
+
+
+\begin{frame}{New Parametrisation: Update}
+\tikz{\draw[fill,gray!20!white] (0,0) rectangle (0.5,0.3); \draw[tuegreen,very thick] (0,0.15) -- (0.5,0.15);}
+Prior $\yzr \in [0.25, 0.75]$, $\nzg \in [3,8]$
+\qquad \uncover<2->{%
+\tikz{\draw[fill,gray!20!white] (0,0) rectangle (0.5,0.3); \draw[tuedarkblue,very thick] (0,0.15) -- (0.5,0.15);} Posterior}
+\begin{tikzpicture}
+\uncover<1>{\node at (0,0) {\includegraphics[width=0.9\textwidth]{figs/rectinmik0.pdf}};}
+\uncover<2>{\node at (0,0) {\includegraphics[width=0.9\textwidth]{figs/rectinmik1.pdf}};}
+\uncover<2->{%
+\node[fill=white] at (-3.3,1.8) {$\frac{s}{n}=\frac{4}{8}$};
+\node[fill=white] at ( 2.0,1.8) {$\frac{s}{n}=\frac{8}{8}$};
+}
+\end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}{New Parameter Set Shape}
+
 \end{frame}
 
 
