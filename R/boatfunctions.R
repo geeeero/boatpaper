@@ -168,7 +168,7 @@ normalplotter <- function(boatobj, prior = TRUE, xlims = NULL, ylims = c(0,1), m
     plot(luck1, control=controlList(posterior=!prior, polygonCol=NA, annotate=FALSE), add = TRUE, lty = 2)
     if(!is.na(usymmcred)){
       borders <- unionHdi(luck1, posterior=!prior)$borders
-      npos <- n0(luck1)[2] + diff(boatobj$xp)/15 + usymmcredoffset
+      npos <- n0(luck1)[2] + diff(boatobj$xp)/10 + usymmcredoffset
       if(!prior)
         npos <- npos + n(data(luck1))
       lines(rep(npos, 2), borders, lty=2, lwd=2, lend=2)
@@ -178,7 +178,7 @@ normalplotter <- function(boatobj, prior = TRUE, xlims = NULL, ylims = c(0,1), m
     gamma <- usymmcred
     borders <- usymmcredboat(boatobj, prior, gamma, seqx)
     npos <- boatobj$xp[2] + data$n + 2 + diff(boatobj$xp)/30 + usymmcredoffset
-    lines(rep(npos, 2), borders, lty=1, lwd=2, lend=2)
+    lines(rep(npos, 2), borders, lty=1, lwd=2, lend=2, col=col)
   }
 }
 

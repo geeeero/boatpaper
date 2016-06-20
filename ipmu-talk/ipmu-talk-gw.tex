@@ -432,6 +432,7 @@ Then the Bayesian update corresponds to
 
 
 \begin{frame}{New Parametrisation: Update}
+\vspace*{-2.5ex}
 \tikz{\draw[fill,gray!20!white] (0,0) rectangle (0.5,0.3); \draw[tuegreen,very thick] (0,0.15) -- (0.5,0.15);}
 Prior $\yzr \in [0.25, 0.75]$, $\nzg \in [3,8]$
 \qquad \uncover<2->{%
@@ -447,18 +448,23 @@ Prior $\yzr \in [0.25, 0.75]$, $\nzg \in [3,8]$
 \end{frame}
 
 
-\begin{frame}{New Parameter Set Shape}
+\begin{frame}{New Parameter Set Shape: Boatshape}
+\vspace*{2ex}
+\tikz{\draw[fill,gray!20!white] (0,0) rectangle (0.5,0.3); \draw[tuegreen,very thick] (0,0.15) -- (0.5,0.15);}
+Prior $\yzr \in [0.25, 0.75]$, $\nzg \in [3,8]$
 \begin{tikzpicture}
 \uncover<1->{\node at (0,0) {\includegraphics[width=0.9\textwidth]{figs/boatshape-alone.pdf}};}
-\end{tikzpicture}
+\end{tikzpicture}%
+\vspace*{-2ex}%
 \uncover<2->{%
+%\begin{align*}
+%\EZ = \big\{(\ezg,\eor) \colon \ezl \le \ezg \le \ezu,\, \czl(\eta_0) \le  \eor \le \czu(\eta_0) \big\}\,,
+%\text{ where}
+%\end{align*}%
+%\vspace*{-4ex}%
 \begin{align*}
-\EZ = \{(\ezg,\eor) \colon \ezl \le \eta_0 \le \ezu, \czl(\eta_0) \le  \eta_1 \le \czu(\eta_0) \}\,,
-\text{ where}
-\end{align*}
-\begin{align*}
-\czu(\eta_0) &=  a \left( 1 - e^{-b(\eta_0 - \ezl)} \right)\,, \text{ and } 
-\czl(\eta_0) &= -a \left( 1 - e^{-b(\eta_0 - \ezl)} \right)\,.
+\czu(\eta_0) =  a \left( 1 - e^{-b(\eta_0 - \ezl)} \right) \text{ and }\, 
+\czl(\eta_0) = -a \left( 1 - e^{-b(\eta_0 - \ezl)} \right)
 \end{align*}}
 %\begin{columns}
 %\begin{column}{0.5\textwidth}
@@ -468,13 +474,22 @@ Prior $\yzr \in [0.25, 0.75]$, $\nzg \in [3,8]$
 %\end{columns}
 \end{frame}
 
-\begin{frame}{New Parameter Set Shape: Update}
+\begin{frame}{Boatshape: Update}
 \begin{tikzpicture}
-\uncover<1->{\node at (0,0) {\includegraphics[width=0.9\textwidth]{figs/boatshape-posterior-mik-ipmu0.pdf}};}
-\uncover<2->{\node at (0,0) {\includegraphics[width=0.9\textwidth]{figs/boatshape-posterior-mik-ipmu1.pdf}};}
-\uncover<2->{%
-\node[fill=white] at (-3.3,1.5) {$\frac{s}{n}=\frac{4}{8}$};
-\node[fill=white] at ( 2.0,1.5) {$\frac{s}{n}=\frac{8}{8}$};
+\uncover<1>{\node at (0,0) {\includegraphics[width=0.9\textwidth]{figs/boatshape-posterior-mik-ipmu0.pdf}};}
+\uncover<2>{\node at (0,0) {\includegraphics[width=0.9\textwidth]{figs/boatshape-posterior-mik-ipmu1.pdf}};}
+\uncover<3>{\node at (0,0) {\includegraphics[width=0.9\textwidth]{figs/boatshape-posterior-nor-ipmu1.pdf}};}
+%\uncover<4>{\node at (0,0) {\includegraphics[width=0.9\textwidth]{figs/boatshape-posterior-hpd-ipmu1.pdf}};}
+\uncover<4>{\node at (0,0) {\includegraphics[width=0.9\textwidth]{figs/boatshape-posterior-mik-ipmu2.pdf}};}
+\uncover<5>{\node at (0,0) {\includegraphics[width=0.9\textwidth]{figs/boatshape-posterior-mik-ipmu3.pdf}};}
+\uncover<6>{\node at (0,0) {\includegraphics[width=0.9\textwidth]{figs/boatshape-posterior-nor-ipmu3.pdf}};}
+\uncover<2-3>{%
+\node[fill=white] at (-3.3,1.6) {$\frac{s}{n}=\frac{4}{8}$};
+\node[fill=white] at ( 2.0,1.6) {$\frac{s}{n}=\frac{8}{8}$};
+}
+\uncover<5-6>{%
+\node[fill=white] at (-3.3,-1) {$\frac{s}{n}=\frac{6}{8}$};
+\node[fill=white] at ( 2.0,-1) {$\frac{s}{n}=\frac{2}{8}$};
 }
 \end{tikzpicture}
 \end{frame}
