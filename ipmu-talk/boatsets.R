@@ -148,4 +148,38 @@ normalplotter(boat1, prior=F, add=T, col=tuedarkblue, fillcol=rgb(0.063,0.063,0.
 mtext("prior-data conflict", side=3, line=0.5)
 dev.off()
 
+# PPP for spda effect
+pppn1 <- 10
+pppboat1 <- list(xp = c(-1,20), a = 1, b = 0.4, yc = 0.5, data = list(tau = 0, n = pppn1))
+ppp1lm <- luckenvelope(pppboat1)
+svecby <- 0.01
+svec1 <- seq(0, pppn1, by=svecby)
+ylvec1 <- ynfinder(boatobj = pppboat1, svec = svec1)
+yuvec1 <- ynfinder(boatobj = pppboat1, svec = svec1, lower = FALSE)
+
+pdf("figs/boatshape-spda1.pdf", width=6, height=3)
+par(mar=c(3,3.5,1.5,.1), cex.lab=1.1, cex.axis=.8, mgp=c(2,.7,0), tcl=-.3)
+layout(matrix(c(1, 2), ncol=2, byrow=TRUE), widths=c(1, 2))
+# paramsets
+normalplotter(pppboat1, xlims = c(0,23), col=tuegreen, fillcol=rgb(0.000,0.675,0.510,0.5), xaxp=c(0, 21, 3))
+plot(ppp1lm, add=T, lty=2, control=controlList(polygonCol=NA, annotate=F))
+mtext(bquote(paste("Prior parameter sets")), side=3, line=0.4)
+# ppp
+plot(svec1, yuvec1, type="l", lwd=1.5, col=tuedarkblue, ylim=c(0,1), xlab="s", ylab=expression(y^(n)))
+lines(svec1, ylvec1, type="l", lwd=1.5, col=tuedarkblue)
+luckppplines(luckobj=ppp1lm, n=pppn1, lty=2, lwd=1.5)
+mtext(bquote(paste("Posterior imprecision (n=",.(pppn1),")")), side=3, line=0.4)
+dev.off()
+
+
+
+
+#postscript("pppboat-ipmu1.eps", width=12, height=6)
+#ipmu1 <- pppmaker(pppboat1, pppn1, rtrn=TRUE)
+#dev.off()
+
+#pdf("singleprior-pdc.pdf", width=8, height=3)
+#grid.arrange(betadens2, pdcillu, nrow=1, ncol=2, widths=c(1,1.2))
+#dev.off()
+
 #

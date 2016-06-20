@@ -150,8 +150,8 @@ normalplotter <- function(boatobj, prior = TRUE, xlims = NULL, ylims = c(0,1), m
   polygon(c(upper$x, lower$x), c(upper$y, lower$y), col = fillcol, border = col, ...)
   nymm <- nyminmax(lower=lower, upper=upper)
   if(minmax){
-    points(nymm$ymin, cex = 1.5)
-    points(nymm$ymax, cex = 1.5)
+    points(nymm$ymin, cex = 1.5); print(nymm$ymin)
+    points(nymm$ymax, cex = 1.5); print(nymm$ymax)
   }
   if(addluck){
     if(prior){
