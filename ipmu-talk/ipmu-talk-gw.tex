@@ -448,7 +448,35 @@ Prior $\yzr \in [0.25, 0.75]$, $\nzg \in [3,8]$
 
 
 \begin{frame}{New Parameter Set Shape}
+\begin{tikzpicture}
+\uncover<1->{\node at (0,0) {\includegraphics[width=0.9\textwidth]{figs/boatshape-alone.pdf}};}
+\end{tikzpicture}
+\uncover<2->{%
+\begin{align*}
+\EZ = \{(\ezg,\eor) \colon \ezl \le \eta_0 \le \ezu, \czl(\eta_0) \le  \eta_1 \le \czu(\eta_0) \}\,,
+\text{ where}
+\end{align*}
+\begin{align*}
+\czu(\eta_0) &=  a \left( 1 - e^{-b(\eta_0 - \ezl)} \right)\,, \text{ and } 
+\czl(\eta_0) &= -a \left( 1 - e^{-b(\eta_0 - \ezl)} \right)\,.
+\end{align*}}
+%\begin{columns}
+%\begin{column}{0.5\textwidth}
+%\end{column}
+%\begin{column}{0.5\textwidth}
+%\end{column}
+%\end{columns}
+\end{frame}
 
+\begin{frame}{New Parameter Set Shape: Update}
+\begin{tikzpicture}
+\uncover<1->{\node at (0,0) {\includegraphics[width=0.9\textwidth]{figs/boatshape-posterior-mik-ipmu0.pdf}};}
+\uncover<2->{\node at (0,0) {\includegraphics[width=0.9\textwidth]{figs/boatshape-posterior-mik-ipmu1.pdf}};}
+\uncover<2->{%
+\node[fill=white] at (-3.3,1.5) {$\frac{s}{n}=\frac{4}{8}$};
+\node[fill=white] at ( 2.0,1.5) {$\frac{s}{n}=\frac{8}{8}$};
+}
+\end{tikzpicture}
 \end{frame}
 
 
